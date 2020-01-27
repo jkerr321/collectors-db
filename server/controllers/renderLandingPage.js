@@ -2,7 +2,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 const GoogleSpreadsheet = require('google-spreadsheet');
 const { promisify } = require('util');
-const config = require('../../config');
 
 const updateSpreadsheet = async (rows, reqBody) => {
 	try {
@@ -24,8 +23,8 @@ const updateSpreadsheet = async (rows, reqBody) => {
 	}
 };
 
-const getRows = async (sheetName) => {
-	const doc = new GoogleSpreadsheet('1igrPkooUEO7EhljF3tjjuuZf67smjO9obRVngghhYu8');
+const getRows = async (sheetName, config) => {
+	const doc = new GoogleSpreadsheet(config.sheet_id);
 	await promisify(doc.useServiceAccountAuth)(config);
 	const info = await promisify(doc.getInfo)();
 
@@ -118,29 +117,31 @@ const getFilterString = (reqBody) => {
     return result;
 }
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, config) => {
 	try {
-		const rows = await getRows('FullList');
+		const rows = await getRows('FullList', config);
 		const seasonData = getUniqueList(rows, 'season');
 		const opponentData = getUniqueList(rows, 'opponent').sort();
+		const variables = config.options;
+		const baseRenderData = { seasonData, opponentData, variables };
 		let renderData;
 
 		if (req.method === 'POST') {
 			if (req.body.filter) {
 				const filteredRows = await filterRows(rows, req.body);
 				const allData = await getFullListData(filteredRows);
-                const isFiltered = true;
-                const appliedFilter = getFilterString(req.body);
-				renderData = { seasonData, opponentData, allData, isFiltered, appliedFilter };
+				const isFiltered = true;
+				const appliedFilter = getFilterString(req.body);
+				renderData = { ...baseRenderData,  allData, isFiltered, appliedFilter };
 			} else {
 				await updateSpreadsheet(rows, req.body);
 				const updatedRows = await getRows('FullList');
 				const allData = await getFullListData(updatedRows);
-				renderData = { seasonData, opponentData, allData };
+				renderData = { ...baseRenderData, allData }
 			}
 		} else {
 			const allData = await getFullListData(rows, seasonData);
-			renderData = { seasonData, opponentData, allData };
+			renderData = { ...baseRenderData, allData }
 		}
 		return res.render('landing', renderData);
 	} catch (err) {

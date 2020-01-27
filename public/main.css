@@ -1,4 +1,7 @@
-/* Grids */
+:root {
+  --main-color: LightGrey;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -46,8 +49,8 @@ body {
   top: -15%;
 }
 
-.claret {
-  color: crimson;
+.main-color {
+  color: var(--main-color);
 }
 
 .section {
@@ -79,13 +82,13 @@ body {
 
 .checkbox {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-auto-columns: auto;
   grid-auto-flow: column;
   text-align: left;
 }
 
 .checkbox__season {
-  grid-template-rows: repeat(25, 1fr);
+  grid-template-rows: repeat(20, 1fr);
   max-width: 60%;
   margin: auto;
 }
@@ -129,7 +132,7 @@ body {
 }
 
 .Got {
-  background-color: crimson;
+  background-color: var(--main-color);
 }
 
 .Want {

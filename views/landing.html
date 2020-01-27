@@ -6,8 +6,8 @@
 {{/if}}
 <div class="js-rich-view">
     <div class="header js-header" id="header">
-        <div class="typography--head">David's Cobblers Database</div>
-        <div class="typography--large">NTFC Programme Collection</div>
+        <div class="typography--head">{{variables.heading}}</div>
+        <div class="typography--large">{{variables.sub_heading}}</div>
     </div>
     <div class="filter">
         <div class="js-filter-toggle faux-link">
@@ -58,8 +58,8 @@
             </form>
         </div>
     </div>
-    <img class="prog-img prog-img--left" src="prog1a.png" alt="">
-    <img class="prog-img prog-img--right" src="prog2.png" alt="">
+    <img class="prog-img prog-img--left" src="{{variables.img_one_src}}" alt="">
+    <img class="prog-img prog-img--right" src="{{variables.img_two_src}}" alt="">
 
     {{#allData}}
         <div class="matches section" data-season-string="{{season_string}}">
@@ -147,13 +147,13 @@
             <div class="js-modal-season"></div>
             <div class="js-modal-league"></div>
             <div class="js-modal-date"></div>
-            <div class="js-modal-opponent typography--large claret"></div>
+            <div class="js-modal-opponent typography--large main-color"></div>
             <div class="js-modal-home_away"></div>
             <div class="js-modal-score"></div>
             <div class="js-modal-competition"></div>
             <div class="js-modal-match_notes"></div>
             <div class="js-modal-content-editable">
-                <div class="modal-got_want js-modal-got_want typography--large claret"></div>
+                <div class="modal-got_want js-modal-got_want typography--large main-color"></div>
                 <div class="js-modal-price"></div>
                 <div class="js-modal-notes"></div>
                 <button class="button js-modal-edit-button">Edit</button>
@@ -249,4 +249,9 @@
     </div>
 {{/allData}}
 </div>
+{{/if}}
+<div class="js-title hidden">{{variables.heading}}</div>
+<div class="js-colour-one hidden">{{variables.colour_one}}</div>
+{{#if variables.colour_two}}
+<div class="js-colour-two hidden">{{variables.colour_two}}</div>
 {{/if}}

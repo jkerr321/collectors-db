@@ -1,4 +1,13 @@
 module.exports = {
+    "options": {
+        "colour_one": 'blue',
+        "colour_two": 'white',
+        "heading": 'Example Collectors Database',
+        "sub_heading": 'Everton FC Programme Collection',
+        "img_one_src": 'prog1a.png',
+        "img_two_src": 'prog2.png',
+    },
+    "sheet_id": process.env.sheet_id,
     "type": process.env.type,
     "project_id": process.env.project_id,
     "private_key_id": process.env.private_key_id,

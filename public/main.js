@@ -10,6 +10,13 @@ const dataPoints = ['season', 'league', 'date', 'opponent', 'home_away', 'score'
 const show = (element) => element.classList.remove('hidden');
 const hide = (element) => element.classList.add('hidden');
 
+// update html to reflect config values
+const colourOne = document.querySelector('.js-colour-one').innerHTML;
+const colourTwo = document.querySelector('.js-colour-two').innerHTML;
+const title = document.querySelector('.js-title').innerHTML;
+document.querySelector(':root').style.setProperty('--main-color', colourOne);
+document.querySelector('title').innerHTML = title;
+
 const toggleClickableSpan = (element) => {
 	// e.g. toggle between 'Show More' / 'Show Less' clickable headings in the HTML
 	hide(element);
