@@ -4,9 +4,10 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const bodyParser = require('body-parser');
 const renderLandingPage = require('./server/controllers/renderLandingPage');
-const config = require('./config');
+const exampleConfig = require('./config');
 
-const init = () => {
+const init = (userConfig) => {
+	config = userConfig || exampleConfig;
 	app.engine('html', exphbs({
 		defaultLayout: 'main',
 		extname: '.html',

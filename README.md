@@ -1,7 +1,7 @@
 
-David's Cobblers Database
+Base Collector's Database UI
 ==========
-A UI for viewing and managing the football programme collection data contained in a google sheet
+A UI for viewing and managing the (football programme) collection data contained in a google sheet
 
 Table of Contents
 -----------------
@@ -40,7 +40,7 @@ To create a smiliar UI from your own data you will need:
 
 Usage
 -----
-via the browser: https://davidscobblersdatabase.co.uk
+via the browser, e.g.: https://example-programme-database.herokuapp.com/
 
 Development
 -----
@@ -56,6 +56,8 @@ To run locally:
 Things still to do
 ---------------------
 
+- update readme once componentisation complete
 - modal to push page down rather than up - use onclick window scrollTo - with propagate
 - on table view, if match is clicked on, do edit inline?
-- transition on show and hide
+- tests
+- additional custom values, in front end, table, grid-match

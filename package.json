@@ -2,7 +2,7 @@
   "name": "collectors-db",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "author": "Jennifer Johnson",
   "license": "ISC",
   "dependencies": {
