@@ -23,13 +23,13 @@ const getImages = (configOptions) => {
 		if (err) { console.log('realpath error'); throw err; }
 		console.log('realpath complete!');
 	});
-	fs.rename(imgOnePath, `${newPath}/${imgOne}`, (err) => {
+	fs.copyFile(imgOnePath, `${newPath}/${imgOne}`, (err) => {
 		if (err) throw err;
 	});
-	fs.rename(imgTwoPath, `${newPath}/${imgTwo}`, (err) => {
+	fs.copyFile(imgTwoPath, `${newPath}/${imgTwo}`, (err) => {
 		if (err) throw err;
 	});
-	console.log('rename complete!');
+	console.log('image file copies complete!');
 }
 
 const init = (userConfig) => {
