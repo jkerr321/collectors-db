@@ -3,7 +3,7 @@ const app = express();
 const exphbs = require('express-handlebars');
 const path = require('path');
 const bodyParser = require('body-parser');
-const renderLandingPage = require('./server/controllers/renderLandingPage');
+const renderLandingPage = require('./server/controllers/renderLandingPage').init;
 const exampleConfig = require('./config');
 const fs = require('fs');
 
@@ -32,18 +32,23 @@ const getImages = (configOptions) => {
 	console.log('image file copies complete!');
 }
 
-const init = (userConfig) => {
-	config = userConfig || exampleConfig;
+const init = (config, isTestApp) => {
 
-	if (userConfig) {
-		getImages(userConfig.options);
-	}
+	if (isTestApp) {
+		app.engine('html', exphbs({
+			defaultLayout: 'main',
+			extname: '.html',
+			layoutsDir: 'views/layouts/'
+		}));
+	} else {	
+		getImages(config.options); //copy user provided images to module
 
-	app.engine('html', exphbs({
+		app.engine('html', exphbs({
 		defaultLayout: 'main',
-		extname: '.html',
-		layoutsDir: 'node_modules/collectors-db/views/layouts/'
-	}));
+			extname: '.html',
+			layoutsDir: 'node_modules/collectors-db/views/layouts/'
+		}));
+	}	
 
 	app.set('view engine', 'html');
 	app.set('views', path.join(__dirname, '/views'));
@@ -57,5 +62,7 @@ const init = (userConfig) => {
 		console.log('collectors-db: listening on port 8001');
 	});
 }
+
+// init(exampleConfig, true);  //uncomment to run the module with test config
 
 module.exports = init;

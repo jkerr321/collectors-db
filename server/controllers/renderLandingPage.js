@@ -23,11 +23,10 @@ const updateSpreadsheet = async (rows, reqBody) => {
 	}
 };
 
-const getRows = async (sheetName, config) => {
+const getRows = async (config) => {
 	const doc = new GoogleSpreadsheet(config.sheet_id);
 	await promisify(doc.useServiceAccountAuth)(config);
 	const info = await promisify(doc.getInfo)();
-
     const rows = await promisify(info.worksheets[0].getRows)({
 		'offset': 1,
 		'limit': 5000
@@ -108,7 +107,7 @@ const filterRows = async (rows, reqBody) => {
 	});
 };
 
-const getFilterString = (reqBody) => {
+const getFilterArray = (reqBody) => {
     let result = [];
     if (reqBody.seasonFilter) { result.push(`${reqBody.seasonFilter}`); }
     if (reqBody.opponentFilter) { result.push(`${reqBody.opponentFilter}`); }
@@ -117,9 +116,12 @@ const getFilterString = (reqBody) => {
     return result;
 }
 
-module.exports = async (req, res, config) => {
+const init = async (req, res, config) => {
+	console.log('==================');
+	console.log('req.body', req.body);
+	console.log('==================');
 	try {
-		const rows = await getRows('FullList', config);
+		const rows = await getRows(config);
 		const seasonData = getUniqueList(rows, 'season');
 		const opponentData = getUniqueList(rows, 'opponent').sort();
 		const variables = config.options;
@@ -131,8 +133,8 @@ module.exports = async (req, res, config) => {
 				const filteredRows = await filterRows(rows, req.body);
 				const allData = await getFullListData(filteredRows);
 				const isFiltered = true;
-				const appliedFilter = getFilterString(req.body);
-				renderData = { ...baseRenderData,  allData, isFiltered, appliedFilter };
+				const appliedFilter = getFilterArray(req.body);
+				renderData = { ...baseRenderData, allData, isFiltered, appliedFilter };
 			} else {
 				await updateSpreadsheet(rows, req.body);
 				const updatedRows = await getRows('FullList');
@@ -148,3 +150,5 @@ module.exports = async (req, res, config) => {
 		console.error('render error', err);
 	}
 };
+
+module.exports = { getRows, getUniqueList, updateSpreadsheet, getFullListData, filterRows, getFilterArray, init }
