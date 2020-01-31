@@ -10,13 +10,13 @@
         <div class="typography--large">{{variables.sub_heading}}</div>
     </div>
     <div class="filter">
-        <div class="js-filter-toggle faux-link">
-            <span>Filter Data >></span>
+        <span class="js-filter-toggle faux-link">
+            <span class="">Filter Data >></span>
             <span class="hidden">Hide Filter <<</span>
-        </div>
+        </span>
         <div class="section js-filter-form filter__content hidden">
             {{#if isFiltered}}
-            <form class="section" action="/" method="POST">
+            <form class="section" action="/" method="GET">
                 <button class="button" type="submit">Remove Filter</button>
             </form>
             {{/if}}
