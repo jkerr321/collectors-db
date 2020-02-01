@@ -8,7 +8,7 @@ module.exports = [
         league: 'Division 3 (South)',
         leaguetier: '4',
         date: '24-Jan-1948',
-        opponent: 'Bristol City',
+        opponent: 'Bristol City ABC',
         homeaway: 'Home',
         score: 'L0-4',
         result: 'L',
@@ -21,7 +21,7 @@ module.exports = [
         gotwant: 'Want',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -46,7 +46,7 @@ module.exports = [
         gotwant: 'Got',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -71,7 +71,7 @@ module.exports = [
         gotwant: 'Want',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -96,7 +96,7 @@ module.exports = [
         gotwant: 'Want',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -121,7 +121,7 @@ module.exports = [
         gotwant: 'Want',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -146,7 +146,7 @@ module.exports = [
         gotwant: 'Got',
         programmeprice: '£23',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -171,7 +171,7 @@ module.exports = [
         gotwant: 'Got',
         programmeprice: '£9',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -196,7 +196,7 @@ module.exports = [
         gotwant: 'Want',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -221,7 +221,7 @@ module.exports = [
         gotwant: 'Want',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -246,7 +246,7 @@ module.exports = [
         gotwant: 'Want',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -271,7 +271,7 @@ module.exports = [
         gotwant: 'Got',
         programmeprice: '£9',
         programmenotes: 'poor condition',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -296,7 +296,7 @@ module.exports = [
         gotwant: 'Want',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -321,7 +321,7 @@ module.exports = [
         gotwant: 'Want',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -346,7 +346,7 @@ module.exports = [
         gotwant: 'Got',
         programmeprice: '£25',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -371,7 +371,7 @@ module.exports = [
         gotwant: 'Want',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -396,7 +396,7 @@ module.exports = [
         gotwant: 'Want',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -421,7 +421,7 @@ module.exports = [
         gotwant: 'Got',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -443,10 +443,10 @@ module.exports = [
         points: 'N/A',
         competition: 'League',
         matchnotes: '',
-        gotwant: 'Want',
+        gotwant: 'Got',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -468,10 +468,10 @@ module.exports = [
         points: 'N/A',
         competition: 'League',
         matchnotes: '',
-        gotwant: 'Want',
+        gotwant: 'Got',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
     {
@@ -493,10 +493,10 @@ module.exports = [
         points: 'N/A',
         competition: 'League',
         matchnotes: '',
-        gotwant: 'Want',
+        gotwant: 'Got',
         programmeprice: '',
         programmenotes: '',
-        save: [Function],
+        save: () => 'row saved!',
         del: [Function]
     },
 ]

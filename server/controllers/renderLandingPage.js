@@ -5,18 +5,20 @@ const { promisify } = require('util');
 
 const updateSpreadsheet = async (rows, reqBody) => {
 	try {
+		let changedValue = '';
 		rows.forEach(async row => {
 			if (row.id === reqBody.id) {
 				Object.keys(reqBody).forEach(key => {
 					if (reqBody[key]) {
 						// e.g. if (reqBody.colour) {row.colour = reqBody.colour};
 						row[key] = reqBody[key];
+						changedValue += row[key];
 					}
 				});
 				await row.save();
 			}
 		});
-		return;
+		return changedValue;
 
 	} catch (err) {
 		console.error('updateSpreadsheet error', err);
@@ -117,9 +119,6 @@ const getFilterArray = (reqBody) => {
 }
 
 const init = async (req, res, config) => {
-	console.log('==================');
-	console.log('req.body', req.body);
-	console.log('==================');
 	try {
 		const rows = await getRows(config);
 		const seasonData = getUniqueList(rows, 'season');
@@ -137,7 +136,7 @@ const init = async (req, res, config) => {
 				renderData = { ...baseRenderData, allData, isFiltered, appliedFilter };
 			} else {
 				await updateSpreadsheet(rows, req.body);
-				const updatedRows = await getRows('FullList');
+				const updatedRows = await getRows(config);
 				const allData = await getFullListData(updatedRows);
 				renderData = { ...baseRenderData, allData }
 			}

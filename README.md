@@ -56,8 +56,12 @@ To run locally:
 Things still to do
 ---------------------
 
+- ES lint on commit
+- test on push
 - update readme once componentisation complete
 - DRY out get images function
+- ebay link
+- show filter string on main page
 - modal to push page down rather than up - use onclick window scrollTo - with propagate
 - on table view, if match is clicked on, do edit inline?
 - tests

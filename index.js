@@ -33,7 +33,6 @@ const getImages = (configOptions) => {
 }
 
 const init = (config, isTestApp) => {
-
 	if (isTestApp) {
 		app.engine('html', exphbs({
 			defaultLayout: 'main',
@@ -63,6 +62,6 @@ const init = (config, isTestApp) => {
 	});
 }
 
-// init(exampleConfig, true);  //uncomment to run the module with test config
+init(exampleConfig, true);  //uncomment to run the module with test config
 
 module.exports = init;
