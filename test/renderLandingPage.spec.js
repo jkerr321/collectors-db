@@ -70,15 +70,15 @@ describe('renderLandingPage', async () => {
 
     describe('getFilterArray', () => {
         it('returns a string containing the relevant values for filtering the data from req.body', () => {
-            expect(getFilterArray(reqBodyOne)).to.eql(['1947/48,1948/49', 'Want']);
-            expect(getFilterArray(reqBodyTwo)).to.eql(['Bournemouth,Swansea City,Walsall']);
+            expect(getFilterArray(reqBodyFilterOne)).to.eql(['1947/48,1948/49', 'Want']);
+            expect(getFilterArray(reqBodyFilterTwo)).to.eql(['Bournemouth,Swansea City,Walsall']);
         });
     });
 
     describe('filterRows', () => {
         it('returns the rows that match the given filter conditions in req.body', async () => {
-            const filteredRowsOne = await filterRows(rows, reqBodyOne);
-            const filteredRowsTwo = await filterRows(rows, reqBodyTwo);
+            const filteredRowsOne = await filterRows(rows, reqBodyFilterOne);
+            const filteredRowsTwo = await filterRows(rows, reqBodyFilterTwo);
 
             expect(filteredRowsOne.every(value => value.gotwant === 'Want')).to.be.true;
             expect(filteredRowsOne.every(value => value.season === '1947/48' || '1948/49')).to.be.true;
@@ -108,8 +108,8 @@ describe('renderLandingPage', async () => {
 
     describe('updateSpreadsheet', () => {
         it('returns the correct changed value based on req.body', async () => {
-            expect(await updateSpreadsheet(rows, reqBodyThree)).to.equal('Got923');
-            expect(await updateSpreadsheet(rows, reqBodyFour)).to.equal('£2.80924');
+            expect(await updateSpreadsheet(rows, reqBodyUpdateThree)).to.equal('Got923');
+            expect(await updateSpreadsheet(rows, reqBodyUpdateFour)).to.equal('£2.80924');
         });
     });
 
@@ -119,18 +119,19 @@ describe('renderLandingPage', async () => {
             expect(res.render.calledOnce).to.be.true;
         });
 
-        it('calls res.render with the correct render data when the request method is POST and req.body contains isFiltered', async () => {
+        // it.only('calls res.render with the correct render data when the request method is POST and req.body contains isFiltered', async () => {
             //TODO need to stub getRows function - do I need to make renderLandingPage a class for that?
-            await init(req('POST', reqBodyFilterOne), res, config);
-            expect(res.render.getCall(0).args[1].isFiltered).to.be.true;
-            expect(res.render.getCall(0).args[1].appliedFilter).to.eql(['1947/48,1948/49', 'Want']);
-        });
-        it.only('calls res.render with the correct render data when the request method is POST', async () => {
-            //TODO need to stub update SS function - do I need to make renderLandingPage a class for that?
-            await init(req('POST', reqBodyUpdateFour), res, config);
-            expect(res.render.getCall(0).args[1].isFiltered).to.be.undefined;
-            //expect updateSpreadsheet to have been called
+            // const getRowsStub = sinon.stub(RenderLandingPage, 'getRows');
+        //     await init(req('POST', reqBodyFilterOne), res, config);
+        //     expect(res.render.getCall(0).args[1].isFiltered).to.be.true;
+        //     expect(res.render.getCall(0).args[1].appliedFilter).to.eql(['1947/48,1948/49', 'Want']);
+        // });
+        // it('calls res.render with the correct render data when the request method is POST', async () => {
+        //     //TODO need to stub update SS function - do I need to make renderLandingPage a class for that?
+        //     await init(req('POST', reqBodyUpdateFour), res, config);
+        //     expect(res.render.getCall(0).args[1].isFiltered).to.be.undefined;
+        //     //expect updateSpreadsheet to have been called
 
-        });
+        // });
     }); 
 });

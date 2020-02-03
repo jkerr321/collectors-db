@@ -212,3 +212,5 @@ wantToggles.forEach(toggle => toggle.addEventListener('click', e => toggleWants(
 editButton.addEventListener('click', e => showForm(e));
 filterToggle.addEventListener('click', e => toggleFilter(e));
 if(printViewToggle) { printViewToggle.addEventListener('click', e => togglePrintView(e)); }
+
+module.exports = { togglePrintView };

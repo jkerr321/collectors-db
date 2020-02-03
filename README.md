@@ -56,13 +56,16 @@ To run locally:
 Things still to do
 ---------------------
 
+- tests
 - ES lint on commit
 - test on push
-- update readme once componentisation complete
-- DRY out get images function
-- ebay link
+- password
 - show filter string on main page
+- ebay link
+- DRY out get images function
+- update readme once componentisation complete
 - modal to push page down rather than up - use onclick window scrollTo - with propagate
 - on table view, if match is clicked on, do edit inline?
-- tests
 - additional custom values, in front end, table, grid-match
+- update code to use classes / renderLandingPage and main.js
+- are non unique IDs on checkboxes a problem?
