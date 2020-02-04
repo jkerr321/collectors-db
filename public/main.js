@@ -13,8 +13,13 @@ const hide = (element) => element.classList.add('hidden');
 // update html to reflect config values
 const colourOne = document.querySelector('.js-colour-one').innerHTML;
 const colourTwo = document.querySelector('.js-colour-two').innerHTML;
+console.log('==================');
+console.log('colourTwo', colourTwo);
+console.log('==================');
+
 const title = document.querySelector('.js-title').innerHTML;
-document.querySelector(':root').style.setProperty('--main-color', colourOne);
+document.querySelector(':root').style.setProperty('--primary-color', colourOne);
+document.querySelector(':root').style.setProperty('--secondary-color', colourTwo);
 document.querySelector('title').innerHTML = title;
 
 const toggleClickableSpan = (element) => {
@@ -212,5 +217,3 @@ wantToggles.forEach(toggle => toggle.addEventListener('click', e => toggleWants(
 editButton.addEventListener('click', e => showForm(e));
 filterToggle.addEventListener('click', e => toggleFilter(e));
 if(printViewToggle) { printViewToggle.addEventListener('click', e => togglePrintView(e)); }
-
-module.exports = { togglePrintView };

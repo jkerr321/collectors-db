@@ -7,7 +7,7 @@
 <div class="js-rich-view">
     <div class="header js-header" id="header">
         <div class="typography--head">{{variables.heading}}</div>
-        <div class="typography--large">{{variables.sub_heading}}</div>
+        <div class="typography--large primary-color">{{variables.sub_heading}}</div>
     </div>
     <div class="filter">
         <span class="js-filter-toggle faux-link">
@@ -64,7 +64,7 @@
     {{#allData}}
         <div class="matches section" data-season-string="{{season_string}}">
             <div class="season-head">
-                <span class="typography--large">{{season}}</span>
+                <span class="typography--large primary-color">{{season}}</span>
                 {{#unless isNotComplete}}
                 <span><img class="check-icon" src="/check-icon.png" alt="check mark icon to indicate programme collection for the season is complete"></span>
                 {{/unless}}
@@ -84,7 +84,7 @@
                 {{>grid-match}}
             {{/matches}}
             </div>
-            <div class="js-games-table hidden">
+            <div class="js-games-table games-table hidden">
                 <table class="table">
                     <col style="width:10%">
                     <col style="width:10%">
@@ -97,7 +97,7 @@
                     <col style="width:10%">
                     <col style="width:10%">
                     <col style="width:10%">
-                    <thead>
+                    <thead class="secondary-color">
                         <tr>
                             <th></th>
                             <th>League</th>
@@ -147,13 +147,13 @@
             <div class="js-modal-season"></div>
             <div class="js-modal-league"></div>
             <div class="js-modal-date"></div>
-            <div class="js-modal-opponent typography--large main-color"></div>
+            <div class="js-modal-opponent typography--large primary-color"></div>
             <div class="js-modal-home_away"></div>
             <div class="js-modal-score"></div>
             <div class="js-modal-competition"></div>
             <div class="js-modal-match_notes"></div>
             <div class="js-modal-content-editable">
-                <div class="modal-got_want js-modal-got_want typography--large main-color"></div>
+                <div class="modal-got_want js-modal-got_want typography--large primary-color"></div>
                 <div class="js-modal-price"></div>
                 <div class="js-modal-notes"></div>
                 <button class="button js-modal-edit-button">Edit</button>

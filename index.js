@@ -7,7 +7,7 @@ const renderLandingPage = require('./server/controllers/renderLandingPage').init
 const exampleConfig = require('./config');
 const fs = require('fs');
 
-//TODO DRY out
+//TODO DRY out - could use object literals?
 const getImages = (configOptions) => {
 	const imgOne = configOptions.img_one_src;
 	const imgTwo = configOptions.img_two_src;
@@ -23,6 +23,7 @@ const getImages = (configOptions) => {
 		if (err) { console.log('realpath error'); throw err; }
 		console.log('realpath complete!');
 	});
+
 	fs.copyFile(imgOnePath, `${newPath}/${imgOne}`, (err) => {
 		if (err) throw err;
 	});
@@ -33,6 +34,7 @@ const getImages = (configOptions) => {
 }
 
 const init = (config, isTestApp) => {
+
 	if (isTestApp) {
 		app.engine('html', exphbs({
 			defaultLayout: 'main',
@@ -62,6 +64,6 @@ const init = (config, isTestApp) => {
 	});
 }
 
-init(exampleConfig, true);  //uncomment to run the module with test config
+init(exampleConfig, true);  // uncomment to run the module with test config
 
 module.exports = init;

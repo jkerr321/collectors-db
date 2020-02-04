@@ -1,5 +1,6 @@
 :root {
-  --main-color: LightGrey;
+  --primary-color: LightGrey;
+  --secondary-color: LightGrey;
 }
 
 html {
@@ -15,8 +16,10 @@ body {
 }
 
 .typography--head {
+  color: var(--primary-color);
   font-size: 6.5rem;
-  font-family: 'Bebas Neue', cursive;
+  font-family: 'Bebas Neue', sans-serif;
+  text-shadow: 6px 6px var(--secondary-color);
 }
 
 .typography--large {
@@ -49,8 +52,12 @@ body {
   top: -15%;
 }
 
-.main-color {
-  color: var(--main-color);
+.primary-color {
+  color: var(--primary-color);
+}
+
+.secondary-color {
+  background-color: var(--secondary-color);
 }
 
 .section {
@@ -132,7 +139,7 @@ body {
 }
 
 .Got {
-  background-color: var(--main-color);
+  background-color: var(--primary-color);
 }
 
 .Want {
@@ -186,6 +193,10 @@ body {
   margin: auto;
   font-size: 1.4rem;
   border-collapse: collapse;
+}
+
+.games-table th {
+  background-color: var(--secondary-color);
 }
 
 .table--print-view {

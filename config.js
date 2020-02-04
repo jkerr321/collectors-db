@@ -1,7 +1,7 @@
 module.exports = {
     "options": {
-        "colour_one": 'blue',
-        "colour_two": 'white',
+        "colour_one": 'darkblue',
+        "colour_two": 'yellow',
         "heading": 'Example Collectors Database',
         "sub_heading": 'Everton FC Programme Collection',
         "img_one_src": 'everton_prog_1.jpg',
