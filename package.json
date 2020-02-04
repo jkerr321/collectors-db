@@ -6,7 +6,13 @@
   "author": "Jennifer Johnson",
   "license": "ISC",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint server/** && eslint public/main.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm test"
+    }
   },
   "dependencies": {
     "chai": "^4.2.0",
@@ -14,6 +20,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "google-spreadsheet": "^2.0.8",
+    "husky": "^4.2.1",
     "mocha": "^7.0.1",
     "nodemon": "^1.19.3",
     "path": "^0.12.7",
