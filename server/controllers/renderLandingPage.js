@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 const dotenv = require('dotenv');
 dotenv.config();
 const GoogleSpreadsheet = require('google-spreadsheet');
@@ -29,7 +30,7 @@ const getRows = async (config) => {
 	const doc = new GoogleSpreadsheet(config.sheet_id);
 	await promisify(doc.useServiceAccountAuth)(config);
 	const info = await promisify(doc.getInfo)();
-    const rows = await promisify(info.worksheets[0].getRows)({
+	const rows = await promisify(info.worksheets[0].getRows)({
 		'offset': 1,
 		'limit': 5000
 	});
@@ -110,13 +111,13 @@ const filterRows = async (rows, reqBody) => {
 };
 
 const getFilterArray = (reqBody) => {
-    let result = [];
-    if (reqBody.seasonFilter) { result.push(`${reqBody.seasonFilter}`); }
-    if (reqBody.opponentFilter) { result.push(`${reqBody.opponentFilter}`); }
-    if (reqBody.gotWantFilter) { result.push(`${reqBody.gotWantFilter}`); }
-    if (reqBody.homeAwayFilter) { result.push(`${reqBody.homeAwayFilter}`); }
-    return result;
-}
+	let result = [];
+	if (reqBody.seasonFilter) { result.push(`${reqBody.seasonFilter}`); }
+	if (reqBody.opponentFilter) { result.push(`${reqBody.opponentFilter}`); }
+	if (reqBody.gotWantFilter) { result.push(`${reqBody.gotWantFilter}`); }
+	if (reqBody.homeAwayFilter) { result.push(`${reqBody.homeAwayFilter}`); }
+	return result;
+};
 
 const init = async (req, res, config) => {
 	try {
@@ -138,11 +139,11 @@ const init = async (req, res, config) => {
 				await updateSpreadsheet(rows, req.body);
 				const updatedRows = await getRows(config);
 				const allData = await getFullListData(updatedRows);
-				renderData = { ...baseRenderData, allData }
+				renderData = { ...baseRenderData, allData };
 			}
 		} else {
 			const allData = await getFullListData(rows, seasonData);
-			renderData = { ...baseRenderData, allData }
+			renderData = { ...baseRenderData, allData };
 		}
 		return res.render('landing', renderData);
 	} catch (err) {
@@ -150,4 +151,4 @@ const init = async (req, res, config) => {
 	}
 };
 
-module.exports = { getRows, getUniqueList, updateSpreadsheet, getFullListData, filterRows, getFilterArray, init }
+module.exports = { getRows, getUniqueList, updateSpreadsheet, getFullListData, filterRows, getFilterArray, init };

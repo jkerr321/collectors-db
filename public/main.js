@@ -13,10 +13,6 @@ const hide = (element) => element.classList.add('hidden');
 // update html to reflect config values
 const colourOne = document.querySelector('.js-colour-one').innerHTML;
 const colourTwo = document.querySelector('.js-colour-two').innerHTML;
-console.log('==================');
-console.log('colourTwo', colourTwo);
-console.log('==================');
-
 const title = document.querySelector('.js-title').innerHTML;
 document.querySelector(':root').style.setProperty('--primary-color', colourOne);
 document.querySelector(':root').style.setProperty('--secondary-color', colourTwo);
@@ -52,7 +48,7 @@ const showModal = (event) => {
 	const modalContentForm = document.querySelector('.js-modal-content-form');
 	const modalEditable = document.querySelector('.js-modal-content-editable');
 	const season = getSeasonContainer(event);
-	
+
 	// modalInfo = {
 	// 	season: '1908/09',
 	// 	opponent: 'Tranmere Rovers',
@@ -67,7 +63,7 @@ const showModal = (event) => {
 	season.appendChild(modal); // position modal under correct season on page
 
 	populateForm(modalInfo);
-	
+
 	// in case modal has been opened elsewhere and edit button clicked, reset to show info not form
 	hide(modalContentForm);
 	show(modalEditable);
@@ -80,7 +76,7 @@ const showModal = (event) => {
 	// console.log('==================');
 	// console.log('modal', modal);
 	// console.log('==================');
-	
+
 	// console.log('==================');
 	// console.log('position', position);
 	// console.log('==================');
@@ -118,7 +114,7 @@ const populateForm = (modalInfo) => {
 		}
 	});
 
-	document.querySelector(`.js-form-id`).value = modalInfo.id;
+	document.querySelector('.js-form-id').value = modalInfo.id;
 
 	const formWant = document.querySelector('.js-form-want');
 	const formGot = document.querySelector('.js-form-got');
@@ -162,7 +158,7 @@ const toggleWants = (event) => {
 			if (cell.innerHTML === 'Got') {
 				cell.parentNode.classList.add('hidden');
 			}
-			});
+		});
 	} else {
 		matchCells.forEach(cell => show(cell.parentNode));
 	}
@@ -175,13 +171,13 @@ const toggleTable = (event) => {
 	const wantsToggle = seasonContainer.querySelector('.js-wants-toggle');
 	const showAllSpan = seasonContainer.querySelector('.js-show-all');
 	const modal = document.querySelector('.js-modal');
-	
-	if (!modal.classList.contains('hidden')) { hide(modal) };
+
+	if (!modal.classList.contains('hidden')) { hide(modal); }
 	if (event.srcElement.classList.contains('js-show-more')) {
 		hide(dots);
 		show(table);
 		if (wantsToggle) {
-			show(wantsToggle); 
+			show(wantsToggle);
 		}
 	} else {
 		if (wantsToggle) {
@@ -189,7 +185,7 @@ const toggleTable = (event) => {
 		}
 		hide(table);
 		show(dots);
-		
+
 		// when hiding table also unfilter 'wants' back to full list
 		toggleWants(event);
 		toggleClickableSpan(showAllSpan);

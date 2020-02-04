@@ -57,6 +57,7 @@ Things still to do
 ---------------------
 
 - tests
+- make button color primary color
 - ES lint on commit
 - test on push
 - password
