@@ -20,16 +20,16 @@ describe('renderLandingPage', async () => {
         filter: 'filter'
     }
     const reqBodyUpdateThree = {
-        gotWant: 'Got',
-        programmePrice: '',
-        programmeNotes: '',
-        id: '923'
+        'Got Want': 'Got',
+        'Programme Price': '',
+        'Programme Notes': '',
+        ID: '923'
     }
     const reqBodyUpdateFour = {
         gotWant: '',
-        programmePrice: '£2.80',
-        programmeNotes: '',
-        id: '924'
+        'Programme Price': '£2.80',
+        'Programme Notes': '',
+        ID: '924'
     }
 
     beforeEach(() => {
@@ -54,7 +54,7 @@ describe('renderLandingPage', async () => {
         });
         it('rows contain an id value', async () => {
             const rows = await getRows(config);
-            expect(rows[0]).to.haveOwnProperty('id');
+            expect(rows[0]).to.haveOwnProperty('ID');
         });
     });
 
@@ -80,10 +80,10 @@ describe('renderLandingPage', async () => {
             const filteredRowsOne = await filterRows(rows, reqBodyFilterOne);
             const filteredRowsTwo = await filterRows(rows, reqBodyFilterTwo);
 
-            expect(filteredRowsOne.every(value => value.gotwant === 'Want')).to.be.true;
-            expect(filteredRowsOne.every(value => value.season === '1947/48' || '1948/49')).to.be.true;
-            expect(filteredRowsTwo.every(value => value.opponent !== 'Queens Park Rangers')).to.be.true;
-            expect(filteredRowsTwo.some(value => value.opponent === 'Walsall')).to.be.true;
+            expect(filteredRowsOne.every(value => value['Got/Want'] === 'Want')).to.be.true;
+            expect(filteredRowsOne.every(value => value.Season === '1947/48' || '1948/49')).to.be.true;
+            expect(filteredRowsTwo.every(value => value.Opponent !== 'Queens Park Rangers')).to.be.true;
+            expect(filteredRowsTwo.some(value => value.Opponent === 'Walsall')).to.be.true;
         });
     });
 
@@ -98,7 +98,7 @@ describe('renderLandingPage', async () => {
             expect(getFullListData(rows).every(value => value.matches)).to.be.true;
             expect(getFullListData(rows)[0].matches).to.have.lengthOf(16);
         });
-        it('specifies whether a collection is not complete for a season', () => { //This should really be its own tested function I think
+        it('specifies whether a collection is not complete for a season', () => { //TODO This should really be its own tested function I think
             expect(getFullListData(rows)[0].isNotComplete).to.be.true;
         });
         it('does not specify "isNotComplete" value for a completed season', () => {
