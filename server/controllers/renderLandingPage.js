@@ -1,14 +1,13 @@
 /* eslint no-console: 0 */
 const dotenv = require('dotenv');
 dotenv.config();
-const GoogleSpreadsheet = require('google-spreadsheet');
-const { promisify } = require('util');
+const { GoogleSpreadsheet }= require('google-spreadsheet');
 
 const updateSpreadsheet = async (rows, reqBody) => {
 	try {
 		let changedValue = '';
 		rows.forEach(async row => {
-			if (row.id === reqBody.id) {
+			if (row.ID === reqBody.ID) {
 				Object.keys(reqBody).forEach(key => {
 					if (reqBody[key]) {
 						// e.g. if (reqBody.colour) {row.colour = reqBody.colour};
@@ -28,9 +27,13 @@ const updateSpreadsheet = async (rows, reqBody) => {
 
 const getRows = async (config) => {
 	const doc = new GoogleSpreadsheet(config.sheet_id);
-	await promisify(doc.useServiceAccountAuth)(config);
-	const info = await promisify(doc.getInfo)();
-	const rows = await promisify(info.worksheets[0].getRows)({
+	await doc.useServiceAccountAuth({
+		client_email: config.client_email,
+		private_key: config.private_key
+	});
+	await doc.loadInfo();
+	const sheet = await doc.sheetsByIndex[0];
+	const rows = await sheet.getRows({
 		'offset': 1,
 		'limit': 5000
 	});
@@ -48,7 +51,7 @@ const getUniqueList = (rows, value) => {
 
 const getFullListData = (rows) => {
 	try {
-		const seasons = getUniqueList(rows, 'season');
+		const seasons = getUniqueList(rows, 'Season');
 		// create empty array / objects for each season:
 		// {
 		//     season: 1998/99,
@@ -66,33 +69,32 @@ const getFullListData = (rows) => {
 
 		const values = rows.reduce((seasonsArray, row) => {
 			seasonsArray.forEach(obj => {
-				if (row.season === obj.season) {
-					if (row.gotwant === 'Want' && !obj.isNotComplete) {
+				if (row.Season === obj.season) {
+					if (row['Got/Want'] === 'Want' && !obj.isNotComplete) {
 						obj.isNotComplete = true;
 					}
 					obj.matches.push({
-						season: row.season,
-						league: row.league,
-						tier: row.leaguetier,
-						date: row.date,
-						opponent: row.opponent,
-						home_away: row.homeaway,
-						score: row.score,
-						result: row.result,
-						position: row.position,
-						points: row.points,
-						competition: row.competition,
-						match_notes: row.matchnotes,
-						got_want: row.gotwant,
-						price: row.programmeprice,
-						notes: row.programmenotes,
-						id: row.id
+						season: row.Season,
+						league: row.League,
+						tier: row['League Tier'],
+						date: row.Date,
+						opponent: row.Opponent,
+						home_away: row['Home/Away'],
+						score: row.Score,
+						result: row.Result,
+						position: row.Position,
+						points: row.Points,
+						competition: row.Competition,
+						match_notes: row['Match Notes'],
+						got_want: row['Got/Want'],
+						price: row['Programme Price'],
+						notes: row['Programme Notes'],
+						id: row.ID
 					});
 				}
 			});
 			return seasonsArray;
 		}, seasonsArray);
-
 		return values;
 	} catch (err) {
 		console.error('getData error', err);
@@ -102,10 +104,10 @@ const getFullListData = (rows) => {
 const filterRows = async (rows, reqBody) => {
 	return rows.filter(row => {
 		let result = true;
-		if (reqBody.seasonFilter && !reqBody.seasonFilter.includes(row.season)) {result = false;}
-		if (reqBody.opponentFilter && !reqBody.opponentFilter.includes(row.opponent)) {result = false;}
-		if (reqBody.gotWantFilter && row.gotwant !== reqBody.gotWantFilter) {result = false;}
-		if (reqBody.homeAwayFilter && row.homeaway !== reqBody.homeAwayFilter) {result = false;}
+		if (reqBody.seasonFilter && !reqBody.seasonFilter.includes(row.Season)) {result = false;}
+		if (reqBody.opponentFilter && !reqBody.opponentFilter.includes(row.Opponent)) {result = false;}
+		if (reqBody.gotWantFilter && row['Got/Want'] !== reqBody.gotWantFilter) {result = false;}
+		if (reqBody.homeAwayFilter && row['Home/Away'] !== reqBody.homeAwayFilter) {result = false;}
 		return result;
 	});
 };
@@ -122,8 +124,8 @@ const getFilterArray = (reqBody) => {
 const init = async (req, res, config) => {
 	try {
 		const rows = await getRows(config);
-		const seasonData = getUniqueList(rows, 'season');
-		const opponentData = getUniqueList(rows, 'opponent').sort();
+		const seasonData = getUniqueList(rows, 'Season');
+		const opponentData = getUniqueList(rows, 'Opponent').sort();
 		const variables = config.options;
 		const baseRenderData = { seasonData, opponentData, variables };
 		let renderData;

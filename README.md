@@ -56,10 +56,11 @@ To run locally:
 Things still to do
 ---------------------
 
+- upgrade to google spreadsheet v4
+- webkit styles
 - tests
 - make button color primary color
 - password
-- upgrade to google spreadsheet v4
 - show filter string on main page
 - ebay link
 - DRY out get images function
