@@ -53,14 +53,13 @@ To run locally:
 - Update `renderLandingPage.js` to point to your google sheet: `new GoogleSpreadsheet('[MY_SHEET_ID]')`
 - run locally with `$ nodemon app.js`
 
-Things still to do
+Things to do
 ---------------------
 
-- upgrade to google spreadsheet v4
 - webkit styles
 - tests
-- make button color primary color
 - password
+- make colorTwo a transparent version of colourOne if no colourTwo supplied
 - show filter string on main page
 - ebay link
 - DRY out get images function

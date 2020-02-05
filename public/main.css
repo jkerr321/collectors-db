@@ -1,6 +1,6 @@
 :root {
   --primary-color: LightGrey;
-  --secondary-color: LightGrey;
+  --secondary-color: white;
 }
 
 html {
@@ -65,7 +65,7 @@ body {
 }
 
 .button {
-  color: #131313; 
+  color: #131313;
   background-color: white;
   font-size: 1.6rem;
   height: 3.2rem;
@@ -76,7 +76,8 @@ body {
 .button:hover {
   cursor: pointer;
   color: white;
-  background-color: #131313;
+  background-color: var(--primary-color);
+  border: 0.1rem solid var(--primary-color);
 }
 
 .filter {
