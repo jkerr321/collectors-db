@@ -75,8 +75,6 @@ const getFullListData = (rows) => {
 					}
 					obj.matches.push({
 						season: row.Season,
-						league: row.League,
-						tier: row['League Tier'],
 						date: row.Date,
 						opponent: row.Opponent,
 						home_away: row['Home/Away'],
@@ -89,7 +87,9 @@ const getFullListData = (rows) => {
 						got_want: row['Got/Want'],
 						price: row['Programme Price'],
 						notes: row['Programme Notes'],
-						id: row.ID
+						id: row.ID,
+						ground: row.Ground,
+						attendance: row.Att
 					});
 				}
 			});

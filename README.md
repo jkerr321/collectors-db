@@ -67,5 +67,5 @@ Things to do
 - modal to push page down rather than up - use onclick window scrollTo - with propagate
 - on table view, if match is clicked on, do edit inline?
 - additional custom values, in front end, table, grid-match
-- update code to use classes / renderLandingPage and main.js
+- update code to use classes / renderLandingPage and main.js ??
 - are non unique IDs on checkboxes a problem?
