@@ -206,40 +206,6 @@ body {
   width: 100%;
 }
 
-.col-2 {
-  width: 6%
-}
-.col-3 {
-  width: 7%
-}
-.col-4 {
-  width: 9%
-}
-.col-5 {
-  width: 4%
-}
-.col-6 {
-  width: 4%
-}
-.col-7 {
-  width: 4%
-}
-.col-8 {
-  width: 4%
-}
-.col-9 {
-  width: 6%
-}
-.col-10 {
-  width: 5%
-}
-.col-11 {
-  width: 5%
-}
-.col-12 {
-  width: 5%
-}
-
 td, th {
   padding: 0.5rem;
   text-align: left;
