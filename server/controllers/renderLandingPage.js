@@ -25,7 +25,7 @@ const updateSpreadsheet = async (rows, reqBody) => {
 	}
 };
 
-const getRows = async (config) => {
+const getSheet = async (config) => {
 	const doc = new GoogleSpreadsheet(config.sheet_id);
 	await doc.useServiceAccountAuth({
 		client_email: config.client_email,
@@ -33,11 +33,17 @@ const getRows = async (config) => {
 	});
 	await doc.loadInfo();
 	const sheet = await doc.sheetsByIndex[0];
+	return sheet;
+};
+
+const getRows = async (config) => {
+	const sheet = await getSheet(config);
 	const rows = await sheet.getRows({
 		'offset': 1,
 		'limit': 5000
 	});
-	return rows;
+	const headers = sheet.headerValues;
+	return { rows, headers };
 };
 
 const getUniqueList = (rows, value) => {
@@ -49,8 +55,12 @@ const getUniqueList = (rows, value) => {
 	}, []);
 };
 
-const getFullListData = (rows) => {
+//TODO split this into multiple functions
+const getFullListData = (rows, headers) => {
 	try {
+		let headersForRender = {};
+		headers.forEach(val => headersForRender[val] = val);
+
 		const seasons = getUniqueList(rows, 'Season');
 		// create empty array / objects for each season:
 		// {
@@ -60,6 +70,7 @@ const getFullListData = (rows) => {
 		// }
 		const seasonsArray = seasons.reduce((acc, season) => {
 			const obj = {};
+			obj.headers = headersForRender;
 			obj.season = season;
 			obj.season_string = season.substring(0, 4) + season.substring(5);
 			obj.matches = [];
@@ -67,34 +78,46 @@ const getFullListData = (rows) => {
 			return acc;
 		}, []);
 
+		const dataPointOptions = [
+			{ varName: 'season', rowName: 'Season' },
+			{ varName: 'date', rowName: 'Date' },
+			{ varName: 'opponent', rowName: 'Opponent' },
+			{ varName: 'home_away', rowName: 'Home/Away' },
+			{ varName: 'score', rowName: 'Score' },
+			{ varName: 'position', rowName: 'Position' },
+			{ varName: 'points', rowName: 'Points' },
+			{ varName: 'competition', rowName: 'Competition' },
+			{ varName: 'match_notes', rowName: 'Match Notes' },
+			{ varName: 'got_want', rowName: 'Got/Want' },
+			{ varName: 'price', rowName: 'Programme Price' },
+			{ varName: 'notes', rowName: 'Programme Notes' },
+			{ varName: 'id', rowName: 'ID' },
+			{ varName: 'ground', rowName: 'Ground' },
+			{ varName: 'attendance', rowName: 'Attn' }
+		];
+		const dataPoints = dataPointOptions.filter(dataPoint => headers.includes(dataPoint.rowName));
+
 		const values = rows.reduce((seasonsArray, row) => {
 			seasonsArray.forEach(obj => {
+				// create an object with with data from each row, only using the data points filtered out above
+				const matchObject = dataPoints.reduce((acc, dataPoint) => {
+					acc[dataPoint.varName] = row[dataPoint.rowName];
+					return acc;
+				}, {});
+
 				if (row.Season === obj.season) {
 					if (row['Got/Want'] === 'Want' && !obj.isNotComplete) {
 						obj.isNotComplete = true;
 					}
-					obj.matches.push({
-						season: row.Season,
-						date: row.Date,
-						opponent: row.Opponent,
-						home_away: row['Home/Away'],
-						score: row.Score,
-						result: row.Result,
-						position: row.Position,
-						points: row.Points,
-						competition: row.Competition,
-						match_notes: row['Match Notes'],
-						got_want: row['Got/Want'],
-						price: row['Programme Price'],
-						notes: row['Programme Notes'],
-						id: row.ID,
-						ground: row.Ground,
-						attendance: row.Att
-					});
+					obj.matches.push(matchObject);
 				}
 			});
 			return seasonsArray;
 		}, seasonsArray);
+		console.log('==================');
+		console.log('values[0]', values[0]);
+		console.log('==================');
+		
 		return values;
 	} catch (err) {
 		console.error('getData error', err);
@@ -123,7 +146,9 @@ const getFilterArray = (reqBody) => {
 
 const init = async (req, res, config) => {
 	try {
-		const rows = await getRows(config);
+		const rowInfo = await getRows(config);
+		const rows = rowInfo.rows;
+		const headers = rowInfo.headers;
 		const seasonData = getUniqueList(rows, 'Season');
 		const opponentData = getUniqueList(rows, 'Opponent').sort();
 		const variables = config.options;
@@ -133,18 +158,18 @@ const init = async (req, res, config) => {
 		if (req.method === 'POST') {
 			if (req.body.filter) {
 				const filteredRows = await filterRows(rows, req.body);
-				const allData = await getFullListData(filteredRows);
+				const allData = await getFullListData(filteredRows, headers);
 				const isFiltered = true;
 				const appliedFilter = getFilterArray(req.body);
 				renderData = { ...baseRenderData, allData, isFiltered, appliedFilter };
 			} else {
 				await updateSpreadsheet(rows, req.body);
 				const updatedRows = await getRows(config);
-				const allData = await getFullListData(updatedRows);
+				const allData = await getFullListData(updatedRows, headers);
 				renderData = { ...baseRenderData, allData };
 			}
 		} else {
-			const allData = await getFullListData(rows, seasonData);
+			const allData = await getFullListData(rows, headers);
 			renderData = { ...baseRenderData, allData };
 		}
 		return res.render('landing', renderData);
