@@ -64,6 +64,6 @@ const init = (config, isTestApp) => {
 	});
 }
 
-// init(exampleConfig, true);  // uncomment to run the module with test config
+init(exampleConfig, true);  // uncomment to run the module with test config
 
 module.exports = init;
