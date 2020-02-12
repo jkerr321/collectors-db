@@ -74,7 +74,7 @@ const showModal = (event) => {
 	const modalContent = modal.querySelector('.modal-content');
 	const bodyRect = document.body.getBoundingClientRect();
 	const modalRect = modalContent.getBoundingClientRect();
-	const offsetTop = modalRect.top - bodyRect.top;
+	const offsetTop = modalRect.top - (bodyRect.top + 120);
 	const offsetLeft = modalRect.left - bodyRect.left;
 	window.scrollTo({
 		top: offsetTop,

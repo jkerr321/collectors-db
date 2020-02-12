@@ -57,15 +57,12 @@ Things to do
 ---------------------
 
 - webkit styles
-- tests
 - password
 - make colorTwo a transparent version of colourOne if no colourTwo supplied
 - show filter string on main page
 - ebay link
 - DRY out get images function
 - update readme once componentisation complete
-- modal to push page down rather than up - use onclick window scrollTo - with propagate
 - on table view, if match is clicked on, do edit inline?
-- additional custom values, in front end, table, grid-match
 - update code to use classes / renderLandingPage and main.js ??
 - are non unique IDs on checkboxes a problem?
