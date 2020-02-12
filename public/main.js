@@ -70,21 +70,17 @@ const showModal = (event) => {
 
 	show(modal);
 
-	// TODO THIS DOESN'T WORK
-	// const modalContent = modal.querySelector('.modal-content');
-	// const position = modalContent.getBoundingClientRect();
-	// console.log('==================');
-	// console.log('modal', modal);
-	// console.log('==================');
-
-	// console.log('==================');
-	// console.log('position', position);
-	// console.log('==================');
-	// window.scrollTo({
-	// 	top: position.top,
-	// 	left: position.left,
-	// 	behavior: 'smooth'
-	// });
+	// scroll to the modal
+	const modalContent = modal.querySelector('.modal-content');
+	const bodyRect = document.body.getBoundingClientRect();
+	const modalRect = modalContent.getBoundingClientRect();
+	const offsetTop = modalRect.top - bodyRect.top;
+	const offsetLeft = modalRect.left - bodyRect.left;
+	window.scrollTo({
+		top: offsetTop,
+		left: offsetLeft,
+		behavior: 'smooth'
+	});
 };
 
 const populateModalData = (modalInfo) => {
