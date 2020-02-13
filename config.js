@@ -7,6 +7,7 @@ module.exports = {
         "img_one_src": 'everton_prog_1.jpg',
         "img_two_src": 'everton_prog_2.jpg',
     },
+    "password": process.env.password,
     "sheet_id": process.env.sheet_id,
     "type": process.env.type,
     "project_id": process.env.project_id,

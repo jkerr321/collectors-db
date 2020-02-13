@@ -57,7 +57,7 @@ Things to do
 ---------------------
 
 - webkit styles
-- password
+- password - write tests, do styling
 - make colorTwo a transparent version of colourOne if no colourTwo supplied
 - show filter string on main page
 - ebay link

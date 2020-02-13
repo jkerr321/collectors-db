@@ -2,10 +2,11 @@ const express = require('express');
 const app = express();
 const exphbs = require('express-handlebars');
 const path = require('path');
+const fs = require('fs');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const renderLandingPage = require('./server/controllers/renderLandingPage').init;
 const exampleConfig = require('./config');
-const fs = require('fs');
 
 //TODO DRY out - could use object literals?
 const getImages = (configOptions) => {
@@ -55,6 +56,7 @@ const init = (config, isTestApp) => {
 	app.set('views', path.join(__dirname, '/views'));
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(express.static(path.join(__dirname, 'public')));
+	app.use(cookieParser());
 
 	app.get('/', (req, res) => renderLandingPage(req, res, config));
 	app.post('/', (req, res) => renderLandingPage(req, res, config));
@@ -64,6 +66,6 @@ const init = (config, isTestApp) => {
 	});
 }
 
-// init(exampleConfig, true);  // uncomment to run the module with test config
+init(exampleConfig, true);  // uncomment to run the module with test config
 
 module.exports = init;

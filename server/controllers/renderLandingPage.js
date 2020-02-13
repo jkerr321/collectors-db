@@ -133,11 +133,21 @@ const init = async (req, res, config) => {
 		const opponentData = getUniqueList(rows, 'Opponent').sort();
 		const sheet_id = config.sheet_id;
 		const variables = config.options;
-		const baseRenderData = { seasonData, opponentData, variables, sheet_id };
+		const editMode = !!req.cookies.programmeCollectorCookie || false;
+		const baseRenderData = { seasonData, opponentData, variables, sheet_id, editMode };
 		let renderData;
 
 		if (req.method === 'POST') {
-			if (req.body.filter) {
+			if (req.body.password) {
+				if (req.body.password.toLowerCase() === config.password.toLowerCase()) {
+					await res.cookie('programmeCollectorCookie', { httpOnly: true });
+					return res.redirect('/');
+				} else {
+					const allData = await getFullListData(rows);
+					const passwordFail = true;
+					renderData = { ...baseRenderData, allData, passwordFail };
+				}
+			} else if (req.body.filter) {
 				const filteredRows = await filterRows(rows, req.body);
 				const allData = await getFullListData(filteredRows);
 				const isFiltered = true;

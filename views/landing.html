@@ -153,7 +153,8 @@
                 <div class="js-modal-notes"></div>
                 <button class="button js-modal-edit-button">Edit</button>
             </div>
-            <form method="POST" class="section js-modal-content-form hidden" action="/{{seasonPath}}">
+            <form method="POST" class="section js-modal-content-form" action="/">
+                {{#if editMode}}
                 <div>
                     <label for="got">Got</label>
                     <input type="radio" id="got" name="Got/Want" value="Got" class="js-form-got">
@@ -170,7 +171,14 @@
                     <label for="Programme Notes">Programme Notes</label>
                     <textarea name="Programme Notes" rows="4" id="form-notes" class="js-form-notes"></textarea>
                 </div>
-                <input id="form-id" name="ID" class="js-form-id hidden"></input>
+                <div id="form-id" name="ID" class="js-form-id hidden"></div>
+                {{else}}
+                {{#if passwordFail}} <div>The password you entered was incorrect, please try again</div> {{/if}}
+                <div>
+                    <label for="password">Enter password to enable edit mode:</label>
+                    <input name="password" id="form-password" class="js-form-password"></input>
+                </div>
+                {{/if}}
                 <button class="button" type="submit">Submit</button>
             </form>
         </div>

@@ -62,7 +62,7 @@ const showModal = (event) => {
 	populateModalData(modalInfo);
 	season.appendChild(modal); // position modal under correct season on page
 
-	populateForm(modalInfo);
+	if (!document.querySelector('.js-form-password')) { populateForm(modalInfo); }
 
 	// in case modal has been opened elsewhere and edit button clicked, reset to show info not form
 	hide(modalContentForm);
@@ -132,7 +132,6 @@ const populateForm = (modalInfo) => {
 const showForm = () => {
 	const modalContentForm = document.querySelector('.js-modal-content-form');
 	const modalEditable = document.querySelector('.js-modal-content-editable');
-
 	show(modalContentForm);
 	hide(modalEditable);
 };
