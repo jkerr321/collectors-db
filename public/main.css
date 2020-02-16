@@ -236,6 +236,22 @@ td {
   text-align: center;
 }
 
+.password-box {
+  padding: 1em;
+  background-color: whitesmoke;
+}
+
+.error-msg {
+  color: darkred;
+  background-color: mistyrose;
+  padding: 1rem;
+  font-size: 1.4rem;
+}
+
+input, textarea {
+  border: 0.1rem solid grey;
+}
+
 .modal-content div {
   margin: 0 0 0.8rem 0;
 }
