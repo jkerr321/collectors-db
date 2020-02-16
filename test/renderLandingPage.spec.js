@@ -33,17 +33,24 @@ describe('renderLandingPage', async () => {
     }
 
     beforeEach(() => {
+        sandbox = sinon.createSandbox();        
         req = (method, body) => ({
             method: method || 'GET',
             get: () => { },
             post: () => { },
+            cookies: {},
             query: {},
             body: { ...body || {} }
         });
 
         res = {
             render: sinon.spy(),
+            redirect: sinon.spy()
         };
+    });
+
+    afterEach(() => {
+        sandbox.restore();
     });
 
     describe('getRows', async () => {
@@ -115,9 +122,19 @@ describe('renderLandingPage', async () => {
 
     describe('init', () => {
         it('renders the site', async () => {
-            await init(req, res, config);
+            await init(req(), res, config);
             expect(res.render.calledOnce).to.be.true;
         });
+
+        // it('renders the site with password fail object if password provided doesn\'t match config', async () => {
+        //     await init(req('POST', { password: 'password' }), res, config);
+        //     expect(res.redirect.calledOnce).to.be.true;
+        // });
+
+        // it('redirects to itself when password provided matches config and sets cookie', async () => {
+        //     await init(req('POST', { password: 'wrongPassword' }), res, config);
+        //     expect(res.render.getCall(0).args[1].passwordFail).to.be.true;
+        // });
 
         // it.only('calls res.render with the correct render data when the request method is POST and req.body contains isFiltered', async () => {
             //TODO need to stub getRows function - do I need to make renderLandingPage a class for that?
