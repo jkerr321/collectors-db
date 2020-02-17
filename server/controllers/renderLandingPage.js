@@ -39,7 +39,6 @@ const getSheet = async (config) => {
 const getRows = async (config) => {
 	const sheet = await getSheet(config);
 	const rows = await sheet.getRows({
-		'offset': 1,
 		'limit': 5000
 	});
 	return rows;
