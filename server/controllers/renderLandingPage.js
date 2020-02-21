@@ -19,29 +19,39 @@ const updateSpreadsheet = async (rows, reqBody) => {
 			}
 		});
 		return changedValue;
-
 	} catch (err) {
 		console.error('updateSpreadsheet error', err);
+		throw new Error('updateSpreadsheet error');
 	}
 };
 
 const getSheet = async (config) => {
-	const doc = new GoogleSpreadsheet(config.sheet_id);
-	await doc.useServiceAccountAuth({
-		client_email: config.client_email,
-		private_key: config.private_key
-	});
-	await doc.loadInfo();
-	const sheet = await doc.sheetsByIndex[0];
-	return sheet;
+	try {
+		const doc = new GoogleSpreadsheet(config.sheet_id);
+		await doc.useServiceAccountAuth({
+			client_email: config.client_email,
+			private_key: config.private_key
+		});
+		await doc.loadInfo();
+		const sheet = await doc.sheetsByIndex[0];
+		return sheet;
+	} catch (err) {
+		console.error('getSheet error', err);
+		throw new Error('getSheet error');
+	}
 };
 
 const getRows = async (config) => {
-	const sheet = await getSheet(config);
-	const rows = await sheet.getRows({
-		'limit': 5000
-	});
-	return rows;
+	try {
+		const sheet = await getSheet(config);
+		const rows = await sheet.getRows({
+			'limit': 5000
+		});
+		return rows;
+	} catch (err) {
+		console.error('getRows error', err);
+		throw new Error('getRows error');
+	}
 };
 
 const getUniqueList = (rows, value) => {
@@ -101,7 +111,8 @@ const getFullListData = (rows) => {
 		}, seasonsArray);
 		return values;
 	} catch (err) {
-		console.error('getData error', err);
+		console.error('getFullListData error', err);
+		throw new Error('getFullListData error')
 	}
 };
 
@@ -164,7 +175,9 @@ const init = async (req, res, config) => {
 		}
 		return res.render('landing', renderData);
 	} catch (err) {
+		const errorName = err.message;
 		console.error('render error', err);
+		return res.render('error', {errorName});
 	}
 };
 

@@ -35,7 +35,6 @@ const getImages = (configOptions) => {
 }
 
 const init = (config, isTestApp) => {
-
 	if (isTestApp) {
 		app.engine('html', exphbs({
 			defaultLayout: 'main',
@@ -51,13 +50,12 @@ const init = (config, isTestApp) => {
 			layoutsDir: 'node_modules/collectors-db/views/layouts/'
 		}));
 	}	
-
+	
 	app.set('view engine', 'html');
 	app.set('views', path.join(__dirname, '/views'));
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.use(cookieParser());
-
 	app.get('/', (req, res) => renderLandingPage(req, res, config));
 	app.post('/', (req, res) => renderLandingPage(req, res, config));
 
