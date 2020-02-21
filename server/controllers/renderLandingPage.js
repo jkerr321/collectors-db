@@ -112,7 +112,7 @@ const getFullListData = (rows) => {
 		return values;
 	} catch (err) {
 		console.error('getFullListData error', err);
-		throw new Error('getFullListData error')
+		throw new Error('getFullListData error');
 	}
 };
 
