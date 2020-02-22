@@ -10,6 +10,7 @@ const exampleConfig = require('./config');
 
 //TODO DRY out - could use object literals?
 const getImages = (configOptions) => {
+	console.info('getImages: starting');
 	const imgOne = configOptions.img_one_src;
 	const imgTwo = configOptions.img_two_src;
 
@@ -31,17 +32,19 @@ const getImages = (configOptions) => {
 	fs.copyFile(imgTwoPath, `${newPath}/${imgTwo}`, (err) => {
 		if (err) throw err;
 	});
-	console.log('image file copies complete!');
+	console.info('image file copies complete!');
 }
 
 const init = (config, isTestApp) => {
 	if (isTestApp) {
+		console.info('index init: testApp');
 		app.engine('html', exphbs({
 			defaultLayout: 'main',
 			extname: '.html',
 			layoutsDir: 'views/layouts/'
 		}));
-	} else {	
+	} else {
+		console.info('index init: production');
 		getImages(config.options); //copy user provided images to module
 
 		app.engine('html', exphbs({
@@ -62,6 +65,7 @@ const init = (config, isTestApp) => {
 	app.listen(process.env.PORT || 8001, () => {
 		console.log('collectors-db: listening on port 8001');
 	});
+	console.info('index init: complete');
 }
 
 // init(exampleConfig, true);  // uncomment to run the module with test config

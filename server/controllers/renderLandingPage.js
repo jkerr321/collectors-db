@@ -5,6 +5,11 @@ const { GoogleSpreadsheet }= require('google-spreadsheet');
 
 const updateSpreadsheet = async (rows, reqBody) => {
 	try {
+		console.info('UpdateSpreadsheet: starting');
+		// defending against previous bug
+		if (!reqBody.ID) {
+			throw new Error('UpdateSpreadsheet - missing ID error');
+		}
 		let changedValue = '';
 		rows.forEach(async row => {
 			if (row.ID === reqBody.ID) {
@@ -18,6 +23,7 @@ const updateSpreadsheet = async (rows, reqBody) => {
 				await row.save();
 			}
 		});
+		console.info('UpdateSpreadsheet: complete');
 		return changedValue;
 	} catch (err) {
 		console.error('updateSpreadsheet error', err);
@@ -35,6 +41,7 @@ const getSheet = async (config) => {
 		await doc.loadInfo();
 		const sheet = await doc.sheetsByIndex[0];
 		return sheet;
+		console.info('getSheet: complete');
 	} catch (err) {
 		console.error('getSheet error', err);
 		throw new Error('getSheet error');
@@ -43,10 +50,12 @@ const getSheet = async (config) => {
 
 const getRows = async (config) => {
 	try {
+		console.info('getRows: starting');
 		const sheet = await getSheet(config);
 		const rows = await sheet.getRows({
 			'limit': 5000
 		});
+		console.info('getRows: complete');
 		return rows;
 	} catch (err) {
 		console.error('getRows error', err);
@@ -63,9 +72,10 @@ const getUniqueList = (rows, value) => {
 	}, []);
 };
 
-//TODO split this into multiple functions
+//TODO split this into multiple functions?
 const getFullListData = (rows) => {
 	try {
+		console.info('getFullListData: starting');
 		const seasons = getUniqueList(rows, 'Season');
 		// create empty array / objects for each season:
 		// {
@@ -109,6 +119,7 @@ const getFullListData = (rows) => {
 			});
 			return seasonsArray;
 		}, seasonsArray);
+		console.info('getFullListData: complete');
 		return values;
 	} catch (err) {
 		console.error('getFullListData error', err);
@@ -117,6 +128,7 @@ const getFullListData = (rows) => {
 };
 
 const filterRows = async (rows, reqBody) => {
+	console.info('filterRows: inside');
 	return rows.filter(row => {
 		let result = true;
 		if (reqBody.seasonFilter && !reqBody.seasonFilter.includes(row.Season)) {result = false;}
@@ -128,6 +140,7 @@ const filterRows = async (rows, reqBody) => {
 };
 
 const getFilterArray = (reqBody) => {
+	console.info('getFilterArray: inside');
 	let result = [];
 	if (reqBody.seasonFilter) { result.push(`${reqBody.seasonFilter}`); }
 	if (reqBody.opponentFilter) { result.push(`${reqBody.opponentFilter}`); }
@@ -138,6 +151,7 @@ const getFilterArray = (reqBody) => {
 
 const init = async (req, res, config) => {
 	try {
+		console.info('init: landing page controller invoked');
 		const rows = await getRows(config);
 		const seasonData = getUniqueList(rows, 'Season');
 		const opponentData = getUniqueList(rows, 'Opponent').sort();
@@ -148,13 +162,17 @@ const init = async (req, res, config) => {
 		let renderData;
 
 		if (req.method === 'POST') {
+			console.info(`Request Body: ${JSON.stringify(req.body)}`)
 			if (req.body.password) {
+				console.info('init: POST request with password entered');
 				if (req.body.password.toLowerCase() === config.password.toLowerCase()) {
 					await res.cookie('programmeCollectorCookie', { httpOnly: true });
+					console.info('init: POST - password correct, cookie set');
 					return res.redirect('/');
 				} else {
 					const allData = await getFullListData(rows);
 					const passwordFail = true;
+					console.info('init: password failed');
 					renderData = { ...baseRenderData, allData, passwordFail };
 				}
 			} else if (req.body.filter) {
@@ -162,14 +180,17 @@ const init = async (req, res, config) => {
 				const allData = await getFullListData(filteredRows);
 				const isFiltered = true;
 				const appliedFilter = getFilterArray(req.body);
+				console.info(`init: POST - filter data requested - ${appliedFilter}`);
 				renderData = { ...baseRenderData, allData, isFiltered, appliedFilter };
 			} else {
+				console.info('init: POST - data update requested');
 				await updateSpreadsheet(rows, req.body);
 				const updatedRows = await getRows(config);
 				const allData = await getFullListData(updatedRows);
 				renderData = { ...baseRenderData, allData };
 			}
 		} else {
+			console.info('init: vanilla GET request');
 			const allData = await getFullListData(rows);
 			renderData = { ...baseRenderData, allData };
 		}
