@@ -40,8 +40,8 @@ const getSheet = async (config) => {
 		});
 		await doc.loadInfo();
 		const sheet = await doc.sheetsByIndex[0];
-		return sheet;
 		console.info('getSheet: complete');
+		return sheet;
 	} catch (err) {
 		console.error('getSheet error', err);
 		throw new Error('getSheet error');
@@ -162,7 +162,7 @@ const init = async (req, res, config) => {
 		let renderData;
 
 		if (req.method === 'POST') {
-			console.info(`Request Body: ${JSON.stringify(req.body)}`)
+			console.info(`Request Body: ${JSON.stringify(req.body)}`);
 			if (req.body.password) {
 				console.info('init: POST request with password entered');
 				if (req.body.password.toLowerCase() === config.password.toLowerCase()) {
