@@ -112,7 +112,7 @@
                             <td>{{>grid-match}}</td>
                             <td>{{this.date}}</td>
                             <td>{{this.opponent}}</td>
-                            <td>{{this.competition}}</td>
+                            <td>{{this.competition}}{{#if this.cup_round}}, {{this.cup_round}}{{/if}}</td>
                             <td>{{this.home_away}}</td>
                             <td>{{this.score}}</td>
                             <td class="hidden-mobile">{{this.match_notes}}</td>
@@ -135,6 +135,7 @@
         <div class="modal-content typography--small">
             <div class="js-modal-season"></div>
             <div class="js-modal-competition"></div>
+            <div class="js-modal-cup_round"></div>
             <div class="js-modal-date"></div>
             <div class="js-modal-opponent typography--large primary-color"></div>
             <div class="js-modal-home_away"></div>

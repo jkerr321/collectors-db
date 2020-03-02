@@ -107,6 +107,7 @@ const getFullListData = (rows) => {
 						position: row.Position,
 						points: row.Points,
 						competition: row.Competition,
+						cup_round: row['Cup Round'],
 						match_notes: row['Match Notes'],
 						got_want: row['Got/Want'],
 						price: row['Programme Price'],
