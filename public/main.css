@@ -172,7 +172,7 @@ body {
 .check-icon {
   max-width: 2rem;
   vertical-align: baseline;
-  margin: 0 0.4rem 0 0;
+  margin: 0 0.4rem -0.3rem 0;
 }
 
 .align-left {
