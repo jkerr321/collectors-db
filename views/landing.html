@@ -1,4 +1,4 @@
-{{#if isFiltered}}
+{{#if data.isFiltered}}
 <div class="section align-left">
     <span class="js-print-view-toggle faux-link">
         <span>Print View</span>
@@ -14,7 +14,7 @@
             <span class="hidden">Hide Filter <<</span>
         </span>
         <div class="section js-filter-form filter__content hidden">
-            {{#if isFiltered}}
+            {{#if data.isFiltered}}
             <form class="section" action="/" method="GET">
                 <button class="button" type="submit">Remove Filter</button>
             </form>
@@ -37,20 +37,20 @@
                     <input type="radio" id="all" name="homeAwayFilter" value=""></input>
                 </div>
                 <div class="checkbox checkbox__season section">
-                    {{#seasonData}}
+                    {{#data.seasonData}}
                     <div>
                         <input type="checkbox" id="seasonFilter" name="seasonFilter" value="{{this}}">
                         <label for="seasonFilter">{{this}}</label>
                     </div>
-                    {{/seasonData}}
+                    {{/data.seasonData}}
                 </div>
                 <div class="checkbox checkbox__opponent section">
-                    {{#opponentData}}
+                    {{#data.opponentData}}
                     <div>
                         <input type="checkbox" id="opponentFilter" name="opponentFilter" value="{{this}}">
                         <label for="opponentFilter">{{this}}</label>
                     </div>
-                    {{/opponentData}}
+                    {{/data.opponentData}}
                 </div>
                 <input id="filter" name="filter" class="hidden" value="filter"></input>
                 <button class="button" type="submit">Filter</button>
@@ -60,7 +60,7 @@
     <img class="prog-img prog-img--left" src="{{variables.img_one_src}}" alt="">
     <img class="prog-img prog-img--right" src="{{variables.img_two_src}}" alt="">
 
-    {{#allData}}
+    {{#data.allMatchData}}
         <div class="matches section" data-season-string="{{season_string}}">
             <div class="season-head">
                 <span class="typography--large primary-color">{{season}}</span>
@@ -127,7 +127,7 @@
                 </table>
             </div>
         </div>
-    {{/allData}}
+    {{/data.allMatchData}}
     <a href="#header" class="sticky-bottom">Back to top ^</a>
     <div class="footer">
         <a href="https://docs.google.com/spreadsheets/d/{{sheet_id}}" target="_blank">View Data</a>
@@ -156,7 +156,7 @@
                 <button class="button js-modal-edit-button">Edit</button>
             </div>
             <form method="POST" class="section js-modal-content-form" action="/">
-                {{#if editMode}}
+                {{#if data.editMode}}
                 <div>
                     <label for="got">Got</label>
                     <input type="radio" id="got" name="Got/Want" value="Got" class="js-form-got">
@@ -176,7 +176,7 @@
                 <input id="form-id" name="ID" class="js-form-id hidden"></input>
                 {{else}}
                 <div class="password-box">
-                    {{#if passwordFail}}<div class="error-msg">The password you entered was incorrect, please try again</div>{{/if}}
+                    {{#if data.passwordFail}}<div class="error-msg">The password you entered was incorrect, please try again</div>{{/if}}
                     <div>
                         <label for="password">Enter password to enable edit mode:</label>
                     </div>
@@ -189,11 +189,11 @@
     </div>
 </div>
 
-{{#if isFiltered}}
+{{#if data.isFiltered}}
 <div class="js-print-view hidden">
     <div class="section align-left">
         <strong>Showing:</strong>
-        {{#each appliedFilter}}
+        {{#each data.appliedFilter}}
         <div>{{this}}</div>
         {{/each}}
     </div>
@@ -214,11 +214,11 @@
                 <th>Result</th>
                 <th class="hidden-mobile">Match Notes</th>
                 <th>Got / Want</th>
-                {{#if isAlsoTicketCollection}}<th>Ticket Got / Want</th>{{/if}}
+                {{#if data.isAlsoTicketCollection}}<th>Ticket Got / Want</th>{{/if}}
             </tr>
         </thead>
     </table>
-{{#allData}}
+{{#data.allMatchData}}
     <div class="matches section" data-season-string="{{season_string}}">
         <table class="table table--print-view">
             <col style="width:12%">
@@ -244,12 +244,12 @@
             </tbody>
         </table>
     </div>
-{{/allData}}
+{{/data.allMatchData}}
 </div>
 {{/if}}
-<div class="js-title hidden">{{variables.heading}}</div>
-<div class="js-colour-one hidden">{{variables.colour_one}}</div>
-{{#if variables.colour_two}}
-<div class="js-colour-two hidden">{{variables.colour_two}}</div>
-<div class="js-colour-three hidden">{{variables.colour_three}}</div>
+<div class="js-title hidden">{{data.variables.heading}}</div>
+<div class="js-colour-one hidden">{{data.variables.colour_one}}</div>
+{{#if data.variables.colour_two}}
+<div class="js-colour-two hidden">{{data.variables.colour_two}}</div>
+<div class="js-colour-three hidden">{{data.variables.colour_three}}</div>
 {{/if}}

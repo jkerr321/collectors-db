@@ -6,7 +6,10 @@ module.exports = {
         "sub_heading": 'Everton FC Programme Collection',
         "img_one_src": 'everton_prog_1.jpg',
         "img_two_src": 'everton_prog_2.jpg',
-        "tickets": true
+        "tickets": true,
+        // "data_points_table": [score, ticket_got_want, other_items],
+        // "data_points_modal_static": [cup_round, prog_price, match_notes],
+        // "data_points_editable": [cup_round, price, notes, other_items ]
     },
     "password": process.env.password,
     "sheet_id": process.env.sheet_id,
@@ -21,3 +24,14 @@ module.exports = {
     "auth_provider_x509_cert_url": process.env.auth_provider_x509_cert_url,
     "client_x509_cert_url": process.env.client_x509_cert_url
 }
+    // score: row.Score,
+    // position: row.Position,
+    // points: row.Points,
+    // cup_round: row['Cup Round'],
+    // match_notes: row['Match Notes'],
+    // ticket_got_want: row['Ticket Got/Want'],
+    // prog_price: row['Programme Price'],
+    // notes: row['Programme Notes'],
+    // ground: row.Ground,
+    // attendance: row.Att,
+    // other_items: row['Other Items']
