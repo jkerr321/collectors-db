@@ -147,6 +147,8 @@
             <div class="js-modal-ground"></div>
             <div class="js-modal-attendance"></div>
             <div class="js-modal-match_notes"></div>
+            <div class="js-modal-other_items"></div>
+            <div class="js-modal-ticket_got_want"></div>
             <div class="js-modal-content-editable">
                 <div class="modal-got_want js-modal-got_want typography--large primary-color"></div>
                 <div class="js-modal-price"></div>
@@ -211,7 +213,8 @@
                 <th>H / A</th>
                 <th>Result</th>
                 <th class="hidden-mobile">Match Notes</th>
-                <th >Got / Want</th>
+                <th>Got / Want</th>
+                {{#if isAlsoTicketCollection}}<th>Ticket Got / Want</th>{{/if}}
             </tr>
         </thead>
     </table>
@@ -235,6 +238,7 @@
                     <td>{{this.score}}</td>
                     <td class="hidden-mobile">{{this.match_notes}}</td>
                     <td>{{this.got_want}}</td>
+                    {{#if this.ticket_got_want}}<td>{{this.ticket_got_want}}</td>{{/if}}
                 </tr>
                 {{/matches}}
             </tbody>

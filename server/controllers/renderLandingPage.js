@@ -110,11 +110,13 @@ const getFullListData = (rows) => {
 						cup_round: row['Cup Round'],
 						match_notes: row['Match Notes'],
 						got_want: row['Got/Want'],
+						ticket_got_want: row['Ticket Got/Want'],
 						price: row['Programme Price'],
 						notes: row['Programme Notes'],
 						id: row.ID,
 						ground: row.Ground,
-						attendance: row.Att
+						attendance: row.Att,
+						other_items: row['Other Items']
 					});
 				}
 			});
@@ -158,8 +160,9 @@ const init = async (req, res, config) => {
 		const opponentData = getUniqueList(rows, 'Opponent').sort();
 		const sheet_id = config.sheet_id;
 		const variables = config.options;
+		const isAlsoTicketCollection = config.options.tickets;
 		const editMode = !!req.cookies.programmeCollectorCookie || false;
-		const baseRenderData = { seasonData, opponentData, variables, sheet_id, editMode };
+		const baseRenderData = { seasonData, opponentData, variables, isAlsoTicketCollection, sheet_id, editMode };
 		let renderData;
 
 		if (req.method === 'POST') {

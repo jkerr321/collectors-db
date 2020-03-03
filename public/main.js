@@ -5,7 +5,7 @@ const tableToggles = document.querySelectorAll('.js-table-toggle');
 const wantToggles = document.querySelectorAll('.js-wants-toggle');
 const filterToggle = document.querySelector('.js-filter-toggle');
 const printViewToggle = document.querySelector('.js-print-view-toggle');
-const dataPoints = ['season', 'date', 'opponent', 'home_away', 'score', 'competition', 'cup_round', 'match_notes', 'got_want', 'price', 'notes', 'id', 'ground', 'attendance'];
+const dataPoints = ['season', 'date', 'opponent', 'home_away', 'score', 'competition', 'cup_round', 'match_notes', 'got_want', 'price', 'notes', 'id', 'ground', 'attendance', 'other_items', 'ticket_got_want'];
 
 const show = (element) => element.classList.remove('hidden');
 const hide = (element) => element.classList.add('hidden');
@@ -99,6 +99,9 @@ const populateModalData = (modalInfo) => {
 			}
 			if (modalInfo[dataPoint] && dataPoint === 'attendance') {
 				preamble = 'Attendance: ';
+			}
+			if (modalInfo[dataPoint] && dataPoint === 'other_items') {
+				preamble = 'Other Collection Items: ';
 			}
 			document.querySelector(`.js-modal-${dataPoint}`).innerHTML = `${preamble}${modalInfo[dataPoint]}` || '';
 		}

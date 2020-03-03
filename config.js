@@ -6,6 +6,7 @@ module.exports = {
         "sub_heading": 'Everton FC Programme Collection',
         "img_one_src": 'everton_prog_1.jpg',
         "img_two_src": 'everton_prog_2.jpg',
+        "tickets": true
     },
     "password": process.env.password,
     "sheet_id": process.env.sheet_id,

@@ -136,7 +136,7 @@ describe('renderLandingPage', async () => {
         //     expect(res.render.getCall(0).args[1].passwordFail).to.be.true;
         // });
 
-        // it.only('calls res.render with the correct render data when the request method is POST and req.body contains isFiltered', async () => {
+        // it('calls res.render with the correct render data when the request method is POST and req.body contains isFiltered', async () => {
             //TODO need to stub getRows function - do I need to make renderLandingPage a class for that?
             // const getRowsStub = sinon.stub(RenderLandingPage, 'getRows');
         //     await init(req('POST', reqBodyFilterOne), res, config);
