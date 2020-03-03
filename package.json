@@ -6,6 +6,7 @@
   "author": "Jennifer Johnson",
   "license": "ISC",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "mocha",
     "lint": "eslint server/** && eslint public/main.js"
   },
