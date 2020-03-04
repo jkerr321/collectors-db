@@ -2,7 +2,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const DataModel = require('../DataModel');
-// const { requiredDataPoints, optionalDataPoints } = require('../dataPoints');
+const { updateSpreadsheet, getRows } = require('../helpers/googleSpreadSheetHelpers');
 
 const filterRows = async (rows, reqBody) => {
 	console.info('filterRows: inside');
@@ -16,54 +16,49 @@ const filterRows = async (rows, reqBody) => {
 	});
 };
 
-
-
 const init = async (req, res, config) => {
 	try {
 		const data = await new DataModel(config, req);
-		await data.getSpreadsheetRowData(config);
-		data.setSeasonData(data.rows);
-		data.setOpponentData(data.rows);
-		data.setAllMatchData(data.rows);
+		const sheetRows = await getRows(config);
+		data.setOpponentList(sheetRows);
+		data.setCollectionData(sheetRows);
+		console.info('init: DataModel created');
 
-		console.info('init: landing page controller invoked');
+		if (req.method === 'POST') {
+			console.info(`Request Body: ${JSON.stringify(req.body)}`);
 
-		// if (req.method === 'POST') {
-		// 	console.info(`Request Body: ${JSON.stringify(req.body)}`);
-		// 	if (req.body.password) {
-		// 		console.info('init: POST request with password entered');
-		// 		if (req.body.password.toLowerCase() === config.password.toLowerCase()) {
-		// 			await res.cookie('programmeCollectorCookie', { httpOnly: true });
-		// 			console.info('init: POST - password correct, cookie set');
-		// 			return res.redirect('/');
-		// 		} else {
-		// 			const allMatchData = await getFullListData(rows);
-		// 			data.setPasswordFail();
-		// 			console.info('init: password failed');
-		// 			renderData = { ...baseRenderData, allMatchData, passwordFail };
-		// 		}
-		// 	} else if (req.body.filter) {
-		// 		const filteredRows = await filterRows(rows, req.body);
-		// 		const allMatchData = await getFullListData(filteredRows);
-		// 		data.setFilterData(req.body);
-		// 		console.info(`init: POST - filter data requested - ${data.appliedFilter}`);
-		// 		renderData = { ...baseRenderData, allMatchData, isFiltered, appliedFilter };
-		// 	} else {
-		// 		console.info('init: POST - data update requested');
-		// 		await updateSpreadsheet(data.rows, req.body);
-		// 		const updatedRows = await getRows(config);
-		// 		const allMatchData = await getFullListData(updatedRows);
-		// 		renderData = { ...baseRenderData, allMatchData };
-		// 	}
-		// } else {
+			if (req.body.password) {
+				if (req.body.password.toLowerCase() === config.password.toLowerCase()) {
+					await res.cookie('programmeCollectorCookie', { httpOnly: true });
+					console.info('init: POST - password correct, cookie set');
+					return res.redirect('/');
+				} else {
+					data.setPasswordFail();
+					console.info('init: password failed');
+				}
+
+			} else if (req.body.filter) {
+				const filteredRows = await filterRows(sheetRows, req.body);
+				data.setCollectionData(filteredRows);
+				data.setFilterData(req.body);
+				console.info(`init: POST - filter data requested - ${data.appliedFilter}`);
+
+			} else {
+				console.info('init: POST - data update requested');
+				await updateSpreadsheet(sheetRows, req.body);
+				const updatedRows = await getRows(config);
+				data.setCollectionData(updatedRows);
+			}
+
+		} else {
 			console.info('init: vanilla GET request');
-		// }
-		return res.render('landing', {data});
+		}		
+		return res.render('landing', { data });
 	} catch (err) {
 		const errorName = err.message;
 		console.error('render error', err);
-		return res.render('error', {errorName});
+		return res.render('error', { errorName });
 	}
 };
 
-module.exports = { init };
+module.exports = init;

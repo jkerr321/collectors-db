@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const renderLandingPage = require('./server/controllers/renderLandingPage').init;
+const renderLandingPage = require('./server/controllers/renderLandingPage');
 const exampleConfig = require('./config');
 
 //TODO DRY out - could use object literals?
