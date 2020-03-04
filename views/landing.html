@@ -37,30 +37,30 @@
                     <input type="radio" id="all" name="homeAwayFilter" value=""></input>
                 </div>
                 <div class="checkbox checkbox__season section">
-                    {{#data.seasonData}}
+                    {{#data.seasonList}}
                     <div>
                         <input type="checkbox" id="seasonFilter" name="seasonFilter" value="{{this}}">
                         <label for="seasonFilter">{{this}}</label>
                     </div>
-                    {{/data.seasonData}}
+                    {{/data.seasonList}}
                 </div>
                 <div class="checkbox checkbox__opponent section">
-                    {{#data.opponentData}}
+                    {{#data.opponentList}}
                     <div>
                         <input type="checkbox" id="opponentFilter" name="opponentFilter" value="{{this}}">
                         <label for="opponentFilter">{{this}}</label>
                     </div>
-                    {{/data.opponentData}}
+                    {{/data.opponentList}}
                 </div>
                 <input id="filter" name="filter" class="hidden" value="filter"></input>
                 <button class="button" type="submit">Filter</button>
             </form>
         </div>
     </div>
-    <img class="prog-img prog-img--left" src="{{variables.img_one_src}}" alt="">
-    <img class="prog-img prog-img--right" src="{{variables.img_two_src}}" alt="">
+    <img class="prog-img prog-img--left" src="{{data.img_one_src}}" alt="">
+    <img class="prog-img prog-img--right" src="{{data.img_two_src}}" alt="">
 
-    {{#data.allMatchData}}
+    {{#data.collectionData}}
         <div class="matches section" data-season-string="{{season_string}}">
             <div class="season-head">
                 <span class="typography--large primary-color">{{season}}</span>
@@ -79,9 +79,9 @@
                 {{/if}}
             </div>
             <div class="games-dots js-games-dots">
-            {{#matches}}
+            {{#matchData}}
                 {{>grid-match}}
-            {{/matches}}
+            {{/matchData}}
             </div>
             <div class="js-games-table games-table hidden">
                 <table class="table">
@@ -109,28 +109,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{#matches}}
+                        {{#matchData}}
                         <tr>
                             <td>{{>grid-match}}</td>
-                            <td>{{this.date}}</td>
-                            <td>{{this.opponent}}</td>
-                            <td>{{this.competition}}{{#if this.cup_round}}, {{this.cup_round}}{{/if}}</td>
-                            <td>{{this.home_away}}</td>
-                            <td>{{this.score}}</td>
-                            <td class="hidden-mobile">{{this.match_notes}}</td>
-                            <td class="hidden-mobile">{{this.price}}</td>
-                            <td class="hidden-mobile">{{this.notes}}</td>
-                            <td class="hidden">{{this.got_want}}</td>
+                            <td>{{date}}</td>
+                            <td>{{opponent}}</td>
+                            <td>{{competition}}{{#if cup_round}}, {{cup_round}}{{/if}}</td>
+                            <td>{{home_away}}</td>
+                            <td>{{score}}</td>
+                            <td class="hidden-mobile">{{match_notes}}</td>
+                            <td class="hidden-mobile">{{price}}</td>
+                            <td class="hidden-mobile">{{notes}}</td>
+                            <td class="hidden">{{got_want}}</td>
                         </tr>
-                        {{/matches}}
+                        {{/matchData}}
                     </tbody>
                 </table>
             </div>
         </div>
-    {{/data.allMatchData}}
+    {{/data.collectionData}}
     <a href="#header" class="sticky-bottom">Back to top ^</a>
     <div class="footer">
-        <a href="https://docs.google.com/spreadsheets/d/{{sheet_id}}" target="_blank">View Data</a>
+        <a href="https://docs.google.com/spreadsheets/d/{{data.sheet_id}}" target="_blank">View Data</a>
     </div>
 
     <div class="modal js-modal hidden">
@@ -214,11 +214,10 @@
                 <th>Result</th>
                 <th class="hidden-mobile">Match Notes</th>
                 <th>Got / Want</th>
-                {{#if data.isAlsoTicketCollection}}<th>Ticket Got / Want</th>{{/if}}
             </tr>
         </thead>
     </table>
-{{#data.allMatchData}}
+{{#data.collectionData}}
     <div class="matches section" data-season-string="{{season_string}}">
         <table class="table table--print-view">
             <col style="width:12%">
@@ -229,27 +228,25 @@
             <col style="width:12%">
             <col style="width:12%">
             <tbody>
-                {{#matches}}
+                {{#matchData}}
                 <tr>
-                    <td>{{this.date}}</td>
-                    <td>{{this.opponent}}</td>
-                    <td>{{this.competition}}</td>
-                    <td>{{this.home_away}}</td>
-                    <td>{{this.score}}</td>
-                    <td class="hidden-mobile">{{this.match_notes}}</td>
-                    <td>{{this.got_want}}</td>
-                    {{#if this.ticket_got_want}}<td>{{this.ticket_got_want}}</td>{{/if}}
+                    <td>{{date}}</td>
+                    <td>{{opponent}}</td>
+                    <td>{{competition}}</td>
+                    <td>{{home_away}}</td>
+                    <td>{{score}}</td>
+                    <td class="hidden-mobile">{{match_notes}}</td>
+                    <td>{{got_want}}</td>
                 </tr>
-                {{/matches}}
+                {{/matchData}}
             </tbody>
         </table>
     </div>
-{{/data.allMatchData}}
+{{/data.collectionData}}
 </div>
 {{/if}}
-<div class="js-title hidden">{{data.variables.heading}}</div>
-<div class="js-colour-one hidden">{{data.variables.colour_one}}</div>
-{{#if data.variables.colour_two}}
-<div class="js-colour-two hidden">{{data.variables.colour_two}}</div>
-<div class="js-colour-three hidden">{{data.variables.colour_three}}</div>
+<div class="js-title hidden">{{data.heading}}</div>
+<div class="js-colour-one hidden">{{data.colour_one}}</div>
+{{#if data.colour_two}}
+<div class="js-colour-two hidden">{{data.colour_two}}</div>
 {{/if}}
