@@ -19,7 +19,7 @@ module.exports = {
         'indent': ['error', 'tab', { 'SwitchCase': 1 }],
         'new-cap': 'off',
         'no-caller': 'error',
-        'no-console': 'error',
+        // 'no-console': 'error',
         'no-extend-native': 'error',
         'no-irregular-whitespace': 'error',
         'no-loop-func': 'error',
