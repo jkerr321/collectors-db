@@ -52,7 +52,7 @@ const init = async (req, res, config) => {
 
 		} else {
 			console.info('init: vanilla GET request');
-		}		
+		}
 		return res.render('landing', { data });
 	} catch (err) {
 		const errorName = err.message;

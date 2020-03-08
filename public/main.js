@@ -1,216 +1,231 @@
-// for query selectors
-const matches = document.querySelectorAll('.js-grid-match');
-const editButton = document.querySelector('.js-modal-edit-button');
-const tableToggles = document.querySelectorAll('.js-table-toggle');
-const wantToggles = document.querySelectorAll('.js-wants-toggle');
-const filterToggle = document.querySelector('.js-filter-toggle');
-const printViewToggle = document.querySelector('.js-print-view-toggle');
-const dataPoints = ['season', 'date', 'opponent', 'home_away', 'score', 'competition', 'cup_round', 'match_notes', 'got_want', 'price', 'notes', 'id', 'ground', 'attendance', 'other_items', 'ticket_got_want'];
+// const myScript = (window) => {
+	// for query selectors
+	const matches = document.querySelectorAll('.js-grid-match');
+	const editButton = document.querySelector('.js-modal-edit-button');
+	const tableToggles = document.querySelectorAll('.js-table-toggle');
+	const wantToggles = document.querySelectorAll('.js-wants-toggle');
+	const filterToggle = document.querySelector('.js-filter-toggle');
+	const printViewToggle = document.querySelector('.js-print-view-toggle');
 
-const show = (element) => element.classList.remove('hidden');
-const hide = (element) => element.classList.add('hidden');
+	const show = (element) => element.classList.remove('hidden');
+	const hide = (element) => element.classList.add('hidden');
 
-// update html to reflect config values
-const colourOne = document.querySelector('.js-colour-one').innerHTML;
-const colourTwo = document.querySelector('.js-colour-two') ? document.querySelector('.js-colour-two').innerHTML : 'ghostwhite';
-const title = document.querySelector('.js-title').innerHTML;
-document.querySelector(':root').style.setProperty('--primary-color', colourOne);
-document.querySelector(':root').style.setProperty('--secondary-color', colourTwo);
-document.querySelector('title').innerHTML = title;
+	// update html to reflect config values
+	const colourOne = document.querySelector('.js-colour-one').innerHTML;
+	const colourTwo = document.querySelector('.js-colour-two') ? document.querySelector('.js-colour-two').innerHTML : 'ghostwhite';
+	const title = document.querySelector('.js-title').innerHTML;
+	document.querySelector(':root').style.setProperty('--primary-color', colourOne);
+	document.querySelector(':root').style.setProperty('--secondary-color', colourTwo);
+	document.querySelector('title').innerHTML = title;
 
-const toggleClickableSpan = (element) => {
-	// e.g. toggle between 'Show More' / 'Show Less' clickable headings in the HTML
-	hide(element);
-	if (element.nextElementSibling) {
-		show(element.nextElementSibling);
-	} else {
-		show(element.previousElementSibling);
-	}
-};
-
-const getSeasonContainer = (event) => {
-	let seasonContainer;
-	// workaround to emulate event.path which is not available in Safari
-	let element = event.target;
-	while (element) {
-		if (element.dataset && element.dataset.seasonString) {
-			seasonContainer = element;
-			break;
+	const toggleClickableSpan = (element) => {
+		// e.g. toggle between 'Show More' / 'Show Less' clickable headings in the HTML
+		hide(element);
+		if (element.nextElementSibling) {
+			show(element.nextElementSibling);
 		} else {
-			element = element.parentElement;
+			show(element.previousElementSibling);
 		}
-	}
-	return seasonContainer;
-};
+	};
 
-const showModal = (event) => {
-	const modal = document.querySelector('.js-modal');
-	const modalContentForm = document.querySelector('.js-modal-content-form');
-	const modalEditable = document.querySelector('.js-modal-content-editable');
-	const season = getSeasonContainer(event);
-
-	// modalInfo = {
-	// 	season: '1908/09',
-	// 	opponent: 'Tranmere Rovers',
-	// 	etc...
-	// }
-	let modalInfo = {};
-	dataPoints.forEach(dataPoint => {
-		modalInfo[dataPoint] = event.srcElement.attributes[`data-${dataPoint}`].value;
-	});
-
-	populateModalData(modalInfo);
-	season.appendChild(modal); // position modal under correct season on page
-
-	if (!document.querySelector('.js-form-password')) { populateForm(modalInfo); }
-
-	// in case modal has been opened elsewhere and edit button clicked, reset to show info not form
-	hide(modalContentForm);
-	show(modalEditable);
-
-	show(modal);
-
-	// scroll to the modal
-	const modalContent = modal.querySelector('.modal-content');
-	const bodyRect = document.body.getBoundingClientRect();
-	const modalRect = modalContent.getBoundingClientRect();
-	const offsetTop = modalRect.top - (bodyRect.top + 120);
-	const offsetLeft = modalRect.left - bodyRect.left;
-	window.scrollTo({
-		top: offsetTop,
-		left: offsetLeft,
-		behavior: 'smooth'
-	});
-};
-
-const populateModalData = (modalInfo) => {
-	dataPoints.forEach(dataPoint => {
-		if (document.querySelector(`.js-modal-${dataPoint}`)) {
-			let preamble = '';
-			// add some explainer text to less obvious data points
-			if (modalInfo[dataPoint] && dataPoint === 'match_notes') {
-				preamble = 'Match Notes: ';
+	const getSeasonContainer = (event) => {
+		let seasonContainer;
+		// workaround to emulate event.path which is not available in Safari
+		let element = event.target;
+		while (element) {
+			if (element.dataset && element.dataset.seasonString) {
+				seasonContainer = element;
+				break;
+			} else {
+				element = element.parentElement;
 			}
-			if (modalInfo[dataPoint] && dataPoint === 'price') {
-				preamble = 'Programme Price: ';
-			}
-			if (modalInfo[dataPoint] && dataPoint === 'notes') {
-				preamble = 'Programme Notes: ';
-			}
-			if (modalInfo[dataPoint] && dataPoint === 'attendance') {
-				preamble = 'Attendance: ';
-			}
-			if (modalInfo[dataPoint] && dataPoint === 'other_items') {
-				preamble = 'Other Collection Items: ';
-			}
-			document.querySelector(`.js-modal-${dataPoint}`).innerHTML = `${preamble}${modalInfo[dataPoint]}` || '';
 		}
-	});
-};
+		return seasonContainer;
+	};
 
-const populateForm = (modalInfo) => {
-	// set placeholder values
-	dataPoints.forEach(dataPoint => {
-		if (document.querySelector(`.js-form-${dataPoint}`)) {
-			document.querySelector(`.js-form-${dataPoint}`).placeholder = `${modalInfo[dataPoint]}` || '';
-		}
-	});
+	const showModal = (event) => {
+		const modal = document.querySelector('.js-modal');
+		const modalContentForm = document.querySelector('.js-modal-content-form');
+		const modalEditable = document.querySelector('.js-modal-content-editable');
+		const season = getSeasonContainer(event);
+		const dataForModal = Array.from(event.srcElement.attributes)
+		populateModalData(dataForModal);
+		season.appendChild(modal); // position modal under correct season on page
 
-	document.querySelector('.js-form-id').value = modalInfo.id;
+		if (!document.querySelector('.js-form-password')) { populateForm(dataForModal); }
 
-	const formWant = document.querySelector('.js-form-want');
-	const formGot = document.querySelector('.js-form-got');
+		// in case modal has been opened elsewhere and edit button clicked, reset to show info not form
+		hide(modalContentForm);
+		show(modalEditable);
 
-	// remove current radio button selection
-	formGot.removeAttribute('checked');
-	formWant.removeAttribute('checked');
+		show(modal);
 
-	if (modalInfo.got_want === 'Got') {
-		formGot.setAttribute('checked', '');
-	} else {
-		formWant.setAttribute('checked', '');
-	}
-};
+		// scroll to the modal
+		const modalContent = modal.querySelector('.modal-content');
+		const bodyRect = document.body.getBoundingClientRect();
+		const modalRect = modalContent.getBoundingClientRect();
+		const offsetTop = modalRect.top - (bodyRect.top + 120);
+		const offsetLeft = modalRect.left - bodyRect.left;
+		window.scrollTo({
+			top: offsetTop,
+			left: offsetLeft,
+			behavior: 'smooth'
+		});
+	};
 
-const showForm = () => {
-	const modalContentForm = document.querySelector('.js-modal-content-form');
-	const modalEditable = document.querySelector('.js-modal-content-editable');
-	show(modalContentForm);
-	hide(modalEditable);
-};
-
-const toggleFilter = (event) => {
-	toggleClickableSpan(event.srcElement);
-	const filter = document.querySelector('.js-filter-form');
-	if(filter.classList.contains('hidden')) {
-		show(filter);
-	} else {
-		hide(filter);
-	}
-};
-
-const toggleWants = (event) => {
-	toggleClickableSpan(event.srcElement);
-	const seasonContainer = getSeasonContainer(event);
-	const matchCells = seasonContainer.querySelectorAll('td');
-
-	if (event.srcElement.classList.contains('js-show-wants')) {
-		matchCells.forEach(cell => {
-			if (cell.innerHTML === 'Got') {
-				cell.parentNode.classList.add('hidden');
+	const populateModalData = (eventAttrArray) => {
+		eventAttrArray.forEach(attr => {
+			// get the name of the data attribute without the 'data-' prefix
+			const dataPointName = (attr.name).substring(5);
+			const dataPointValue = attr.value;
+			// first of all reset all datapoint values in the modal to blank to overwrite anything already there
+			if (dataPointName && document.querySelector(`.js-modal-${dataPointName}`)) {
+				document.querySelector(`.js-modal-${dataPointName}`).innerHTML = '';
+			}
+			// if data point value isn't undefined and there is a corresponding modal element
+			if (dataPointValue && document.querySelector(`.js-modal-${dataPointName}`)) {
+				let preamble = '';
+				// add some explainer text to less obvious data points
+				if (dataPointName === 'match_notes') {
+					preamble = 'Match Notes: ';
+				}
+				if (dataPointName === 'price') {
+					preamble = '<strong>Programme Price:</strong> ';
+				}
+				if (dataPointName === 'notes') {
+					preamble = '<strong>Programme Notes:</strong> ';
+				}
+				if (dataPointName === 'attendance') {
+					preamble = 'Attendance: ';
+				}
+				if (dataPointName === 'other_items') {
+					preamble = '<strong>Other Collection Items:</strong> ';
+				}
+				document.querySelector(`.js-modal-${dataPointName}`).innerHTML = `${preamble}${dataPointValue}` || '';
 			}
 		});
-	} else {
-		matchCells.forEach(cell => show(cell.parentNode));
+	};
+
+	const populateForm = (eventAttrArray) => {
+		// set placeholder values
+		eventAttrArray.forEach(attr => {
+			// get the name of the data attribute without the 'data-' prefix
+			const dataPointName = (attr.name).substring(5);
+			const dataPointValue = attr.value;
+
+			if (document.querySelector(`.js-form-${dataPointName}`)) {
+				document.querySelector(`.js-form-${dataPointName}`).value = `${dataPointValue}` || '';
+			}
+		});
+
+		setRadioPlaceholders('programme', eventAttrArray);
+		setRadioPlaceholders('ticket', eventAttrArray);
+	};
+
+	const setRadioPlaceholders = (item, eventAttrArray) => {
+		const formWant = document.querySelector(`.js-form-${item}-want`);
+		const formGot = document.querySelector(`.js-form-${item}-got`);
+		
+		// remove current radio button selection
+		formGot.removeAttribute('checked');
+		formWant.removeAttribute('checked');
+
+		// set correct value to checked
+		eventAttrArray.forEach(attr => {			
+			if (attr.name === `data-${item}_got_want`) {
+				if (attr.value === 'Got') {
+					formGot.setAttribute('checked', '');
+				} else {
+					formWant.setAttribute('checked', '');
+				}
+			}
+		});
 	}
-};
 
-const toggleTable = (event) => {
-	const seasonContainer = getSeasonContainer(event);
-	const table = seasonContainer.querySelector('.js-games-table');
-	const dots = seasonContainer.querySelector('.js-games-dots');
-	const wantsToggle = seasonContainer.querySelector('.js-wants-toggle');
-	const showAllSpan = seasonContainer.querySelector('.js-show-all');
-	const modal = document.querySelector('.js-modal');
+	const showForm = () => {
+		const modalContentForm = document.querySelector('.js-modal-content-form');
+		const modalEditable = document.querySelector('.js-modal-content-editable');
+		show(modalContentForm);
+		hide(modalEditable);
+	};
 
-	if (!modal.classList.contains('hidden')) { hide(modal); }
-	if (event.srcElement.classList.contains('js-show-more')) {
-		hide(dots);
-		show(table);
-		if (wantsToggle) {
-			show(wantsToggle);
+	const toggleFilter = (event) => {
+		toggleClickableSpan(event.srcElement);
+		const filter = document.querySelector('.js-filter-form');
+		if (filter.classList.contains('hidden')) {
+			show(filter);
+		} else {
+			hide(filter);
 		}
-	} else {
-		if (wantsToggle) {
-			hide(wantsToggle);
+	};
+
+	const toggleWants = (event) => {
+		toggleClickableSpan(event.srcElement);
+		const seasonContainer = getSeasonContainer(event);
+		const matchCells = seasonContainer.querySelectorAll('td');
+
+		if (event.srcElement.classList.contains('js-show-wants')) {
+			matchCells.forEach(cell => {
+				if (cell.innerHTML === 'Got') {
+					cell.parentNode.classList.add('hidden');
+				}
+			});
+		} else {
+			matchCells.forEach(cell => show(cell.parentNode));
 		}
-		hide(table);
-		show(dots);
+	};
 
-		// when hiding table also unfilter 'wants' back to full list
-		toggleWants(event);
-		toggleClickableSpan(showAllSpan);
-	}
-	toggleClickableSpan(event.srcElement);
-};
+	const toggleTable = (event) => {
+		const seasonContainer = getSeasonContainer(event);
+		const table = seasonContainer.querySelector('.js-games-table');
+		const dots = seasonContainer.querySelector('.js-games-dots');
+		const wantsToggle = seasonContainer.querySelector('.js-wants-toggle');
+		const showAllSpan = seasonContainer.querySelector('.js-show-all');
+		const modal = document.querySelector('.js-modal');
 
-const togglePrintView = (event) => {
-	const printView = document.querySelector('.js-print-view');
-	const richView = document.querySelector('.js-rich-view');
-	toggleClickableSpan(event.srcElement);
+		if (!modal.classList.contains('hidden')) { hide(modal); }
+		if (event.srcElement.classList.contains('js-show-more')) {
+			hide(dots);
+			show(table);
+			if (wantsToggle) {
+				show(wantsToggle);
+			}
+		} else {
+			if (wantsToggle) {
+				hide(wantsToggle);
+			}
+			hide(table);
+			show(dots);
 
-	if (printView.classList.contains('hidden')) {
-		hide(richView);
-		show(printView);
-	} else {
-		hide(printView);
-		show(richView);
-	}
-};
+			// when hiding table also unfilter 'wants' back to full list
+			toggleWants(event);
+			toggleClickableSpan(showAllSpan);
+		}
+		toggleClickableSpan(event.srcElement);
+	};
 
-tableToggles.forEach(toggle => toggle.addEventListener('click', e => toggleTable(e)));
-matches.forEach(match => match.addEventListener('click', e => showModal(e)));
-wantToggles.forEach(toggle => toggle.addEventListener('click', e => toggleWants(e)));
-editButton.addEventListener('click', e => showForm(e));
-filterToggle.addEventListener('click', e => toggleFilter(e));
-if(printViewToggle) { printViewToggle.addEventListener('click', e => togglePrintView(e)); }
+	const togglePrintView = (event) => {
+		const printView = document.querySelector('.js-print-view');
+		const richView = document.querySelector('.js-rich-view');
+		toggleClickableSpan(event.srcElement);
+
+		if (printView.classList.contains('hidden')) {
+			hide(richView);
+			show(printView);
+		} else {
+			hide(printView);
+			show(richView);
+		}
+	};
+
+	tableToggles.forEach(toggle => toggle.addEventListener('click', e => toggleTable(e)));
+	matches.forEach(match => match.addEventListener('click', e => showModal(e)));
+	wantToggles.forEach(toggle => toggle.addEventListener('click', e => toggleWants(e)));
+	editButton.addEventListener('click', e => showForm(e));
+	filterToggle.addEventListener('click', e => toggleFilter(e));
+	if (printViewToggle) { printViewToggle.addEventListener('click', e => togglePrintView(e)); }
+// }
+
+// myScript(window);
+
+module.exports = togglePrintView;
