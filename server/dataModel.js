@@ -12,8 +12,6 @@ module.exports = class DataModel {
 		this.sheet_id = config.sheet_id;
 
 		this.dataPoints = config.options.data_points;
-		this.modalDataPoints = config.options.modal_data_points || '';
-		this.printViewData = config.options.print_view_data || '';
 
 		this.is_ticket_collection = config.options.data_points.is_ticket_collection;
 		this.editMode = !!req.cookies.programmeCollectorCookie || false;
@@ -70,7 +68,8 @@ module.exports = class DataModel {
 			this.collectionData.push({
 				season: season,
 				season_string: season.substring(0, 4) + season.substring(5),
-				matchData: []
+				matchData: [],
+				is_ticket_collection: this.is_ticket_collection
 			});
 		});
 	}
@@ -104,6 +103,8 @@ module.exports = class DataModel {
 					Object.keys(this.dataPoints).forEach(key => {
 						matchObj[key] = row[`${this.dataPoints[key]}`];
 					});
+					matchObj.is_ticket_collection = this.is_ticket_collection;
+
 					seasonObject.matchData.push(matchObj);
 				}
 			});

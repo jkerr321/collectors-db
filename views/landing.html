@@ -102,11 +102,11 @@
                             <th>Competition</th>
                             <th>H / A</th>
                             <th>Result</th>
-                            <th class="hidden-mobile">Match Notes</th>
-                            <th class="hidden-mobile">Programme Price</th>
+                            <th class="{{#if is_ticket_collection}}hidden{{/if}} hidden-mobile">Match Notes</th>
+                            <th class="{{#if is_ticket_collection}}hidden{{/if}} hidden-mobile">Programme Price</th>
                             <th class="hidden-mobile">Programme Notes</th>
                             <th class="{{#unless is_ticket_collection}}hidden{{/unless}}">Programme Got / Want</th>
-                            {{#if data.is_ticket_collection}}<th>Ticket Got / Want</th>{{/if}}
+                            {{#if is_ticket_collection}}<th>Ticket Got / Want</th>{{/if}}
                         </tr>
                     </thead>
                     <tbody>
@@ -119,10 +119,10 @@
                             <td>{{home_away}}</td>
                             <td>{{score}}</td>
                             <td class="hidden-mobile">{{match_notes}}</td>
-                            <td class="hidden-mobile">{{price}}</td>
-                            <td class="hidden-mobile">{{notes}}</td>
+                            <td class="{{#if is_ticket_collection}}hidden{{/if}} hidden-mobile">{{price}}</td>
+                            <td class="{{#if is_ticket_collection}}hidden{{/if}} hidden-mobile">{{notes}}</td>
                             <td class="{{#unless is_ticket_collection}}hidden{{/unless}}">{{programme_got_want}}</td>
-                            {{#if is_ticket_collection}}<th class=>{{ticket_got_want}}</th>{{/if}}
+                            {{#if is_ticket_collection}}<td class=>{{ticket_got_want}}</td>{{/if}}
                         </tr>
                         {{/matchData}}
                     </tbody>
