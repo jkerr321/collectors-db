@@ -13,7 +13,7 @@ module.exports = class DataModel {
 
 		this.dataPoints = config.options.data_points;
 
-		this.is_ticket_collection = config.options.data_points.is_ticket_collection;
+		this.is_ticket_collection = config.options.data_points.is_ticket_collection || false;
 		this.editMode = !!req.cookies.programmeCollectorCookie || false;
 		this.seasonList = '';
 		this.opponentList = '';

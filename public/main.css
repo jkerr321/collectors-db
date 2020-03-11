@@ -234,6 +234,10 @@ body {
   text-align: left;
 }
 
+.block {
+  display: block;
+}
+
 /* Footer */
 .footer {
   text-align: center;

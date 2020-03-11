@@ -116,10 +116,11 @@
 			if (document.querySelector(`.js-form-${dataPointName}`)) {
 				document.querySelector(`.js-form-${dataPointName}`).value = `${dataPointValue}` || '';
 			}
-		});
 
-		setRadioPlaceholders('programme', eventAttrArray);
-		setRadioPlaceholders('ticket', eventAttrArray);
+			if (attr.name === 'ticket' || attr.name === 'programme') {
+				setRadioPlaceholders(attr.name, eventAttrArray);
+			}
+		});
 	};
 
 	const setRadioPlaceholders = (item, eventAttrArray) => {

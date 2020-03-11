@@ -20,6 +20,14 @@
             </form>
             {{/if}}
             <form class="section" action="/" method="POST">
+                {{#if data.is_ticket_collection}}
+                <div class="section">
+                    <label for="tickets">Tickets</label>
+                    <input type="radio" id="ticket" name="ticketProgrammeFilter" value="Ticket">
+                    <label for="programmes">Programmes</label>
+                    <input type="radio" id="programmes" name="ticketProgrammeFilter" value="Programme"></input>
+                </div>
+                {{/if}}
                 <div class="section">
                     <label for="got">Got</label>
                     <input type="radio" id="got" name="gotWantFilter" value="Got">
@@ -102,15 +110,17 @@
                             <th>Competition</th>
                             <th>H / A</th>
                             <th>Result</th>
-                            <th class="{{#if is_ticket_collection}}hidden{{/if}} hidden-mobile">Match Notes</th>
-                            <th class="{{#if is_ticket_collection}}hidden{{/if}} hidden-mobile">Programme Price</th>
-                            <th class="hidden-mobile">Programme Notes</th>
-                            <th class="{{#unless is_ticket_collection}}hidden{{/unless}}">Programme Got / Want</th>
-                            {{#if is_ticket_collection}}<th>Ticket Got / Want</th>{{/if}}
+                            <th class="hidden-mobile">Match Notes</th>
+                            <th class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">Programme Price</th>
+                            <th class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">Programme Notes</th>
+                            <th class="{{#unless this.is_ticket_collection}}hidden{{/unless}}">Programme Got / Want</th>
+                            {{#if this.is_ticket_collection}}<th>Ticket Got / Want</th>{{/if}}
                         </tr>
                     </thead>
                     <tbody>
                         {{#matchData}}
+                                         {{this.is_ticket_collection}}
+
                         <tr>
                             <td>{{>grid-match}}</td>
                             <td>{{date}}</td>
@@ -119,10 +129,10 @@
                             <td>{{home_away}}</td>
                             <td>{{score}}</td>
                             <td class="hidden-mobile">{{match_notes}}</td>
-                            <td class="{{#if is_ticket_collection}}hidden{{/if}} hidden-mobile">{{price}}</td>
-                            <td class="{{#if is_ticket_collection}}hidden{{/if}} hidden-mobile">{{notes}}</td>
-                            <td class="{{#unless is_ticket_collection}}hidden{{/unless}}">{{programme_got_want}}</td>
-                            {{#if is_ticket_collection}}<td class=>{{ticket_got_want}}</td>{{/if}}
+                            <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{price}}</td>
+                            <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{notes}}</td>
+                            <td class="{{#unless this.is_ticket_collection}}hidden{{/unless}}">{{programme_got_want}}</td>
+                            {{#if this.is_ticket_collection}}<td class=>{{ticket_got_want}}</td>{{/if}}
                         </tr>
                         {{/matchData}}
                     </tbody>
@@ -152,7 +162,7 @@
             <div class="js-modal-content-editable">
                 <div class="typography--large primary-color">
                     <div>{{#if data.is_ticket_collection}}<span>Programme: </span>{{/if}}<span class="js-modal-programme_got_want"></span></div>
-                    <div>{{#if data.is_ticket_collection}}<span>Ticket: </span>{{/if}}<span class="js-modal-ticket_got_want"></span></div>
+                    {{#if data.is_ticket_collection}}<div><span>Ticket: </span><span class="js-modal-ticket_got_want"></span></div>{{/if}}
                 </div>
                 <div class="js-modal-price"></div>
                 <div class="js-modal-notes"></div>
@@ -161,7 +171,11 @@
             </div>
             <form method="POST" class="section js-modal-content-form" action="/">
                 {{#if data.editMode}}
-                <div>Programme:</div>
+                {{#if data.is_ticket_collection}}
+                <div>
+                    <strong>Programme: </strong>
+                </div>
+                {{/if}}
                 <div>
                     <label for="got">Got</label>
                     <input type="radio" id="got" name="Programme Got/Want" value="Got" class="js-form-programme-got">
@@ -178,7 +192,10 @@
                     <label for="Programme Notes">Programme Notes</label>
                     <textarea name="Programme Notes" rows="4" id="form-notes" class="js-form-notes"></textarea>
                 </div>
-                <div>Ticket:</div>
+                {{#if data.is_ticket_collection}}
+                <div>
+                    <strong>Ticket: </strong>
+                </div>
                 <div>
                     <label for="got">Got</label>
                     <input type="radio" id="got" name="Ticket Got/Want" value="Got" class="js-form-ticket-got">
@@ -187,8 +204,9 @@
                     <label for="want">Want</label>
                     <input type="radio" id="want" name="Ticket Got/Want" value="Want" class="js-form-ticket-want"></input>
                 </div>
+                {{/if}}
                 <div>
-                    <label for="Other Items">Other Items</label>
+                    <label class="block" for="Other Items">Other Items</label>
                     <textarea name="Other Items" rows="4" id="form-other_items" class="js-form-other_items"></textarea>
                 </div>
                 <input id="form-id" name="ID" class="js-form-id hidden"></input>
@@ -256,7 +274,7 @@
                     <td>{{score}}</td>
                     <td class="hidden-mobile">{{match_notes}}</td>
                     <td>{{programme_got_want}}</td>
-                    {{#if is_ticket_collection}}<td>{{ticket_got_want}}</td>{{/if}}
+                    {{#if this.is_ticket_collection}}<td>{{ticket_got_want}}</td>{{/if}}
                 </tr>
                 {{/matchData}}
             </tbody>
