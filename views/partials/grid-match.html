@@ -1,5 +1,5 @@
 <div class="grid-match-container {{this.home_away}}">
-    <button class="grid-match js-grid-match programme-{{this.programme_got_want}} ticket-{{this.ticket_got_want}}"
+    <button class="grid-match js-grid-match programme-{{this.programme_got_want}} {{#if this.is_ticket_collection}}ticket-{{this.ticket_got_want}}{{/if}}"
         data-season="{{this.season}}" 
         data-tier="{{this.tier}}" 
         data-date="{{this.date}}" 
