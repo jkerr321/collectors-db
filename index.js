@@ -68,6 +68,6 @@ const init = (config, isTestApp) => {
 	console.info('index init: complete');
 }
 
-init(exampleConfig, true);  // uncomment to run the module with test config
+// init(exampleConfig, true);  // uncomment to run the module with test config
 
 module.exports = init;

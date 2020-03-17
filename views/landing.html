@@ -72,14 +72,17 @@
         <div class="matches section" data-season-string="{{season_string}}">
             <div class="season-head">
                 <span class="typography--large primary-color">{{season}}</span>
-                {{#unless isNotComplete}}
+                {{#unless programmeIsNotComplete}}
                 <span><img class="check-icon" src="/check-icon.png" alt="check mark icon to indicate programme collection for the season is complete"></span>
+                {{/unless}}
+                {{#unless ticketIsNotComplete}}
+                <span><img class="check-icon" src="/check-icon.png" alt="check mark icon to indicate ticket collection for the season is complete"></span>
                 {{/unless}}
                 <span class="js-table-toggle faux-link">
                     <span class="js-show-more">Show More</span>
                     <span class="hidden">Show Less</span>
                 </span>
-                {{#if isNotComplete}}
+                {{#if programmeIsNotComplete}}
                 <span class="js-wants-toggle faux-link hidden">
                     <span class="js-show-wants">Show Wants</span>
                     <span class="js-show-all hidden">Show All</span>
