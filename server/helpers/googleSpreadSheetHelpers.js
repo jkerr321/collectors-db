@@ -41,7 +41,7 @@ const getSheet = async (config) => {
 		return sheet;
 	} catch (err) {
 		console.error('getSheet error', err);
-		throw new Error('getSheet error');
+		throw new Error(`getSheet error: ${err}`);
 	}
 };
 
@@ -50,13 +50,13 @@ const getRows = async (config) => {
 		console.info('getRows: starting');
 		const sheet = await getSheet(config);
 		const rows = await sheet.getRows({
-			'limit': 5000
+			'limit': 10000
 		});
 		console.info('getRows: complete');
 		return rows;
 	} catch (err) {
 		console.error('getRows error', err);
-		throw new Error('getRows error');
+		throw new Error(`getRows error: ${err}`);
 	}
 };
 
