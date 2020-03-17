@@ -135,12 +135,13 @@ describe('dataModel', async () => {
         it('specifies whether a collection is not complete for a season', () => {
             const data = new DataModel(config, req());
             data.setCollectionData(rows);
-            expect(data.collectionData[0].isNotComplete).to.be.true;
+            expect(data.collectionData[0].programmeIsNotComplete).to.be.true;
+            expect(data.collectionData[0].ticketIsNotComplete).to.be.true;
         });
-        it('does not specify "isNotComplete" value for a completed season', () => {
+        it('does not specify "programmeIsNotComplete" value for a completed season', () => {
             const data = new DataModel(config, req());
             data.setCollectionData(rows);
-            expect(data.collectionData[1].isNotComplete).to.be.undefined;
+            expect(data.collectionData[1].programmeIsNotComplete).to.be.undefined;
         });
     });
 
