@@ -88,7 +88,10 @@ module.exports = class DataModel {
 				if (row.Season === seasonObject.season) {
 					//TODO this will change if prog row heading changes - make more robust??
 					if (row['Programme Got/Want'] === 'Want' && !seasonObject.isNotComplete) {
-						seasonObject.isNotComplete = true;
+						seasonObject.programmeIsNotComplete = true;
+					}
+					if (row['Programme Got/Want'] === 'Want' && !seasonObject.isNotComplete) {
+						seasonObject.ticketIsNotComplete = true;
 					}
 
 					// result is
