@@ -1,4 +1,3 @@
-// const myScript = (window) => {
 // for query selectors
 const matches = document.querySelectorAll('.js-grid-match');
 const editButton = document.querySelector('.js-modal-edit-button');
@@ -225,8 +224,5 @@ wantToggles.forEach(toggle => toggle.addEventListener('click', e => toggleWants(
 editButton.addEventListener('click', e => showForm(e));
 filterToggle.addEventListener('click', e => toggleFilter(e));
 if (printViewToggle) { printViewToggle.addEventListener('click', e => togglePrintView(e)); }
-// }
-
-// myScript(window);
 
 module.exports = togglePrintView;
