@@ -21,11 +21,11 @@ module.exports = class DataModel {
 	}
 
 	setSeasonList (rows) {
-		this.seasonList = this.getUniqueList(rows, 'Season');
+		this.seasonList = this._getUniqueList(rows, 'Season');
 	}
 
 	setOpponentList (rows) {
-		this.opponentList = this.getUniqueList(rows, 'Opponent').sort();
+		this.opponentList = this._getUniqueList(rows, 'Opponent').sort();
 	}
 
 	setPasswordFail () {
@@ -34,10 +34,10 @@ module.exports = class DataModel {
 
 	setFilterData (reqBody) {
 		this.isFiltered = true;
-		this.appliedFilter = this.getFilterArray(reqBody);
+		this.appliedFilter = this._getFilterArray(reqBody);
 	}
 
-	getUniqueList (rows, value) {
+	_getUniqueList (rows, value) {
 		return rows.reduce((acc, row) => {
 			if (row[value]) {
 				acc.includes(row[value]) ? '' : acc.push(row[value]);
@@ -46,16 +46,18 @@ module.exports = class DataModel {
 		}, []);
 	}
 
-	getFilterArray (reqBody) {
+	_getFilterArray (reqBody) {
 		let result = [];
+		if (reqBody.ticketProgrammeFilter) { result.push(`${reqBody.ticketProgrammeFilter}`); }
 		if (reqBody.seasonFilter) { result.push(`${reqBody.seasonFilter}`); }
 		if (reqBody.opponentFilter) { result.push(`${reqBody.opponentFilter}`); }
 		if (reqBody.gotWantFilter) { result.push(`${reqBody.gotWantFilter}`); }
 		if (reqBody.homeAwayFilter) { result.push(`${reqBody.homeAwayFilter}`); }
+		if (reqBody.homeAwayFilter) { result.push(`${reqBody.homeAwayFilter}`); }
 		return result;
 	}
 
-	setCollectionDataStructure () {
+	_setCollectionDataStructure () {
 		// create structure for match data:
 		// this.collectionData = {
 		//     1998/99: {
@@ -79,7 +81,7 @@ module.exports = class DataModel {
 		this.collectionData = [];
 		// get list of unique seasons
 		this.setSeasonList(rows);
-		this.setCollectionDataStructure();
+		this._setCollectionDataStructure();
 
 		rows.forEach(row => {
 			this.collectionData.forEach(seasonObject => {

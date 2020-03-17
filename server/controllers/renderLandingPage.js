@@ -19,7 +19,7 @@ const filterRows = async (rows, reqBody) => {
 
 const init = async (req, res, config) => {
 	try {
-		const data = await new DataModel(config, req);
+		const data = new DataModel(config, req);
 		const sheetRows = await getRows(config);
 		data.setOpponentList(sheetRows);
 		data.setCollectionData(sheetRows);
@@ -27,7 +27,6 @@ const init = async (req, res, config) => {
 
 		if (req.method === 'POST') {
 			console.info(`Request Body: ${JSON.stringify(req.body)}`);
-
 			if (req.body.password) {
 				if (req.body.password.toLowerCase() === config.password.toLowerCase()) {
 					await res.cookie('programmeCollectorCookie', { httpOnly: true });
@@ -62,4 +61,4 @@ const init = async (req, res, config) => {
 	}
 };
 
-module.exports = init;
+module.exports = { init, filterRows };
