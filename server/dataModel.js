@@ -86,11 +86,10 @@ module.exports = class DataModel {
 		rows.forEach(row => {
 			this.collectionData.forEach(seasonObject => {
 				if (row.Season === seasonObject.season) {
-					//TODO this will change if prog row heading changes - make more robust??
-					if (row['Programme Got/Want'] === 'Want' && !seasonObject.isNotComplete) {
+					if (row[`${this.dataPoints.programme_got_want}`] === 'Want' && !seasonObject.isNotComplete) {
 						seasonObject.programmeIsNotComplete = true;
 					}
-					if (row['Programme Got/Want'] === 'Want' && !seasonObject.isNotComplete) {
+					if (row[`${this.dataPoints.ticket_got_want}`] === 'Want' && !seasonObject.isNotComplete) {
 						seasonObject.ticketIsNotComplete = true;
 					}
 
