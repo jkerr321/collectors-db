@@ -1,7 +1,7 @@
 /* eslint no-console: 0 */
 const dotenv = require('dotenv');
 dotenv.config();
-const DataModel = require('../DataModel');
+const DataModel = require('../dataModel');
 const { updateSpreadsheet, getRows } = require('../helpers/googleSpreadSheetHelpers');
 
 const filterRows = async (rows, reqBody) => {
