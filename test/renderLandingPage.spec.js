@@ -58,25 +58,25 @@ describe('renderLandingPage', async () => {
         it('renders the site', async () => {
             await init(req(), res, config);
             expect(res.render.calledOnce).to.be.true;
-        });
+        }).timeout(15000);
 
         it('sets a cookie and redirects to the site if the password is correct', async () => {
             await init(req('POST', { password: 'password' }), res, config);
             expect(res.cookie.calledOnce).to.be.true;
             expect(res.redirect.calledOnce).to.be.true;
-        });
+        }).timeout(15000);
 
         it('renders the site with password fail object if password provided doesn\'t match config', async () => {
             await init(req('POST', { password: 'wrong-password' }), res, config);
             //?? Can I do this with sinon.match? e.g. expect(res.render).to.have.been.calledWith(sinon.match({ passwordFail: true }));
             expect(res.render.lastCall.args[1].data.passwordFail).to.equal(true);
-        });
+        }).timeout(15000);
 
         it('calls res.render with the correct render data when the request method is POST and req.body contains isFiltered', async () => {
             await init(req('POST', reqBody.filterOne), res, config);
             expect(res.render.getCall(0).args[1].data.isFiltered).to.be.true;
             expect(res.render.getCall(0).args[1].data.appliedFilter).to.eql(['1947/48,1948/49', 'Want']);
-        });
+        }).timeout(15000);
 
         it('updates spreadsheet values when reqBody does not contain `isFiltered`', async () => {
             await init(req('POST', reqBody.updateFour), res, config);
