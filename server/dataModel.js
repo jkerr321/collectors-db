@@ -110,7 +110,7 @@ module.exports = class DataModel {
 					Object.keys(this.dataPoints).forEach(key => {
 						matchObj[key] = row[`${this.dataPoints[key]}`];
 					});
-					
+
 					if (row['Non First Team'] === 'Yes') {
 						matchObj.is_non_first_team = true;
 						seasonObject.nft_matchData.push(matchObj);
