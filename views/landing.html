@@ -6,7 +6,7 @@
     </span>
 </div>
 {{/if}}
-<div class="js-rich-view">
+<div class="rich-view js-rich-view">
     {{>header}}
     <div class="filter">
         <span class="js-filter-toggle faux-link">
@@ -68,6 +68,14 @@
     <img class="prog-img prog-img--left" src="{{data.img_one_src}}" alt="">
     <img class="prog-img prog-img--right" src="{{data.img_two_src}}" alt="">
 
+    {{#if data.intro}}
+    <div class="intro">
+        <p>
+            {{data.intro}}
+        </p>
+    </div>
+    {{/if}}
+
     {{#data.collectionData}}
         <div class="matches section" data-season-string="{{season_string}}">
             <div class="season-head">
@@ -89,11 +97,22 @@
                 </span>
                 {{/if}}
             </div>
+            {{#if nft_matchData}}
+            <div class="games-dots__header">First Team</div>
+            {{/if}}
             <div class="games-dots js-games-dots">
             {{#matchData}}
                 {{>grid-match}}
             {{/matchData}}
             </div>
+            {{#if nft_matchData}}
+            <div class="games-dots__header">Non First Team</div>
+            <div class="games-dots games-dots--secondary js-games-dots">
+                {{#nft_matchData}} 
+                    {{>grid-match}} 
+                {{/nft_matchData}}
+            </div>
+            {{/if}}
             <div class="js-games-table games-table hidden">
                 <table class="table">
                     <col style="width:5%">
@@ -288,6 +307,9 @@
 <div class="js-colour-one hidden">{{data.colour_one}}</div>
 {{#if data.colour_two}}
 <div class="js-colour-two hidden">{{data.colour_two}}</div>
+{{/if}}
+{{#if data.colour_three}}
+<div class="js-colour-three hidden">{{data.colour_three}}</div>
 {{/if}}
 <div class="hidden" data-modal_data_points="{{data.modalDataPoints}}"></div>
 {{#each data.modalDataPoints}}

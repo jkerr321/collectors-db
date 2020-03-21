@@ -2,10 +2,12 @@ module.exports = {
     options: {
         colour_one: 'darkblue',
         colour_two: 'yellow',
+        colour_three: 'orange',
         heading: 'Example Collectors Database',
         sub_heading: 'Everton FC Programme Collection',
         img_one_src: 'everton_prog_1.jpg',
         img_two_src: 'everton_prog_2.jpg',
+        intro: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae dignissim lacus. Aenean nec fermentum augue, at dapibusodio.Vivamus lacus lorem, dictum non efficitur a, mattis vitae turpis.Integer elementum ipsum a enim dictum facilisis. Nullam suscipit convallis purus sit amet scelerisque.Suspendisse nec erat justo.Curabitur at suscipit dui.Sed aliqua pulvinar arcu.Aliquam erat volutpat.<a href=""> this is a link to some photos</a> Nullam molestie tincidunt libero a viverra.Phasellus consequat, justo ut blandit varius, erat ante ornare libero, eleifend tristique tellus sapien sit amet felis.Integer laoreet, velit sed dignissim finibus, metus tellus elementum nisi, vitae pharetra diam orci nec metus.Sed suscipit dui id faucibus tempus.Vestibulum quis quam rutrum, semper tellus non, finibus lectus.`,
         // data points to be used on site, and their row heading names on the spreadsheet
         //TODO have base datapoints already on the model, then append with optional data points
         data_points: {
@@ -19,6 +21,8 @@ module.exports = {
             score: 'Score',
             position: 'Position',
             points: 'Points',
+            friendly: 'Friendly',
+            is_non_first_team: 'Non First Team',
             cup_round: 'Cup Round',
             match_notes: 'Match Notes',
             ticket_got_want: 'Ticket Got/Want',
@@ -27,7 +31,8 @@ module.exports = {
             ground: 'Ground',
             attendance: 'Att',
             other_items: 'Other Items',
-            is_ticket_collection: true
+            is_ticket_collection: true,
+            includes_non_first_team: true //TODO does this need to be in dataPoints?
         },
     },
     password: process.env.password,

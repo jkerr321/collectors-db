@@ -7,13 +7,15 @@ module.exports = class DataModel {
 		this.sub_heading = config.options.sub_heading;
 		this.colour_one = config.options.colour_one;
 		this.colour_two = config.options.colour_two;
+		this.colour_three = config.options.colour_three;
 		this.img_one_src = config.options.img_one_src;
 		this.img_two_src = config.options.img_two_src;
 		this.sheet_id = config.sheet_id;
-
+		this.intro = config.options.intro;
 		this.dataPoints = config.options.data_points;
 
 		this.is_ticket_collection = config.options.data_points.is_ticket_collection || false;
+		this.includes_non_first_team = config.options.data_points.includes_non_first_team || false;
 		this.editMode = !!req.cookies.programmeCollectorCookie || false;
 		this.seasonList = '';
 		this.opponentList = '';
@@ -71,6 +73,7 @@ module.exports = class DataModel {
 				season: season,
 				season_string: season.substring(0, 4) + season.substring(5),
 				matchData: [],
+				nft_matchData: this.includes_non_first_team ? [] : undefined,
 				is_ticket_collection: this.is_ticket_collection
 			});
 		});
@@ -107,9 +110,14 @@ module.exports = class DataModel {
 					Object.keys(this.dataPoints).forEach(key => {
 						matchObj[key] = row[`${this.dataPoints[key]}`];
 					});
-					matchObj.is_ticket_collection = this.is_ticket_collection;
-
-					seasonObject.matchData.push(matchObj);
+					
+					if (row['Non First Team'] === 'Yes') {
+						matchObj.is_non_first_team = true;
+						seasonObject.nft_matchData.push(matchObj);
+					} else {
+						matchObj.is_ticket_collection = this.is_ticket_collection; // don't want to show ticket collection for non first-team fixtures
+						seasonObject.matchData.push(matchObj);
+					}
 				}
 			});
 		});

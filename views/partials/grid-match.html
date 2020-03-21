@@ -1,5 +1,9 @@
 <div class="grid-match-container {{this.home_away}}">
-    <button class="grid-match js-grid-match programme-{{this.programme_got_want}} {{#if this.is_ticket_collection}}ticket-{{this.ticket_got_want}}{{/if}}"
+    <button class="grid-match 
+    js-grid-match programme-{{this.programme_got_want}} 
+    {{#if this.is_ticket_collection}}ticket-{{this.ticket_got_want}}{{/if}} 
+    {{#if this.friendly}}friendly{{/if}}
+    {{#if this.is_non_first_team}}non-first-team{{/if}}"
         data-season="{{this.season}}" 
         data-tier="{{this.tier}}" 
         data-date="{{this.date}}" 

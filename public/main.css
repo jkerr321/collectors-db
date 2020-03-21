@@ -1,6 +1,7 @@
 :root {
   --primary-color: LightGrey;
   --secondary-color: white;
+  --tertiary-color: white;
 }
 
 html {
@@ -13,6 +14,11 @@ body {
   color: #131313;
   text-align: center;
   font-size: 1.6rem;
+}
+
+.rich-view {
+  max-width: 70%;
+  margin: auto;
 }
 
 .typography--head {
@@ -107,6 +113,18 @@ body {
   margin: auto;
 }
 
+.intro {
+    background-color: rgba(255, 255, 255, .8);
+    padding: 4rem;
+    max-width: 70%;
+    margin: auto;
+    text-align: justify;
+}
+
+.intro p {
+  margin-bottom: 0;
+}
+
 .season-head {
   margin: 0 0 0.2rem 0;
 }
@@ -121,6 +139,14 @@ body {
   grid-template-columns: repeat(27, min-content);
   grid-template-rows: auto;
   justify-self: center;
+}
+.games-dots--secondary {
+  justify-self: left;
+}
+
+.games-dots__header {
+  margin-top: 0.8rem;
+  text-align: left;
 }
 
 .grid-match-container {
@@ -183,11 +209,15 @@ body {
   background-color: white;
 }
 
+.friendly::before {
+  background-color: var(--secondary-color);
+}
+
 .ticket-Got::before, .ticket-Want::before {
     content: '';
     position: absolute;
     top: 0.05rem;
-    left: 1.8rem;
+    left: 1.75rem;
     right: 0;
     height: 3.5rem;
     width: 1.75rem;
@@ -195,6 +225,14 @@ body {
     margin-right: auto;
     border-top-right-radius: 8rem;
     border-bottom-right-radius: 8rem;
+}
+
+.friendly {
+  background-color: var(--secondary-color);
+}
+
+.non-first-team {
+  background-color: var(--tertiary-color);
 }
 
 /* .ticket-Got::before, .ticket-Want::before {
@@ -250,7 +288,7 @@ body {
 
 /* Data table */
 .table {
-  width: 70%;
+  /* width: 70%; */
   margin: auto;
   font-size: 1.4rem;
   border-collapse: collapse;
@@ -283,7 +321,7 @@ td {
 /* Info modal */
 .modal {
   background-color: white;
-  width: 25%;
+  width: 35%;
   margin: 2.4rem auto;
   border: 0.2rem dotted;
 }
@@ -332,6 +370,10 @@ input, textarea {
     font-size: 100%;
   }
 
+  .print-view {
+    width: 90%
+  }
+
   .table {
     width: 100%;
     margin-left: 0;
@@ -346,7 +388,7 @@ input, textarea {
   }
 
   .modal {
-    width: 60%;
+    width: 50%;
   }
 }
 
