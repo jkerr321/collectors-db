@@ -180,7 +180,7 @@ const toggleWants = (event) => {
 const toggleTable = (event) => {
 	const seasonContainer = getSeasonContainer(event);
 	const table = seasonContainer.querySelector('.js-games-table');
-	const dots = seasonContainer.querySelector('.js-games-dots');
+	const dots = seasonContainer.querySelector('.js-games-dots-container');
 	const wantsToggle = seasonContainer.querySelector('.js-wants-toggle');
 	const showAllSpan = seasonContainer.querySelector('.js-show-all');
 	const modal = document.querySelector('.js-modal');

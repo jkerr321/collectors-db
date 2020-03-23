@@ -111,7 +111,7 @@ module.exports = class DataModel {
 						matchObj[key] = row[`${this.dataPoints[key]}`];
 					});
 
-					if (row['Non First Team'] === 'Yes') {
+					if (this.includes_non_first_team && row['Non First Team'] === 'Yes') {
 						matchObj.is_non_first_team = true;
 						seasonObject.nft_matchData.push(matchObj);
 					} else {

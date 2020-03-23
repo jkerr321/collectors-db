@@ -142,11 +142,7 @@ body {
 }
 .games-dots--secondary {
   justify-self: left;
-}
-
-.games-dots__header {
-  margin-top: 0.8rem;
-  text-align: left;
+  margin-top: 10px;
 }
 
 .grid-match-container {
@@ -158,11 +154,11 @@ body {
 }
 
 .Away {
-  border: 2px dotted #131313;
+  border: 2px dotted var(--primary-color);
 }
 
 .Home {
-  border: 1px solid #131313;
+  border: 1px solid var(--primary-color);
 }
 
 .Neutral {
@@ -178,7 +174,7 @@ body {
 
 .grid-match:focus {
   outline: none;
-  box-shadow: 0 0 1rem;
+  box-shadow: 0 0 1.5rem var(--primary-color);
 }
 
 .grid-match:hover {

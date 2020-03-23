@@ -79,7 +79,7 @@
     {{#data.collectionData}}
         <div class="matches section" data-season-string="{{season_string}}">
             <div class="season-head">
-                <span class="typography--large primary-color">{{season}}</span>
+                <span class="typography--large">{{season}}</span>
                 {{#unless programmeIsNotComplete}}
                 <span><img class="check-icon" src="/check-icon.png" alt="check mark icon to indicate programme collection for the season is complete"></span>
                 {{/unless}}
@@ -97,22 +97,20 @@
                 </span>
                 {{/if}}
             </div>
-            {{#if nft_matchData}}
-            <div class="games-dots__header">First Team</div>
-            {{/if}}
-            <div class="games-dots js-games-dots">
-            {{#matchData}}
-                {{>grid-match}}
-            {{/matchData}}
+            <div class="js-games-dots-container">
+                <div class="games-dots js-games-dots">
+                {{#matchData}}
+                    {{>grid-match}}
+                {{/matchData}}
+                </div>
+                {{#if nft_matchData}}
+                <div class="games-dots games-dots--secondary js-games-dots">
+                    {{#nft_matchData}} 
+                        {{>grid-match}} 
+                    {{/nft_matchData}}
+                </div>
+                {{/if}}
             </div>
-            {{#if nft_matchData}}
-            <div class="games-dots__header">Non First Team</div>
-            <div class="games-dots games-dots--secondary js-games-dots">
-                {{#nft_matchData}} 
-                    {{>grid-match}} 
-                {{/nft_matchData}}
-            </div>
-            {{/if}}
             <div class="js-games-table games-table hidden">
                 <table class="table">
                     <col style="width:5%">
