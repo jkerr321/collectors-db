@@ -10,20 +10,20 @@ html {
 
 body {
   font-family: 'Raleway', sans-serif;
-  background-color: white;
   color: #131313;
   text-align: center;
   font-size: 1.6rem;
+  border: 15px solid var(--secondary-color);
 }
 
 .rich-view {
-  max-width: 70%;
   margin: auto;
+  padding: 3rem 7rem;
 }
 
 .typography--head {
   color: var(--primary-color);
-  font-size: 6.5rem;
+  font-size: 9rem;
   font-family: 'Bebas Neue', sans-serif;
   text-shadow: 6px 6px var(--secondary-color);
 }
@@ -42,20 +42,45 @@ body {
 
 .prog-img {
   margin: 3.5rem 0;
-  position: -webkit-sticky;
-  position: sticky;
   max-height: 30rem;
   z-index: -1;
 }
 
+.prog-img--position-left {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 16%;
+}
+.prog-img--position-mid {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 26%;
+}
+.prog-img--position-right {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 96%;
+}
+
 .prog-img--left {
-  top: 6%;
+  margin-top: 10rem;
+  max-height: 60rem;
   transform: rotate(-25deg);
+  margin-right: 60rem;
+}
+
+.prog-img--mid {
+  max-height: 60rem;
+  transform: rotate(4deg);
+  margin-right: 10rem;
+  margin-top: -30rem;
 }
 
 .prog-img--right {
+  max-height: 60rem;
   transform: rotate(25deg);
-  top: -15%;
+  margin-left: 52rem;
+  margin-top: -60rem;
 }
 
 .primary-color {
@@ -129,23 +154,27 @@ body {
   margin: 0 0 0.2rem 0;
 }
 
+.matches-container {
+  background-color: rgba(255, 255, 255, .8);
+  position: relative;
+  z-index: 3;
+}
+
 .matches {
   display: grid;
-  background-color: rgba(255, 255, 255, .8);
 }
 
 .games-dots {
   display: grid;
-  grid-template-columns: repeat(27, min-content);
+  grid-template-columns: repeat(25, min-content);
   grid-template-rows: auto;
-  justify-self: center;
+  justify-content: center;
 }
 .games-dots--secondary {
-  justify-self: left;
   margin-top: 10px;
 }
 
-.grid-match-container {
+.grid-match-border {
   border-radius: 100%;
   height: 3.5rem;
   width: 3.5rem;
@@ -154,11 +183,12 @@ body {
 }
 
 .Away {
-  border: 2px dotted var(--primary-color);
+  border: 2px dotted #131313;
 }
 
 .Home {
-  border: 1px solid var(--primary-color);
+  border: 1px solid #131313;
+  margin: 1.5px;
 }
 
 .Neutral {
@@ -212,7 +242,7 @@ body {
 .ticket-Got::before, .ticket-Want::before {
     content: '';
     position: absolute;
-    top: 0.05rem;
+    top: 0.00rem;
     left: 1.75rem;
     right: 0;
     height: 3.5rem;

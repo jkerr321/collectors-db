@@ -65,9 +65,15 @@
             </form>
         </div>
     </div>
-    <img class="prog-img prog-img--left" src="{{data.img_one_src}}" alt="">
-    <img class="prog-img prog-img--right" src="{{data.img_two_src}}" alt="">
-
+    <div class="prog-img prog-img--position-left">
+        <img class="prog-img--left" src="{{data.img_one_src}}" alt="">
+    </div>
+    <div class="prog-img prog-img--position-mid">
+        <img class="prog-img--mid" src="{{data.img_three_src}}" alt="">
+    </div>
+    <div class="prog-img prog-img--position-right">
+        <img class="prog-img--right" src="{{data.img_four_src}}" alt="">
+    </div>
     {{#if data.intro}}
     <div class="intro">
         <p>
@@ -77,6 +83,7 @@
     {{/if}}
 
     {{#data.collectionData}}
+    <div class="matches-container">
         <div class="matches section" data-season-string="{{season_string}}">
             <div class="season-head">
                 <span class="typography--large">{{season}}</span>
@@ -157,6 +164,7 @@
                 </table>
             </div>
         </div>
+    </div>
     {{/data.collectionData}}
     <a href="#header" class="sticky-bottom">Back to top ^</a>
     <div class="footer">
