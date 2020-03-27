@@ -1,15 +1,14 @@
 module.exports = {
     options: {
-        colour_one: 'darkblue',
-        colour_two: 'yellow',
-        colour_three: 'orange',
-        heading: 'Example Collectors Database',
-        sub_heading: 'Everton FC Programme Collection',
+        colour_one: '#ff0000',
+        colour_two: '#ffd4d4',
+        colour_three: '#FFE3E2',
+        heading: `Paul's Arsenal Collection`,
+        sub_heading: `Programmes, tickets and memorabilia`,
         img_one_src: 'everton_prog_1.jpg',
         img_two_src: 'everton_prog_2.jpg',
-        intro: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae dignissim lacus. Aenean nec fermentum augue, at dapibusodio.Vivamus lacus lorem, dictum non efficitur a, mattis vitae turpis.Integer elementum ipsum a enim dictum facilisis. Nullam suscipit convallis purus sit amet scelerisque.Suspendisse nec erat justo.Curabitur at suscipit dui.Sed aliqua pulvinar arcu.Aliquam erat volutpat.<a href=""> this is a link to some photos</a> Nullam molestie tincidunt libero a viverra.Phasellus consequat, justo ut blandit varius, erat ante ornare libero, eleifend tristique tellus sapien sit amet felis.Integer laoreet, velit sed dignissim finibus, metus tellus elementum nisi, vitae pharetra diam orci nec metus.Sed suscipit dui id faucibus tempus.Vestibulum quis quam rutrum, semper tellus non, finibus lectus.`,
-        // data points to be used on site, and their row heading names on the spreadsheet
-        //TODO have base datapoints already on the model, then append with optional data points
+        img_three_src: 'PM_home_prog2.jpg',
+        intro: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae dignissim lacus. Aenean nec fermentum augue, at dapibusodio.Vivamus lacus lorem, dictum non efficitur a, mattis vitae turpis.Integer elementum ipsum a enim dictum facilisis. Nullam suscipit convallis purus sit amet scelerisque.Suspendisse nec erat justo.Curabitur at suscipit dui.Sed aliqua pulvinar arcu.Aliquam erat volutpat. Nullam molestie tincidunt libero a viverra.Phasellus consequat, justo ut blandit varius, erat ante ornare libero, eleifend tristique tellus sapien sit amet felis.Integer laoreet, velit sed dignissim finibus, metus tellus elementum nisi, vitae pharetra diam orci nec metus.Sed suscipit dui id faucibus tempus.Vestibulum quis quam rutrum, semper tellus non, finibus lectus.`,
         data_points: {
             season: 'Season',
             date: 'Date',
@@ -18,21 +17,16 @@ module.exports = {
             home_away: 'Home/Away',
             programme_got_want: 'Programme Got/Want',
             id: 'ID',
-            score: 'Score',
-            position: 'Position',
-            points: 'Points',
             friendly: 'Friendly',
-            is_non_first_team: 'Non First Team',
+            score: 'Score',
             cup_round: 'Cup Round',
             match_notes: 'Match Notes',
             ticket_got_want: 'Ticket Got/Want',
             price: 'Programme Price',
-            notes: 'Programme Notes', //TODO change this to programme_notes
-            ground: 'Ground',
-            attendance: 'Att',
+            notes: 'Programme Notes',
             other_items: 'Other Items',
             is_ticket_collection: true,
-            includes_non_first_team: true //TODO does this need to be in dataPoints?
+            includes_non_first_team: true
         },
     },
     password: process.env.password,
@@ -48,3 +42,14 @@ module.exports = {
     auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
     client_x509_cert_url: process.env.client_x509_cert_url
 }
+// muted
+// --primary - color: #de0000;
+// --secondary - color: #ffd4d4;
+// --tertiary - color: #ffe730;
+
+// bright with pink
+// --primary - color: #ff0000;
+// --secondary - color: #ffd4d4;
+// --tertiary - color: #FFE3E2;
+
+//yellow = #ffea00
