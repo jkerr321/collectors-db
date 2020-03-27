@@ -29,7 +29,7 @@ module.exports = {
             includes_non_first_team: true
         },
     },
-    password: process.env.password,
+    password: 'password',
     sheet_id: process.env.sheet_id,
     type: process.env.type,
     project_id: process.env.project_id,
