@@ -42,7 +42,7 @@ describe('renderLandingPage', async () => {
         sandbox.restore();
     });
 
-    describe.only('filterRows', () => {
+    describe('filterRows', () => {
         //TODO separate these into different tests
         it('returns the rows that match the given filter conditions in req.body', async () => {
             const filteredRowsOne = await filterRows(rows, reqBody.filterOne);
