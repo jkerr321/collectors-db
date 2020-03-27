@@ -8,6 +8,7 @@ module.exports = class DataModel {
 		this.colour_one = config.options.colour_one;
 		this.colour_two = config.options.colour_two;
 		this.colour_three = config.options.colour_three;
+		this.table_colour = config.options.table_colour;
 		this.img_one_src = config.options.img_one_src;
 		this.img_two_src = config.options.img_two_src;
 		this.img_three_src = config.options.img_three_src;

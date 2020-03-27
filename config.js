@@ -3,6 +3,7 @@ module.exports = {
         colour_one: '#ff0000',
         colour_two: '#ffd4d4',
         colour_three: '#FFE3E2',
+        table_colour: 'ghostwhite',
         heading: `Paul's Arsenal Collection`,
         sub_heading: `Programmes, tickets and memorabilia`,
         img_one_src: 'everton_prog_1.jpg',

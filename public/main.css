@@ -2,6 +2,7 @@
   --primary-color: LightGrey;
   --secondary-color: white;
   --tertiary-color: white;
+  --table-color: white;
 }
 
 html {
@@ -372,7 +373,7 @@ body {
 }
 
 .games-table th {
-  background-color: var(--secondary-color);
+  background-color: var(--table-color);
 }
 
 .table--print-view {
