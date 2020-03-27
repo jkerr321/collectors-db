@@ -6,13 +6,26 @@ const { updateSpreadsheet, getRows } = require('../helpers/googleSpreadSheetHelp
 
 const filterRows = async (rows, reqBody) => {
 	console.info('filterRows: inside');
-	const collectionType = reqBody.ticketProgrammeFilter || 'Programme';
 	return rows.filter(row => {
 		let result = true;
-		if (reqBody.seasonFilter && !reqBody.seasonFilter.includes(row.Season)) {result = false;}
-		if (reqBody.opponentFilter && !reqBody.opponentFilter.includes(row.Opponent)) {result = false;}
-		if (reqBody.gotWantFilter && row[`${collectionType} Got/Want`] !== reqBody.gotWantFilter) {result = false;}
-		if (reqBody.homeAwayFilter && row['Home/Away'] !== reqBody.homeAwayFilter) {result = false;}
+		if (reqBody.nonFirstTeamFilter && reqBody.nonFirstTeamFilter === 'Yes' && row['Non First Team'] !== 'Yes') { result = false; }
+		if (reqBody.nonFirstTeamFilter && reqBody.nonFirstTeamFilter === 'No' && row['Non First Team'] === 'Yes') { result = false; }
+		if (reqBody.seasonFilter && !reqBody.seasonFilter.includes(row.Season)) { result = false; }
+		if (reqBody.opponentFilter && !reqBody.opponentFilter.includes(row.Opponent)) { result = false; }
+		if (reqBody.homeAwayFilter && row['Home/Away'] !== reqBody.homeAwayFilter) { result = false; }
+		if (reqBody.ticketProgrammeFilter) {
+			const collectionType = reqBody.ticketProgrammeFilter;
+			if (collectionType === 'All') {
+				if (reqBody.gotWantFilter && row['Programme Got/Want'] !== reqBody.gotWantFilter &&
+				reqBody.gotWantFilter && row['Ticket Got/Want'] !== reqBody.gotWantFilter) {
+					result = false;
+				}
+			} else {
+				if (reqBody.gotWantFilter && row[`${collectionType} Got/Want`] !== reqBody.gotWantFilter) { result = false; }
+			}
+		} else {
+			if (reqBody.gotWantFilter && row['Programme Got/Want'] !== reqBody.gotWantFilter) { result = false; }
+		}
 		return result;
 	});
 };

@@ -1,8 +1,7 @@
-<div class="grid-match-border {{this.home_away}}">
+<div class="grid-match-border {{this.home_away}} {{#if this.friendly}}friendly-border{{/if}}">
     <button class="grid-match 
     js-grid-match programme-{{this.programme_got_want}} 
     {{#if this.is_ticket_collection}}ticket-{{this.ticket_got_want}}{{/if}} 
-    {{#if this.friendly}}friendly{{/if}}
     {{#if this.is_non_first_team}}non-first-team{{/if}}"
         data-season="{{this.season}}" 
         data-tier="{{this.tier}}" 

@@ -11,7 +11,6 @@ module.exports = class DataModel {
 		this.img_one_src = config.options.img_one_src;
 		this.img_two_src = config.options.img_two_src;
 		this.img_three_src = config.options.img_three_src;
-		this.img_four_src = config.options.img_four_src;
 		this.sheet_id = config.sheet_id;
 		this.intro = config.options.intro;
 		this.dataPoints = config.options.data_points;
@@ -53,10 +52,11 @@ module.exports = class DataModel {
 	_getFilterArray (reqBody) {
 		let result = [];
 		if (reqBody.ticketProgrammeFilter) { result.push(`${reqBody.ticketProgrammeFilter}`); }
+		if (reqBody.nonFirstTeamFilter && reqBody.nonFirstTeamFilter === 'No') { result.push('First Team'); }
+		if (reqBody.nonFirstTeamFilter && reqBody.nonFirstTeamFilter === 'Yes') { result.push('Non First Team'); }
 		if (reqBody.seasonFilter) { result.push(`${reqBody.seasonFilter}`); }
 		if (reqBody.opponentFilter) { result.push(`${reqBody.opponentFilter}`); }
 		if (reqBody.gotWantFilter) { result.push(`${reqBody.gotWantFilter}`); }
-		if (reqBody.homeAwayFilter) { result.push(`${reqBody.homeAwayFilter}`); }
 		if (reqBody.homeAwayFilter) { result.push(`${reqBody.homeAwayFilter}`); }
 		return result;
 	}
@@ -93,9 +93,6 @@ module.exports = class DataModel {
 				if (row.Season === seasonObject.season) {
 					if (row[`${this.dataPoints.programme_got_want}`] === 'Want' && !seasonObject.isNotComplete) {
 						seasonObject.programmeIsNotComplete = true;
-					}
-					if (row[`${this.dataPoints.ticket_got_want}`] === 'Want' && !seasonObject.isNotComplete) {
-						seasonObject.ticketIsNotComplete = true;
 					}
 
 					// result is
