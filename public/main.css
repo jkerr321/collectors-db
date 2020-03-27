@@ -13,12 +13,18 @@ body {
   color: #131313;
   text-align: center;
   font-size: 1.6rem;
-  border: 15px solid var(--secondary-color);
+}
+
+.rich-view__container {
+  border: 5px solid var(--primary-color);
 }
 
 .rich-view {
   margin: auto;
-  padding: 3rem 7rem;
+}
+
+.hide-border {
+  border: none;
 }
 
 .typography--head {
@@ -37,10 +43,29 @@ body {
 }
 
 .header {
-  margin: 3rem auto;
+  margin: 8rem auto 4rem;
 }
 
 .prog-img {
+  margin: 3.5rem 0;
+  position: -webkit-sticky;
+  position: sticky;
+  max-height: 30rem;
+  z-index: -1;
+}
+
+.prog-img--left {
+  top: 6%;
+  transform: rotate(-25deg);
+}
+
+.prog-img--right {
+  transform: rotate(25deg);
+  top: -15%;
+}
+
+/* TODO make this workable and use in future */
+/* .prog-img {
   margin: 3.5rem 0;
   max-height: 30rem;
   z-index: -1;
@@ -59,7 +84,7 @@ body {
 .prog-img--position-right {
   position: -webkit-sticky;
   position: sticky;
-  top: 96%;
+  top: 36%;
 }
 
 .prog-img--left {
@@ -81,7 +106,7 @@ body {
   transform: rotate(25deg);
   margin-left: 52rem;
   margin-top: -60rem;
-}
+} */
 
 .primary-color {
   color: var(--primary-color);
@@ -133,7 +158,8 @@ body {
 }
 
 .checkbox__opponent {
-  grid-template-rows: repeat(54, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: row;
   max-width: 90%;
   margin: auto;
 }
@@ -141,13 +167,13 @@ body {
 .intro {
     background-color: rgba(255, 255, 255, .8);
     padding: 4rem;
-    max-width: 70%;
     margin: auto;
     text-align: justify;
-}
-
+  }
+  
 .intro p {
-  margin-bottom: 0;
+    margin: auto auto 0;
+    max-width: 60%;
 }
 
 .season-head {
@@ -184,7 +210,6 @@ body {
 }
 
 .matches-container {
-  background-color: rgba(255, 255, 255, .8);
   position: relative;
   z-index: 3;
 }
@@ -199,6 +224,7 @@ body {
   grid-template-rows: auto;
   justify-content: center;
 }
+
 .games-dots--secondary {
   margin-top: 10px;
 }
@@ -233,7 +259,7 @@ body {
 
 .grid-match:focus {
   outline: none;
-  box-shadow: 0 0 1.5rem var(--primary-color);
+  box-shadow: 0 0 1rem #131313;
 }
 
 .grid-match:hover {
@@ -264,10 +290,6 @@ body {
   background-color: white;
 }
 
-.friendly::before {
-  background-color: var(--secondary-color);
-}
-
 .ticket-Got::before, .ticket-Want::before {
     content: '';
     position: absolute;
@@ -282,8 +304,8 @@ body {
     border-bottom-right-radius: 8rem;
 }
 
-.friendly {
-  background-color: var(--secondary-color);
+.friendly-border {
+  border-color: var(--primary-color);
 }
 
 .non-first-team {
@@ -343,7 +365,7 @@ body {
 
 /* Data table */
 .table {
-  /* width: 70%; */
+  width: 100%;
   margin: auto;
   font-size: 1.4rem;
   border-collapse: collapse;

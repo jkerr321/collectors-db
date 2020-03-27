@@ -1,252 +1,350 @@
-{{#if data.isFiltered}}
-<div class="section align-left">
-    <span class="js-print-view-toggle faux-link">
-        <span>Print View</span>
-        <span class="hidden"><< Back</span>
-    </span>
-</div>
-{{/if}}
-<div class="rich-view js-rich-view">
-    {{>header}}
-    <div class="filter">
-        <span class="js-filter-toggle faux-link">
-            <span class="">Filter Data >></span>
-            <span class="hidden">Hide Filter <<</span>
+<div class="js-rich-view__container rich-view__container">
+    {{#if data.isFiltered}}
+    <div class="section align-left">
+        <span class="js-print-view-toggle faux-link">
+            <span>Print View</span>
+            <span class="hidden">
+                << Back
+            </span>
         </span>
-        <div class="section js-filter-form filter__content hidden">
-            {{#if data.isFiltered}}
-            <form class="section" action="/" method="GET">
-                <button class="button" type="submit">Remove Filter</button>
-            </form>
-            {{/if}}
-            <form class="section" action="/" method="POST">
-                {{#if data.is_ticket_collection}}
-                <div class="section">
-                    <label for="tickets">Tickets</label>
-                    <input type="radio" id="ticket" name="ticketProgrammeFilter" value="Ticket">
-                    <label for="programmes">Programmes</label>
-                    <input type="radio" id="programmes" name="ticketProgrammeFilter" value="Programme"></input>
-                </div>
-                {{/if}}
-                <div class="section">
-                    <label for="got">Got</label>
-                    <input type="radio" id="got" name="gotWantFilter" value="Got">
-                    <label for="want">Want</label>
-                    <input type="radio" id="want" name="gotWantFilter" value="Want"></input>
-                    <label for="all">All</label>
-                    <input type="radio" id="all" name="gotWantFilter" value=""></input>
-                </div>
-                <div class="section">
-                    <label for="home">Home</label>
-                    <input type="radio" id="home" name="homeAwayFilter" value="Home">
-                    <label for="away">Away</label>
-                    <input type="radio" id="away" name="homeAwayFilter" value="Away"></input>
-                    <label for="all">All</label>
-                    <input type="radio" id="all" name="homeAwayFilter" value=""></input>
-                </div>
-                <div class="checkbox checkbox__season section">
-                    {{#data.seasonList}}
-                    <div>
-                        <input type="checkbox" id="seasonFilter" name="seasonFilter" value="{{this}}">
-                        <label for="seasonFilter">{{this}}</label>
-                    </div>
-                    {{/data.seasonList}}
-                </div>
-                <div class="checkbox checkbox__opponent section">
-                    {{#data.opponentList}}
-                    <div>
-                        <input type="checkbox" id="opponentFilter" name="opponentFilter" value="{{this}}">
-                        <label for="opponentFilter">{{this}}</label>
-                    </div>
-                    {{/data.opponentList}}
-                </div>
-                <input id="filter" name="filter" class="hidden" value="filter"></input>
-                <button class="button" type="submit">Filter</button>
-            </form>
-        </div>
-    </div>
-    <div class="prog-img prog-img--position-left">
-        <img class="prog-img--left" src="{{data.img_one_src}}" alt="">
-    </div>
-    <div class="prog-img prog-img--position-mid">
-        <img class="prog-img--mid" src="{{data.img_three_src}}" alt="">
-    </div>
-    <div class="prog-img prog-img--position-right">
-        <img class="prog-img--right" src="{{data.img_four_src}}" alt="">
-    </div>
-    {{#if data.intro}}
-    <div class="intro">
-        <p>
-            {{data.intro}}
-        </p>
     </div>
     {{/if}}
-
-    {{#data.collectionData}}
-    <div class="matches-container">
-        <div class="matches section" data-season-string="{{season_string}}">
-            <div class="season-head">
-                <span class="typography--large">{{season}}</span>
-                {{#unless programmeIsNotComplete}}
-                <span><img class="check-icon" src="/check-icon.png" alt="check mark icon to indicate programme collection for the season is complete"></span>
-                {{/unless}}
-                {{#unless ticketIsNotComplete}}
-                <span><img class="check-icon" src="/check-icon.png" alt="check mark icon to indicate ticket collection for the season is complete"></span>
-                {{/unless}}
-                <span class="js-table-toggle faux-link">
-                    <span class="js-show-more">Show More</span>
-                    <span class="hidden">Show Less</span>
-                </span>
-                {{#if programmeIsNotComplete}}
-                <span class="js-wants-toggle faux-link hidden">
-                    <span class="js-show-wants">Show Wants</span>
-                    <span class="js-show-all hidden">Show All</span>
-                </span>
+    <div class="rich-view js-rich-view">
+        {{>header}}
+        <div class="filter">
+            <span class="js-filter-toggle faux-link">
+                <span class="">Filter Data >></span>
+                <span class="hidden">Hide Filter <<</span>
+            </span>
+            <div class="section js-filter-form filter__content hidden">
+                {{#if data.isFiltered}}
+                <form class="section" action="/" method="GET">
+                    <button class="button" type="submit">Remove Filter</button>
+                </form>
                 {{/if}}
-            </div>
-            <div class="js-games-dots-container">
-                <div class="games-dots js-games-dots">
-                {{#matchData}}
-                    {{>grid-match}}
-                {{/matchData}}
-                </div>
-                {{#if nft_matchData}}
-                <div class="games-dots games-dots--secondary js-games-dots">
-                    {{#nft_matchData}} 
-                        {{>grid-match}} 
-                    {{/nft_matchData}}
-                </div>
-                {{/if}}
-            </div>
-            <div class="js-games-table games-table hidden">
-                <table class="table">
-                    <col style="width:5%">
-                    <col style="width:10%">
-                    <col style="width:15%">
-                    <col style="width:10%">
-                    <col style="width:10%">
-                    <col style="width:10%">
-                    <col style="width:10%">
-                    <col style="width:10%">
-                    <col style="width:10%">
-                    <thead class="secondary-color">
-                        <tr>
-                            <th></th>
-                            <th>Date</th>
-                            <th>Opponent</th>
-                            <th>Competition</th>
-                            <th>H / A</th>
-                            <th>Result</th>
-                            <th class="hidden-mobile">Match Notes</th>
-                            <th class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">Programme Price</th>
-                            <th class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">Programme Notes</th>
-                            <th class="{{#unless this.is_ticket_collection}}hidden{{/unless}}">Programme Got / Want</th>
-                            {{#if this.is_ticket_collection}}<th>Ticket Got / Want</th>{{/if}}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#matchData}}
-                        <tr>
-                            <td>{{>grid-match}}</td>
-                            <td>{{date}}</td>
-                            <td>{{opponent}}</td>
-                            <td>{{competition}}{{#if cup_round}}, {{cup_round}}{{/if}}</td>
-                            <td>{{home_away}}</td>
-                            <td>{{score}}</td>
-                            <td class="hidden-mobile">{{match_notes}}</td>
-                            <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{price}}</td>
-                            <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{notes}}</td>
-                            <td class="{{#unless this.is_ticket_collection}}hidden{{/unless}}">{{programme_got_want}}</td>
-                            {{#if this.is_ticket_collection}}<td class=>{{ticket_got_want}}</td>{{/if}}
-                        </tr>
-                        {{/matchData}}
-                    </tbody>
-                </table>
+                <form class="section" action="/" method="POST">
+                    {{#if data.is_ticket_collection}}
+                    <div class="section">
+                        <label for="tickets">Tickets</label>
+                        <input type="radio" id="ticket" name="ticketProgrammeFilter" value="Ticket">
+                        <label for="programmes">Programmes</label>
+                        <input type="radio" id="programmes" name="ticketProgrammeFilter" value="Programme"></input>
+                        <label for="all">All</label>
+                        <input type="radio" id="all" name="ticketProgrammeFilter" value=""></input>
+                    </div>
+                    {{/if}}
+                    {{#if data.includes_non_first_team}}
+                    <div class="section">
+                        <label for="firstTeam">First Team</label>
+                        <input type="radio" id="ticket" name="nonFirstTeamFilter" value="No">
+                        <label for="nonFirstTeam">Non First Team</label>
+                        <input type="radio" id="programmes" name="nonFirstTeamFilter" value="Yes"></input>
+                        <label for="all">All</label>
+                        <input type="radio" id="all" name="nonFirstTeamFilter" value=""></input>
+                    </div>
+                    {{/if}}
+                    <div class="section">
+                        <label for="got">Got</label>
+                        <input type="radio" id="got" name="gotWantFilter" value="Got">
+                        <label for="want">Want</label>
+                        <input type="radio" id="want" name="gotWantFilter" value="Want"></input>
+                        <label for="all">All</label>
+                        <input type="radio" id="all" name="gotWantFilter" value=""></input>
+                    </div>
+                    <div class="section">
+                        <label for="home">Home</label>
+                        <input type="radio" id="home" name="homeAwayFilter" value="Home">
+                        <label for="away">Away</label>
+                        <input type="radio" id="away" name="homeAwayFilter" value="Away"></input>
+                        <label for="all">All</label>
+                        <input type="radio" id="all" name="homeAwayFilter" value=""></input>
+                    </div>
+                    <div class="checkbox checkbox__season section">
+                        {{#data.seasonList}}
+                        <div>
+                            <input type="checkbox" id="seasonFilter" name="seasonFilter" value="{{this}}">
+                            <label for="seasonFilter">{{this}}</label>
+                        </div>
+                        {{/data.seasonList}}
+                    </div>
+                    <div class="checkbox checkbox__opponent section">
+                        {{#data.opponentList}}
+                        <div>
+                            <input type="checkbox" id="opponentFilter" name="opponentFilter" value="{{this}}">
+                            <label for="opponentFilter">{{this}}</label>
+                        </div>
+                        {{/data.opponentList}}
+                    </div>
+                    <input id="filter" name="filter" class="hidden" value="filter"></input>
+                    <button class="button" type="submit">Filter</button>
+                </form>
             </div>
         </div>
-    </div>
-    {{/data.collectionData}}
-    <a href="#header" class="sticky-bottom">Back to top ^</a>
-    <div class="footer">
-        <a href="https://docs.google.com/spreadsheets/d/{{data.sheet_id}}" target="_blank">View Data</a>
-    </div>
 
-    <div class="modal js-modal hidden">
-        <div class="modal-content typography--small">
-            <div class="js-modal-season"></div>
-            <div class="js-modal-competition"></div>
-            <div class="js-modal-cup_round"></div>
-            <div class="js-modal-date"></div>
-            <div class="js-modal-opponent typography--large primary-color"></div>
-            <div class="js-modal-home_away"></div>
-            <div class="js-modal-score"></div>
-            <div class="js-modal-points"></div>
-            <div class="js-modal-league_position"></div>
-            <div class="js-modal-ground"></div>
-            <div class="js-modal-attendance"></div>
-            <div class="js-modal-match_notes"></div>
-            <div class="js-modal-content-editable">
-                <div class="typography--large primary-color">
-                    <div>{{#if data.is_ticket_collection}}<span>Programme: </span>{{/if}}<span class="js-modal-programme_got_want"></span></div>
-                    {{#if data.is_ticket_collection}}<div><span>Ticket: </span><span class="js-modal-ticket_got_want"></span></div>{{/if}}
-                </div>
-                <div class="js-modal-price"></div>
-                <div class="js-modal-notes"></div>
-                <div class="js-modal-other_items"></div>
-                <button class="button js-modal-edit-button">Edit</button>
-            </div>
-            <form method="POST" class="section js-modal-content-form" action="/">
-                {{#if data.editMode}}
-                {{#if data.is_ticket_collection}}
-                <div>
-                    <strong class="primary-color">Programme: </strong>
-                </div>
-                {{/if}}
-                <div>
-                    <label for="got">Got</label>
-                    <input type="radio" id="got" name="Programme Got/Want" value="Got" class="js-form-programme-got">
-                </div>
-                <div>
-                    <label for="want">Want</label>
-                    <input type="radio" id="want" name="Programme Got/Want" value="Want" class="js-form-programme-want"></input>
-                </div>
-                <div>
-                    <label for="Programme Price">Programme Price</label>
-                    <input name="Programme Price" rows="4" id="form-price" class="js-form-price"></input>
-                </div>
-                <div>
-                    <label for="Programme Notes">Programme Notes</label>
-                    <textarea name="Programme Notes" rows="4" id="form-notes" class="js-form-notes"></textarea>
-                </div>
-                {{#if data.is_ticket_collection}}
-                <div>
-                    <strong class="primary-color">Ticket: </strong>
-                </div>
-                <div>
-                    <label for="got">Got</label>
-                    <input type="radio" id="got" name="Ticket Got/Want" value="Got" class="js-form-ticket-got">
-                </div>
-                <div>
-                    <label for="want">Want</label>
-                    <input type="radio" id="want" name="Ticket Got/Want" value="Want" class="js-form-ticket-want"></input>
-                </div>
-                {{/if}}
-                <div>
-                    <label class="block primary-color" for="Other Items"><strong>Other Items</strong></label>
-                    <textarea name="Other Items" rows="4" id="form-other_items" class="js-form-other_items"></textarea>
-                </div>
-                <input id="form-id" name="ID" class="js-form-id hidden"></input>
-                {{else}}
-                <div class="password-box">
-                    {{#if data.passwordFail}}<div class="error-msg">The password you entered was incorrect, please try again</div>{{/if}}
+        <img class="prog-img prog-img--left" src="{{data.img_one_src}}" alt="">
+        <img class="prog-img prog-img--right" src="{{data.img_two_src}}" alt="">
+        <!-- <div class="prog-img prog-img--position-left">
+            <img class="prog-img--left" src="{{data.img_one_src}}" alt="">
+        </div>
+        <div class="prog-img prog-img--position-mid">
+            <img class="prog-img--mid" src="{{data.img_three_src}}" alt="">
+        </div>
+        <div class="prog-img prog-img--position-right">
+            <img class="prog-img--right" src="{{data.img_four_src}}" alt="">
+        </div> -->
+        {{#if data.intro}}
+        <div class="intro">
+            <p>
+                {{data.intro}}
+            </p>
+        </div>
+        {{/if}}
+
+        <div class="collection-container">
+
+            <div class="section">
+                <span class="js-key-toggle faux-link">
+                    <span>Show Key >></span>
+                    <span class="hidden"><< Hide Key</span>
+                </span>
+                <div class="js-key key section hidden">
                     <div>
-                        <label for="password">Enter password to enable edit mode:</label>
+                        <div class="key-item">
+                            <div class="grid-match-border Home key-dot">
+                                <div class="grid-match"></div>
+                            </div>
+                            <div class="key-descriptor">Home</div>
+                        </div>
+                        <div class="key-item">
+                            <div class="grid-match-border Away key-dot">
+                                <div class="grid-match"></div>
+                            </div>
+                            <div class="key-descriptor">Away</div>
+                        </div>
+                        <div class="key-item">
+                            <div class="grid-match-border Neutral key-dot">
+                                <div class="grid-match"></div>
+                            </div>
+                            <div class="key-descriptor">Neutral</div>
+                        </div>
+                        <div class="key-item">
+                            <div class="grid-match-border Home friendly-border key-dot">
+                                <div class="grid-match"></div>
+                            </div>
+                            <div class="key-descriptor">Friendly</div>
+                        </div>
                     </div>
-                    <input name="password" id="form-password" class="js-form-password"></input>
+                    <div>
+                        <div class="key-item">
+                            <div class="grid-match-border Neutral key-dot">
+                                <div class="grid-match programme-Got ticket-Want"></div>
+                            </div>
+                            <div class="key-descriptor">Programme Got</div>
+                        </div>
+                        <div class="key-item">
+                            <div class="grid-match-border Neutral key-dot">
+                                <div class="grid-match programme-Want ticket-Got"></div>
+                            </div>
+                            <div class="key-descriptor">Ticket Got</div>
+                        </div>
+                        <div class="key-item">
+                            <div class="grid-match-border Neutral key-dot">
+                                <div class="grid-match programme-Got ticket-Got"></div>
+                            </div>
+                            <div class="key-descriptor">Programme and Ticket Got</div>
+                        </div>
+                        <div class="key-item">
+                            <div class="grid-match-border Neutral key-dot">
+                                <div class="grid-match non-first-team"></div>
+                            </div>
+                            <div class="key-descriptor">Non First Team</div>
+                        </div>
+                    </div>
                 </div>
-                {{/if}}
-                <button class="button" type="submit">Submit</button>
-            </form>
+            </div>
+            
+
+
+        {{#data.collectionData}}
+            <div class="matches-container">
+                <div class="matches section" data-season-string="{{season_string}}">
+                    <div class="season-head">
+                        <span class="typography--large">{{season}}</span>
+                        {{#unless programmeIsNotComplete}}
+                        <span><img class="check-icon" src="/check-icon.png" alt="check mark icon to indicate programme collection for the season is complete"></span>
+                        {{/unless}}
+                        <span class="js-table-toggle faux-link">
+                            <span class="js-show-more">Show More</span>
+                            <span class="hidden">Show Less</span>
+                        </span>
+                        {{#if programmeIsNotComplete}}
+                        <span class="js-wants-toggle faux-link hidden">
+                            <span class="js-show-wants">Show Wants</span>
+                            <span class="js-show-all hidden">Show All</span>
+                        </span>
+                        {{/if}}
+                    </div>
+                    <div class="js-games-dots-container">
+                        <div class="games-dots js-games-dots">
+                        {{#matchData}}
+                            {{>grid-match}}
+                        {{/matchData}}
+                        </div>
+                        {{#if nft_matchData}}
+                        <div class="games-dots games-dots--secondary js-games-dots">
+                            {{#nft_matchData}} 
+                                {{>grid-match}} 
+                            {{/nft_matchData}}
+                        </div>
+                        {{/if}}
+                    </div>
+                    <div class="js-games-table games-table hidden">
+                        <table class="table">
+                            <col style="width:5%">
+                            <col style="width:10%">
+                            <col style="width:15%">
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <thead class="secondary-color">
+                                <tr>
+                                    <th></th>
+                                    <th>Date</th>
+                                    <th>Opponent</th>
+                                    <th>Competition</th>
+                                    <th>H / A</th>
+                                    <th>Result</th>
+                                    <th class="hidden-mobile">Match Notes</th>
+                                    <th class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">Programme Price</th>
+                                    <th class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">Programme Notes</th>
+                                    <th class="{{#unless this.is_ticket_collection}}hidden{{/unless}}">Programme Got / Want</th>
+                                    {{#if this.is_ticket_collection}}<th>Ticket Got / Want</th>{{/if}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#matchData}}
+                                <tr>
+                                    <td>{{>grid-match}}</td>
+                                    <td>{{date}}</td>
+                                    <td>{{opponent}}</td>
+                                    <td>{{competition}}{{#if cup_round}}, {{cup_round}}{{/if}}</td>
+                                    <td>{{home_away}}</td>
+                                    <td>{{score}}</td>
+                                    <td class="hidden-mobile">{{match_notes}}</td>
+                                    <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{price}}</td>
+                                    <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{notes}}</td>
+                                    <td class="{{#unless this.is_ticket_collection}}hidden{{/unless}}">{{programme_got_want}}</td>
+                                    {{#if this.is_ticket_collection}}<td class=>{{ticket_got_want}}</td>{{/if}}
+                                </tr>
+                                {{/matchData}}
+                                {{#nft_matchData}}
+                                <tr>
+                                    <td>{{>grid-match}}</td>
+                                    <td>{{date}}</td>
+                                    <td>{{opponent}}</td>
+                                    <td>{{competition}}{{#if cup_round}}, {{cup_round}}{{/if}}</td>
+                                    <td>{{home_away}}</td>
+                                    <td>{{score}}</td>
+                                    <td class="hidden-mobile">{{match_notes}}</td>
+                                    <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{price}}</td>
+                                    <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{notes}}</td>
+                                    <td class="{{#unless this.is_ticket_collection}}hidden{{/unless}}">{{programme_got_want}}</td>
+                                    {{#if this.is_ticket_collection}}<td class=>{{ticket_got_want}}</td>{{/if}}
+                                </tr>
+                                {{/nft_matchData}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            
+            </div>
+        {{/data.collectionData}}
+        </div>
+        <a href="#header" class="sticky-bottom">Back to top ^</a>
+        <div class="footer">
+            <a href="https://docs.google.com/spreadsheets/d/{{data.sheet_id}}" target="_blank">View Data</a>
+        </div>
+
+        <div class="modal js-modal hidden">
+            <div class="modal-content typography--small">
+                <div class="js-modal-season"></div>
+                <div class="js-modal-competition"></div>
+                <div class="js-modal-cup_round"></div>
+                <div class="js-modal-date"></div>
+                <div class="js-modal-opponent typography--large primary-color"></div>
+                <div class="js-modal-home_away"></div>
+                <div class="js-modal-score"></div>
+                <div class="js-modal-points"></div>
+                <div class="js-modal-league_position"></div>
+                <div class="js-modal-ground"></div>
+                <div class="js-modal-attendance"></div>
+                <div class="js-modal-match_notes"></div>
+                <div class="js-modal-content-editable">
+                    <div class="typography--large primary-color">
+                        <div>{{#if data.is_ticket_collection}}<span>Programme: </span>{{/if}}<span class="js-modal-programme_got_want"></span></div>
+                        {{#if data.is_ticket_collection}}<div><span>Ticket: </span><span class="js-modal-ticket_got_want"></span></div>{{/if}}
+                    </div>
+                    <div class="js-modal-price"></div>
+                    <div class="js-modal-notes"></div>
+                    <div class="js-modal-other_items"></div>
+                    <button class="button js-modal-edit-button">Edit</button>
+                </div>
+                <form method="POST" class="section js-modal-content-form" action="/">
+                    {{#if data.editMode}}
+                    {{#if data.is_ticket_collection}}
+                    <div>
+                        <strong class="primary-color">Programme: </strong>
+                    </div>
+                    {{/if}}
+                    <div>
+                        <label for="got">Got</label>
+                        <input type="radio" id="got" name="Programme Got/Want" value="Got" class="js-form-programme-got">
+                    </div>
+                    <div>
+                        <label for="want">Want</label>
+                        <input type="radio" id="want" name="Programme Got/Want" value="Want" class="js-form-programme-want"></input>
+                    </div>
+                    <div>
+                        <label for="Programme Price">Programme Price</label>
+                        <input name="Programme Price" rows="4" id="form-price" class="js-form-price"></input>
+                    </div>
+                    <div>
+                        <label for="Programme Notes">Programme Notes</label>
+                        <textarea name="Programme Notes" rows="4" id="form-notes" class="js-form-notes"></textarea>
+                    </div>
+                    {{#if data.is_ticket_collection}}
+                    <div>
+                        <strong class="primary-color">Ticket: </strong>
+                    </div>
+                    <div>
+                        <label for="got">Got</label>
+                        <input type="radio" id="got" name="Ticket Got/Want" value="Got" class="js-form-ticket-got">
+                    </div>
+                    <div>
+                        <label for="want">Want</label>
+                        <input type="radio" id="want" name="Ticket Got/Want" value="Want" class="js-form-ticket-want"></input>
+                    </div>
+                    {{/if}}
+                    <div>
+                        <label class="block primary-color" for="Other Items"><strong>Other Items</strong></label>
+                        <textarea name="Other Items" rows="4" id="form-other_items" class="js-form-other_items"></textarea>
+                    </div>
+                    <input id="form-id" name="ID" class="js-form-id hidden"></input>
+                    {{else}}
+                    <div class="password-box">
+                        {{#if data.passwordFail}}<div class="error-msg">The password you entered was incorrect, please try again</div>{{/if}}
+                        <div>
+                            <label for="password">Enter password to enable edit mode:</label>
+                        </div>
+                        <input name="password" id="form-password" class="js-form-password"></input>
+                    </div>
+                    {{/if}}
+                    <button class="button" type="submit">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
