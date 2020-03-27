@@ -51,7 +51,7 @@ body {
   margin: 3.5rem 0;
   position: -webkit-sticky;
   position: sticky;
-  max-height: 30rem;
+  max-height: 45rem;
   z-index: -1;
 }
 
@@ -64,50 +64,6 @@ body {
   transform: rotate(25deg);
   top: -15%;
 }
-
-/* TODO make this workable and use in future */
-/* .prog-img {
-  margin: 3.5rem 0;
-  max-height: 30rem;
-  z-index: -1;
-}
-
-.prog-img--position-left {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 16%;
-}
-.prog-img--position-mid {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 26%;
-}
-.prog-img--position-right {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 36%;
-}
-
-.prog-img--left {
-  margin-top: 10rem;
-  max-height: 60rem;
-  transform: rotate(-25deg);
-  margin-right: 60rem;
-}
-
-.prog-img--mid {
-  max-height: 60rem;
-  transform: rotate(4deg);
-  margin-right: 10rem;
-  margin-top: -30rem;
-}
-
-.prog-img--right {
-  max-height: 60rem;
-  transform: rotate(25deg);
-  margin-left: 52rem;
-  margin-top: -60rem;
-} */
 
 .primary-color {
   color: var(--primary-color);
@@ -448,6 +404,17 @@ input, textarea {
     font-size: 100%;
   }
 
+  body {
+    margin-right: -13rem;
+  }
+
+  .collection-container {
+    max-width: 100%;
+  }
+
+  .intro p {
+    max-width: 95%;
+  }
   .print-view {
     width: 90%
   }
