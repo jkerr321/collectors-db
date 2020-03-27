@@ -118,14 +118,17 @@
                             </div>
                             <div class="key-descriptor">Neutral</div>
                         </div>
+                        {{#if data.includes_non_first_team}}
                         <div class="key-item">
                             <div class="grid-match-border Home friendly-border key-dot">
                                 <div class="grid-match"></div>
                             </div>
                             <div class="key-descriptor">Friendly</div>
                         </div>
+                        {{/if}}
                     </div>
                     <div>
+                        {{#if data.includes_non_first_team}}
                         <div class="key-item">
                             <div class="grid-match-border Neutral key-dot">
                                 <div class="grid-match programme-Got ticket-Want"></div>
@@ -150,11 +153,23 @@
                             </div>
                             <div class="key-descriptor">Non First Team</div>
                         </div>
+                        {{else}}
+                        <div class="key-item">
+                            <div class="grid-match-border Neutral key-dot">
+                                <div class="grid-match programme-Got"></div>
+                            </div>
+                            <div class="key-descriptor">Got</div>
+                        </div>
+                        <div class="key-item">
+                            <div class="grid-match-border Neutral key-dot">
+                                <div class="grid-match programme-Want"></div>
+                            </div>
+                            <div class="key-descriptor">Want</div>
+                        </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>
-            
-
 
         {{#data.collectionData}}
             <div class="matches-container">

@@ -51,7 +51,7 @@ body {
   margin: 3.5rem 0;
   position: -webkit-sticky;
   position: sticky;
-  max-height: 45rem;
+  max-height: 40rem;
   z-index: -1;
 }
 

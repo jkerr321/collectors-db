@@ -43,14 +43,3 @@ module.exports = {
     auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
     client_x509_cert_url: process.env.client_x509_cert_url
 }
-// muted
-// --primary - color: #de0000;
-// --secondary - color: #ffd4d4;
-// --tertiary - color: #ffe730;
-
-// bright with pink
-// --primary - color: #ff0000;
-// --secondary - color: #ffd4d4;
-// --tertiary - color: #FFE3E2;
-
-//yellow = #ffea00
