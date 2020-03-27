@@ -154,6 +154,35 @@ body {
   margin: 0 0 0.2rem 0;
 }
 
+.key {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 50%;
+  margin: auto;
+  font-size: 1.5rem;
+}
+
+.key-item {
+  display: grid;
+  grid-template-columns: 17% 83%;
+  text-align: left;
+  align-items: center;
+}
+
+.key-dot {
+  justify-self: end;
+}
+
+.key-descriptor {
+  margin-left: 1rem;
+}
+
+.collection-container {
+  background-color: rgba(255, 255, 255, .8);
+  max-width: 70%;
+  margin: auto;
+}
+
 .matches-container {
   background-color: rgba(255, 255, 255, .8);
   position: relative;

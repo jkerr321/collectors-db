@@ -4,6 +4,7 @@ const editButton = document.querySelector('.js-modal-edit-button');
 const tableToggles = document.querySelectorAll('.js-table-toggle');
 const wantToggles = document.querySelectorAll('.js-wants-toggle');
 const filterToggle = document.querySelector('.js-filter-toggle');
+const keyToggle = document.querySelector('.js-key-toggle');
 const printViewToggle = document.querySelector('.js-print-view-toggle');
 
 const show = (element) => element.classList.remove('hidden');
@@ -161,6 +162,16 @@ const toggleFilter = (event) => {
 	}
 };
 
+const toggleKey = (event) => {
+	toggleClickableSpan(event.srcElement);
+	const key = document.querySelector('.js-key');
+	if (key.classList.contains('hidden')) {
+		show(key);
+	} else {
+		hide(key);
+	}
+};
+
 const toggleWants = (event) => {
 	toggleClickableSpan(event.srcElement);
 	const seasonContainer = getSeasonContainer(event);
@@ -209,13 +220,16 @@ const toggleTable = (event) => {
 const togglePrintView = (event) => {
 	const printView = document.querySelector('.js-print-view');
 	const richView = document.querySelector('.js-rich-view');
+	const richViewContainer = document.querySelector('.js-rich-view__container');
 	toggleClickableSpan(event.srcElement);
 
 	if (printView.classList.contains('hidden')) {
 		hide(richView);
+		richViewContainer.classList.add('hide-border');
 		show(printView);
 	} else {
 		hide(printView);
+		richViewContainer.classList.remove('hide-border');
 		show(richView);
 	}
 };
@@ -225,6 +239,7 @@ matches.forEach(match => match.addEventListener('click', e => showModal(e)));
 wantToggles.forEach(toggle => toggle.addEventListener('click', e => toggleWants(e)));
 editButton.addEventListener('click', e => showForm(e));
 filterToggle.addEventListener('click', e => toggleFilter(e));
+if (keyToggle) { keyToggle.addEventListener('click', e => toggleKey(e)); }
 if (printViewToggle) { printViewToggle.addEventListener('click', e => togglePrintView(e)); }
 
 module.exports = togglePrintView;
