@@ -4,6 +4,7 @@ const { filterRows, init } = require('../server/controllers/renderLandingPage');
 const reqBody = require('./fixtures/reqBody');
 const config = require('../config');
 const rows = require('./fixtures/rows');
+const premiumRows = require('./fixtures/rowsPremium');
 const sinon = require('sinon');
 
 // var sinonChai = require("sinon-chai");
@@ -17,7 +18,6 @@ describe('renderLandingPage', async () => {
     let sandbox;
 
     beforeEach(() => {
-        // this.timeout(15000);
         sandbox = sinon.createSandbox();        
         req = (method, body) => ({
             method: method || 'GET',
@@ -42,15 +42,20 @@ describe('renderLandingPage', async () => {
         sandbox.restore();
     });
 
-    describe('filterRows', () => {
+    describe.only('filterRows', () => {
+        //TODO separate these into different tests
         it('returns the rows that match the given filter conditions in req.body', async () => {
             const filteredRowsOne = await filterRows(rows, reqBody.filterOne);
             const filteredRowsTwo = await filterRows(rows, reqBody.filterTwo);
+            const filteredRowsThree = await filterRows(premiumRows, reqBody.filterThree);
+            const filteredRowsFour = await filterRows(premiumRows, reqBody.filterFour);
             
             expect(filteredRowsOne.every(value => value['Programme Got/Want'] === 'Want')).to.be.true;
             expect(filteredRowsOne.every(value => value.Season === '1947/48' || '1948/49')).to.be.true;
-            expect(filteredRowsTwo.every(value => value.Opponent !== 'Queens Park Rangers')).to.be.true;
             expect(filteredRowsTwo.some(value => value.Opponent === 'Walsall')).to.be.true;
+            expect(filteredRowsThree.every(value => value['Ticket Got/Want'] === 'Want' || value['Programme Got/Want'] === 'Want' )).to.be.true;
+            expect(filteredRowsThree.some(value => value['Ticket Got/Want'] === 'Want' )).to.be.true;
+            expect(filteredRowsFour.every(value => value['Ticket Got/Want'] === 'Got' && value['Non First Team'] === 'Yes' )).to.be.true;
         });
     });
 

@@ -53,6 +53,8 @@ describe('dataModel', async () => {
             const data = new DataModel(config, req());
             expect(data._getFilterArray(reqBody.filterOne)).to.eql(['1947/48,1948/49', 'Want']);
             expect(data._getFilterArray(reqBody.filterTwo)).to.eql(['Ticket', 'Bournemouth,Swansea City,Walsall']);
+            expect(data._getFilterArray(reqBody.filterThree)).to.eql(['Tickets and Programmes', 'First Team', 'Want']);
+            expect(data._getFilterArray(reqBody.filterFour)).to.eql(['Ticket', 'Non First Team', 'Got']);
         });
     });
 

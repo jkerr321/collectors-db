@@ -12,6 +12,20 @@ module.exports =
         opponentFilter: ['Bournemouth', 'Swansea City', 'Walsall'],
         filter: 'filter'
     },
+    filterThree : {
+        ticketProgrammeFilter: 'All',
+        nonFirstTeamFilter: 'No',
+        gotWantFilter: 'Want',
+        homeAwayFilter: '',
+        filter: 'filter'
+    },
+    filterFour : {
+        ticketProgrammeFilter: 'Ticket',
+        nonFirstTeamFilter: 'Yes',
+        gotWantFilter: 'Got',
+        homeAwayFilter: '',
+        filter: 'filter'
+    },
     updateThree : {
         'Got Want': 'Got',
         'Programme Price': '',

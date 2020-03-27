@@ -52,7 +52,8 @@ module.exports = class DataModel {
 
 	_getFilterArray (reqBody) {
 		let result = [];
-		if (reqBody.ticketProgrammeFilter) { result.push(`${reqBody.ticketProgrammeFilter}`); }
+		if (reqBody.ticketProgrammeFilter && reqBody.ticketProgrammeFilter === 'All') { result.push('Tickets and Programmes'); }
+		if (reqBody.ticketProgrammeFilter && reqBody.ticketProgrammeFilter !== 'All') { result.push(`${reqBody.ticketProgrammeFilter}`); }
 		if (reqBody.nonFirstTeamFilter && reqBody.nonFirstTeamFilter === 'No') { result.push('First Team'); }
 		if (reqBody.nonFirstTeamFilter && reqBody.nonFirstTeamFilter === 'Yes') { result.push('Non First Team'); }
 		if (reqBody.seasonFilter) { result.push(`${reqBody.seasonFilter}`); }

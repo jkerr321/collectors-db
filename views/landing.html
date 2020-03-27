@@ -30,7 +30,7 @@
                         <label for="programmes">Programmes</label>
                         <input type="radio" id="programmes" name="ticketProgrammeFilter" value="Programme"></input>
                         <label for="all">All</label>
-                        <input type="radio" id="all" name="ticketProgrammeFilter" value=""></input>
+                        <input type="radio" id="all" name="ticketProgrammeFilter" value="All" checked></input>
                     </div>
                     {{/if}}
                     {{#if data.includes_non_first_team}}
@@ -40,7 +40,7 @@
                         <label for="nonFirstTeam">Non First Team</label>
                         <input type="radio" id="programmes" name="nonFirstTeamFilter" value="Yes"></input>
                         <label for="all">All</label>
-                        <input type="radio" id="all" name="nonFirstTeamFilter" value=""></input>
+                        <input type="radio" id="all" name="nonFirstTeamFilter" value="" checked></input>
                     </div>
                     {{/if}}
                     <div class="section">
@@ -49,7 +49,7 @@
                         <label for="want">Want</label>
                         <input type="radio" id="want" name="gotWantFilter" value="Want"></input>
                         <label for="all">All</label>
-                        <input type="radio" id="all" name="gotWantFilter" value=""></input>
+                        <input type="radio" id="all" name="gotWantFilter" value="" checked></input>
                     </div>
                     <div class="section">
                         <label for="home">Home</label>
@@ -57,7 +57,7 @@
                         <label for="away">Away</label>
                         <input type="radio" id="away" name="homeAwayFilter" value="Away"></input>
                         <label for="all">All</label>
-                        <input type="radio" id="all" name="homeAwayFilter" value=""></input>
+                        <input type="radio" id="all" name="homeAwayFilter" value="" checked></input>
                     </div>
                     <div class="checkbox checkbox__season section">
                         {{#data.seasonList}}
