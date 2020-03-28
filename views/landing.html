@@ -60,20 +60,20 @@
                         <input type="radio" id="all" name="homeAwayFilter" value="" checked></input>
                     </div>
                     <div class="checkbox checkbox__season section">
-                        {{#data.seasonList}}
+                        {{#data.season_list}}
                         <div>
                             <input type="checkbox" id="seasonFilter" name="seasonFilter" value="{{this}}">
                             <label for="seasonFilter">{{this}}</label>
                         </div>
-                        {{/data.seasonList}}
+                        {{/data.season_list}}
                     </div>
                     <div class="checkbox checkbox__opponent section">
-                        {{#data.opponentList}}
+                        {{#data.opponent_list}}
                         <div>
                             <input type="checkbox" id="opponentFilter" name="opponentFilter" value="{{this}}">
                             <label for="opponentFilter">{{this}}</label>
                         </div>
-                        {{/data.opponentList}}
+                        {{/data.opponent_list}}
                     </div>
                     <input id="filter" name="filter" class="hidden" value="filter"></input>
                     <button class="button" type="submit">Filter</button>
@@ -171,7 +171,7 @@
                 </div>
             </div>
 
-        {{#data.collectionData}}
+        {{#data.collection_data}}
             <div class="matches-container">
                 <div class="matches section" data-season-string="{{season_string}}">
                     <div class="season-head">
@@ -267,7 +267,7 @@
                 </div>
             
             </div>
-        {{/data.collectionData}}
+        {{/data.collection_data}}
         </div>
         <a href="#header" class="sticky-bottom">Back to top ^</a>
         <div class="footer">
@@ -299,7 +299,7 @@
                     <button class="button js-modal-edit-button">Edit</button>
                 </div>
                 <form method="POST" class="section js-modal-content-form" action="/">
-                    {{#if data.editMode}}
+                    {{#if data.edit_mode}}
                     {{#if data.is_ticket_collection}}
                     <div>
                         <strong class="primary-color">Programme: </strong>
@@ -384,7 +384,7 @@
             </tr>
         </thead>
     </table>
-{{#data.collectionData}}
+{{#data.collection_data}}
     <div class="matches section" data-season-string="{{season_string}}">
         <table class="table table--print-view">
             <col style="width:12%">
@@ -410,7 +410,7 @@
             </tbody>
         </table>
     </div>
-{{/data.collectionData}}
+{{/data.collection_data}}
 </div>
 {{/if}}
 <div class="js-title hidden">{{data.heading}}</div>

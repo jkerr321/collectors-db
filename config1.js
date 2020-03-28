@@ -34,7 +34,7 @@ module.exports = {
             attendance: 'Att',
             other_items: 'Other Items',
             is_ticket_collection: true,
-            includes_non_first_team: true //TODO does this need to be in dataPoints?
+            includes_non_first_team: true //TODO does this need to be in data_points?
         },
     },
     password: process.env.password,

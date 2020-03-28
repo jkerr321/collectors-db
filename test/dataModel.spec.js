@@ -28,12 +28,12 @@ describe('dataModel', async () => {
     });
 
     describe('constructor', () => {
-        it('sets editMode based on the correct cookie', () => {
+        it('sets edit_mode based on the correct cookie', () => {
             const data = new DataModel(config, req());
-            expect(data.editMode).to.equal(false);
+            expect(data.edit_mode).to.equal(false);
             const reqWithCookie = req('GET', {}, { programmeCollectorCookie: true });
             const data2 = new DataModel(config, reqWithCookie);            
-            expect(data2.editMode).to.equal(true);
+            expect(data2.edit_mode).to.equal(true);
         });
     });
 
@@ -58,21 +58,21 @@ describe('dataModel', async () => {
         });
     });
 
-    describe('setSeasonList', () => {
+    describe('_setSeasonList', () => {
         it('', () => {
             const data = new DataModel(config, req());
-            data.setSeasonList(rows);
-            expect(data.seasonList).to.have.lengthOf(2);
-            expect(data.seasonList[0]).to.have.equal('1947/48');
+            data._setSeasonList(rows);
+            expect(data.season_list).to.have.lengthOf(2);
+            expect(data.season_list[0]).to.have.equal('1947/48');
         });
     });
 
     describe('setOpponentList', () => {
-        it('sets data.opponentList to an array of unique opponents', () => {
+        it('sets data.opponent_list to an array of unique opponents', () => {
             const data = new DataModel(config, req());
             data.setOpponentList(rows);
-            expect(data.opponentList).to.have.lengthOf(17);
-            expect(data.opponentList[0]).to.equal('Bournemouth');
+            expect(data.opponent_list).to.have.lengthOf(17);
+            expect(data.opponent_list[0]).to.equal('Bournemouth');
         });
     });
 
@@ -88,18 +88,18 @@ describe('dataModel', async () => {
     // describe.only('_setCollectionDataStructure', () => {
     //     it('contains an empty matchData array for each season', () => {
     //         const data = new DataModel(config, req());
-    //         data.setSeasonList(rows);
+    //         data._setSeasonList(rows);
     //         data._setCollectionDatastructure();
-    //         expect(data.collectionData.every(value => value.matchData)).to.be.true;
-    //         expect(data.collectionData.every(value => value.matchData)).to.be.an.array;
+    //         expect(data.collection_data.every(value => value.matchData)).to.be.true;
+    //         expect(data.collection_data.every(value => value.matchData)).to.be.an.array;
 
     //     });
     //     it('returns an array containing a season string for each season', () => {
     //         const data = new DataModel(config, req());
-    //         data.setSeasonList(rows);
+    //         data._setSeasonList(rows);
     //         data._setCollectionDatastructure();
-    //         expect(data.collectionData.every(value => value.season_string)).to.be.true;
-    //         expect(data.collectionData.every(value => value.season_string)).to.be.a.string;
+    //         expect(data.collection_data.every(value => value.season_string)).to.be.true;
+    //         expect(data.collection_data.every(value => value.season_string)).to.be.a.string;
     //     });
     // });
 
@@ -107,42 +107,42 @@ describe('dataModel', async () => {
         it('sets is_also_ticket_collection if config specifies that is is also a ticket collection', () => {
             const data = new DataModel(config, req());
             data.setCollectionData(rows);            
-            expect(data.collectionData[0].is_ticket_collection).to.be.true;
-            expect(data.collectionData[0].matchData[0].is_ticket_collection).to.be.true;
+            expect(data.collection_data[0].is_ticket_collection).to.be.true;
+            expect(data.collection_data[0].matchData[0].is_ticket_collection).to.be.true;
         });
         it('does not set is_also_ticket_collection if config specifies that is is also a ticket collection', () => {
             config.options.data_points.is_ticket_collection = undefined;
             const data = new DataModel(config, req());
             data.setCollectionData(rows);
-            expect(data.collectionData[0].is_ticket_collection).to.be.false;
-            expect(data.collectionData[0].matchData[0].is_ticket_collection).to.be.false;
+            expect(data.collection_data[0].is_ticket_collection).to.be.false;
+            expect(data.collection_data[0].matchData[0].is_ticket_collection).to.be.false;
         });
         it('returns an array containing an a set of data for each match in the season', () => {
             const data = new DataModel(config, req());
             data.setCollectionData(rows);
-            expect(data.collectionData.every(value => value.matchData)).to.be.true;
-            expect(data.collectionData[0].matchData).to.have.lengthOf(16);
+            expect(data.collection_data.every(value => value.matchData)).to.be.true;
+            expect(data.collection_data[0].matchData).to.have.lengthOf(16);
         });
         it('populates match data with `position` if that is specified as a datapoint in the config', () => {
             const data = new DataModel(config, req());
             data.setCollectionData(rows);
-            expect(data.collectionData[0].matchData[0].position).to.exist;
+            expect(data.collection_data[0].matchData[0].position).to.exist;
         });
         it('and doesn\'t populate match data with `position` if that is not specified as a datapoint in the config', () => {
             config.options.data_points.position = undefined;
             const data = new DataModel(config, req());
             data.setCollectionData(rows);
-            expect(data.collectionData[0].matchData[0].position).to.not.exist;
+            expect(data.collection_data[0].matchData[0].position).to.not.exist;
         });
         it('specifies whether a collection is not complete for a season', () => {
             const data = new DataModel(config, req());
             data.setCollectionData(rows);
-            expect(data.collectionData[0].programmeIsNotComplete).to.be.true;
+            expect(data.collection_data[0].programmeIsNotComplete).to.be.true;
         });
         it('does not specify "programmeIsNotComplete" value for a completed season', () => {
             const data = new DataModel(config, req());
             data.setCollectionData(rows);
-            expect(data.collectionData[1].programmeIsNotComplete).to.be.undefined;
+            expect(data.collection_data[1].programmeIsNotComplete).to.be.undefined;
         });
     });
 

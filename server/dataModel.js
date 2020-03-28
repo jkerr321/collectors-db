@@ -1,5 +1,3 @@
-//TODO _underscore private methods
-//TODO change all _ in names to camel case
 module.exports = class DataModel {
 
 	constructor (config, req) {
@@ -14,22 +12,22 @@ module.exports = class DataModel {
 		this.img_three_src = config.options.img_three_src;
 		this.sheet_id = config.sheet_id;
 		this.intro = config.options.intro;
-		this.dataPoints = config.options.data_points;
+		this.data_points = config.options.data_points;
 
 		this.is_ticket_collection = config.options.data_points.is_ticket_collection || false;
 		this.includes_non_first_team = config.options.data_points.includes_non_first_team || false;
-		this.editMode = !!req.cookies.programmeCollectorCookie || false;
-		this.seasonList = '';
-		this.opponentList = '';
-		this.collectionData = [];
+		this.edit_mode = !!req.cookies.programmeCollectorCookie || false;
+		this.season_list = '';
+		this.opponent_list = '';
+		this.collection_data = [];
 	}
 
-	setSeasonList (rows) {
-		this.seasonList = this._getUniqueList(rows, 'Season');
+	_setSeasonList (rows) {
+		this.season_list = this._getUniqueList(rows, 'Season');
 	}
 
 	setOpponentList (rows) {
-		this.opponentList = this._getUniqueList(rows, 'Opponent').sort();
+		this.opponent_list = this._getUniqueList(rows, 'Opponent').sort();
 	}
 
 	setPasswordFail () {
@@ -65,15 +63,15 @@ module.exports = class DataModel {
 
 	_setCollectionDataStructure () {
 		// create structure for match data:
-		// this.collectionData = {
+		// this.collection_data = {
 		//     1998/99: {
 		//         season: 1998/99,
 		//         season_string: 199899, // eg 200102 rather than 2001/02 - so that this can be inserted into html class and searched on later
 		//         matchData: []
 		//     }
 		// }
-		this.seasonList.forEach(season => {
-			this.collectionData.push({
+		this.season_list.forEach(season => {
+			this.collection_data.push({
 				season: season,
 				season_string: season.substring(0, 4) + season.substring(5),
 				matchData: [],
@@ -85,15 +83,15 @@ module.exports = class DataModel {
 
 	setCollectionData (rows) {
 		// clear any existing data
-		this.collectionData = [];
+		this.collection_data = [];
 		// get list of unique seasons
-		this.setSeasonList(rows);
+		this._setSeasonList(rows);
 		this._setCollectionDataStructure();
 
 		rows.forEach(row => {
-			this.collectionData.forEach(seasonObject => {
+			this.collection_data.forEach(seasonObject => {
 				if (row.Season === seasonObject.season) {
-					if (row[`${this.dataPoints.programme_got_want}`] === 'Want' && !seasonObject.isNotComplete) {
+					if (row[`${this.data_points.programme_got_want}`] === 'Want' && !seasonObject.isNotComplete) {
 						seasonObject.programmeIsNotComplete = true;
 					}
 
@@ -108,8 +106,8 @@ module.exports = class DataModel {
 					//     }
 					// ]
 					let matchObj = {};
-					Object.keys(this.dataPoints).forEach(key => {
-						matchObj[key] = row[`${this.dataPoints[key]}`];
+					Object.keys(this.data_points).forEach(key => {
+						matchObj[key] = row[`${this.data_points[key]}`];
 					});
 
 					if (this.includes_non_first_team && row['Non First Team'] === 'Yes') {

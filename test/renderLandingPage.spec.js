@@ -7,9 +7,6 @@ const rows = require('./fixtures/rows');
 const premiumRows = require('./fixtures/rowsPremium');
 const sinon = require('sinon');
 
-// var sinonChai = require("sinon-chai");
-// chai.use(sinonChai);
-
 describe('renderLandingPage', async () => {
     let req;
     let res;
@@ -87,7 +84,7 @@ describe('renderLandingPage', async () => {
             expect(res.render.getCall(0).args[1].data.appliedFilter).to.eql(['1947/48,1948/49', 'Want']);
         }).timeout(15000);
 
-        it.only('updates spreadsheet values when reqBody does not contain `isFiltered`', async () => {
+        it('updates spreadsheet values when reqBody does not contain `isFiltered`', async () => {
             await init(req('POST', reqBody.updateFour), res, config);
             expect(res.render.getCall(0).args[1].data.isFiltered).to.be.undefined;
             // expect(updateSpreadsheet.calledOnce).to.be.true; //TODO this was working but now isn't!
