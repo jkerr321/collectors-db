@@ -18,7 +18,7 @@
         data-attendance="{{this.attendance}}"
         data-match_notes="{{this.match_notes}}" 
         data-programme_got_want="{{this.programme_got_want}}" 
-        data-ticket_got_want="{{this.ticket_got_want}}" 
+        data-ticket_got_want="{{#if this.is_ticket_collection}}{{this.ticket_got_want}}{{/if}}"
         data-price="{{this.price}}" 
         data-notes="{{this.notes}}"
         data-other_items="{{this.other_items}}"

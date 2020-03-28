@@ -120,14 +120,20 @@ const populateForm = (eventAttrArray) => {
 		if (document.querySelector(`.js-form-${dataPointName}`)) {
 			document.querySelector(`.js-form-${dataPointName}`).value = `${dataPointValue}` || '';
 		}
-
-		if (attr.name === 'ticket' || attr.name === 'programme') {
-			setRadioPlaceholders(attr.name, eventAttrArray);
+		if (dataPointName === 'programme_got_want' || dataPointName === 'ticket_got_want' && !!dataPointValue) {
+			setRadioPlaceholders(dataPointName, eventAttrArray);
 		}
 	});
 };
 
-const setRadioPlaceholders = (item, eventAttrArray) => {
+const setRadioPlaceholders = (dataPointName, eventAttrArray) => {
+	let item;
+	if(dataPointName === 'programme_got_want') {
+		item = 'programme';
+	} else {
+		item = 'ticket';
+	}
+
 	const formWant = document.querySelector(`.js-form-${item}-want`);
 	const formGot = document.querySelector(`.js-form-${item}-got`);
 
@@ -139,9 +145,9 @@ const setRadioPlaceholders = (item, eventAttrArray) => {
 	eventAttrArray.forEach(attr => {
 		if (attr.name === `data-${item}_got_want`) {
 			if (attr.value === 'Got') {
-				formGot.setAttribute('checked', '');
+				formGot.setAttribute('checked', 'checked');
 			} else {
-				formWant.setAttribute('checked', '');
+				formWant.setAttribute('checked', 'checked');
 			}
 		}
 	});
