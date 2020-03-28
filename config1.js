@@ -11,7 +11,6 @@ module.exports = {
         img_four_src: 'PM_home_prog3.jpg',
         intro: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae dignissim lacus. Aenean nec fermentum augue, at dapibusodio.Vivamus lacus lorem, dictum non efficitur a, mattis vitae turpis.Integer elementum ipsum a enim dictum facilisis. Nullam suscipit convallis purus sit amet scelerisque.Suspendisse nec erat justo.Curabitur at suscipit dui.Sed aliqua pulvinar arcu.Aliquam erat volutpat.<a href=""> this is a link to some photos</a> Nullam molestie tincidunt libero a viverra.Phasellus consequat, justo ut blandit varius, erat ante ornare libero, eleifend tristique tellus sapien sit amet felis.Integer laoreet, velit sed dignissim finibus, metus tellus elementum nisi, vitae pharetra diam orci nec metus.Sed suscipit dui id faucibus tempus.Vestibulum quis quam rutrum, semper tellus non, finibus lectus.`,
         // data points to be used on site, and their row heading names on the spreadsheet
-        //TODO have base datapoints already on the model, then append with optional data points
         data_points: {
             season: 'Season',
             date: 'Date',
@@ -29,12 +28,12 @@ module.exports = {
             match_notes: 'Match Notes',
             ticket_got_want: 'Ticket Got/Want',
             price: 'Programme Price',
-            notes: 'Programme Notes', //TODO change this to programme_notes
+            programme_notes: 'Programme Notes',
             ground: 'Ground',
             attendance: 'Att',
             other_items: 'Other Items',
             is_ticket_collection: true,
-            includes_non_first_team: true //TODO does this need to be in data_points?
+            includes_non_first_team: true
         },
     },
     password: process.env.password,

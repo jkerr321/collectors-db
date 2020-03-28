@@ -241,7 +241,7 @@
                                     <td>{{score}}</td>
                                     <td class="hidden-mobile">{{match_notes}}</td>
                                     <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{price}}</td>
-                                    <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{notes}}</td>
+                                    <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{programme_notes}}</td>
                                     <td class="{{#unless this.is_ticket_collection}}hidden{{/unless}}">{{programme_got_want}}</td>
                                     {{#if this.is_ticket_collection}}<td class=>{{ticket_got_want}}</td>{{/if}}
                                 </tr>
@@ -256,7 +256,7 @@
                                     <td>{{score}}</td>
                                     <td class="hidden-mobile">{{match_notes}}</td>
                                     <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{price}}</td>
-                                    <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{notes}}</td>
+                                    <td class="{{#if this.is_ticket_collection}}hidden{{/if}} hidden-mobile">{{programme_notes}}</td>
                                     <td class="{{#unless this.is_ticket_collection}}hidden{{/unless}}">{{programme_got_want}}</td>
                                     {{#if this.is_ticket_collection}}<td class=>{{ticket_got_want}}</td>{{/if}}
                                 </tr>
@@ -293,8 +293,8 @@
                         <div>{{#if data.is_ticket_collection}}<span>Programme: </span>{{/if}}<span class="js-modal-programme_got_want"></span></div>
                         {{#if data.is_ticket_collection}}<div><span>Ticket: </span><span class="js-modal-ticket_got_want"></span></div>{{/if}}
                     </div>
-                    <div class="js-modal-price"></div>
-                    <div class="js-modal-notes"></div>
+                    {{#if data.data_points.price}}<div class="js-modal-price"></div>{{/if}}
+                    <div class="js-modal-programme_notes"></div>
                     <div class="js-modal-other_items"></div>
                     <button class="button js-modal-edit-button">Edit</button>
                 </div>
@@ -319,7 +319,7 @@
                     </div>
                     <div>
                         <label for="Programme Notes">Programme Notes</label>
-                        <textarea name="Programme Notes" rows="4" id="form-notes" class="js-form-notes"></textarea>
+                        <textarea name="Programme Notes" rows="4" id="form-programme_notes" class="js-form-programme_notes"></textarea>
                     </div>
                     {{#if data.is_ticket_collection}}
                     <div>

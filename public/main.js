@@ -96,7 +96,7 @@ const populateModalData = (eventAttrArray) => {
 			if (dataPointName === 'price') {
 				preamble = '<strong>Programme Price:</strong> ';
 			}
-			if (dataPointName === 'notes') {
+			if (dataPointName === 'programme_notes') {
 				preamble = '<strong>Programme Notes:</strong> ';
 			}
 			if (dataPointName === 'attendance') {

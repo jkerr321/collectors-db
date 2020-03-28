@@ -7,7 +7,6 @@ module.exports = {
         img_one_src: 'everton_prog_1.jpg',
         img_two_src: 'everton_prog_2.jpg',
         // data points to be used on site, and their row heading names on the spreadsheet
-        //TODO have base datapoints already on the model, then append with optional data points
         data_points: {
             season: 'Season',
             date: 'Date',
@@ -23,7 +22,7 @@ module.exports = {
             match_notes: 'Match Notes',
             ticket_got_want: 'Ticket Got/Want',
             price: 'Programme Price',
-            notes: 'Programme Notes', //TODO change this to programme_notes
+            programme_notes: 'Programme Notes',
             ground: 'Ground',
             attendance: 'Att',
             other_items: 'Other Items',

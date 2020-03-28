@@ -23,8 +23,7 @@ module.exports = {
             cup_round: 'Cup Round',
             match_notes: 'Match Notes',
             ticket_got_want: 'Ticket Got/Want',
-            price: 'Programme Price',
-            notes: 'Programme Notes',
+            programme_notes: 'Programme Notes',
             other_items: 'Other Items',
             is_ticket_collection: true,
             includes_non_first_team: true
