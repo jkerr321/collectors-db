@@ -43,18 +43,22 @@ describe('renderLandingPage', async () => {
     });
 
     describe('filterRows', () => {
-        //TODO separate these into different tests
-        it('returns the rows that match the given filter conditions in req.body', async () => {
+        it('returns the matching rows when filtered on Programme wants and Season', async () => {
             const filteredRowsOne = await filterRows(rows, reqBody.filterOne);
-            const filteredRowsTwo = await filterRows(rows, reqBody.filterTwo);
-            const filteredRowsThree = await filterRows(premiumRows, reqBody.filterThree);
-            const filteredRowsFour = await filterRows(premiumRows, reqBody.filterFour);
-            
             expect(filteredRowsOne.every(value => value['Programme Got/Want'] === 'Want')).to.be.true;
             expect(filteredRowsOne.every(value => value.Season === '1947/48' || '1948/49')).to.be.true;
+        }); 
+        it('returns the matching rows when filtered on Opponent', async () => { 
+            const filteredRowsTwo = await filterRows(rows, reqBody.filterTwo);
             expect(filteredRowsTwo.some(value => value.Opponent === 'Walsall')).to.be.true;
+        });
+        it('returns the matching rows when filtered on Ticket wants', async () => {
+            const filteredRowsThree = await filterRows(premiumRows, reqBody.filterThree);
             expect(filteredRowsThree.every(value => value['Ticket Got/Want'] === 'Want' || value['Programme Got/Want'] === 'Want' )).to.be.true;
             expect(filteredRowsThree.some(value => value['Ticket Got/Want'] === 'Want' )).to.be.true;
+        });
+        it('returns the matching rows when filtered on Non First Team', async () => {
+            const filteredRowsFour = await filterRows(premiumRows, reqBody.filterFour);
             expect(filteredRowsFour.every(value => value['Ticket Got/Want'] === 'Got' && value['Non First Team'] === 'Yes' )).to.be.true;
         });
     });
@@ -83,7 +87,7 @@ describe('renderLandingPage', async () => {
             expect(res.render.getCall(0).args[1].data.appliedFilter).to.eql(['1947/48,1948/49', 'Want']);
         }).timeout(15000);
 
-        it('updates spreadsheet values when reqBody does not contain `isFiltered`', async () => {
+        it.only('updates spreadsheet values when reqBody does not contain `isFiltered`', async () => {
             await init(req('POST', reqBody.updateFour), res, config);
             expect(res.render.getCall(0).args[1].data.isFiltered).to.be.undefined;
             // expect(updateSpreadsheet.calledOnce).to.be.true; //TODO this was working but now isn't!
