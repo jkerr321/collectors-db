@@ -120,34 +120,36 @@ const populateForm = (eventAttrArray) => {
 		if (document.querySelector(`.js-form-${dataPointName}`)) {
 			document.querySelector(`.js-form-${dataPointName}`).value = `${dataPointValue}` || '';
 		}
-		if (dataPointName === 'programme_got_want' || dataPointName === 'ticket_got_want' && !!dataPointValue) {
-			setRadioPlaceholders(dataPointName, eventAttrArray);
+		if (dataPointName === 'programme_got_want' && !!dataPointValue) {
+			const radioOne = document.querySelector('.js-form-programme-want');
+			const radioTwo = document.querySelector('.js-form-programme-got');
+			setRadioPlaceholders(dataPointName, eventAttrArray, radioOne, radioTwo);
+		}
+		if (dataPointName === 'ticket_got_want' && !!dataPointValue) {
+			const radioOne = document.querySelector('.js-form-ticket-want');
+			const radioTwo = document.querySelector('.js-form-ticket-got');
+			setRadioPlaceholders(dataPointName, eventAttrArray, radioOne, radioTwo);
+		}
+		if (dataPointName === 'home_away' && !!dataPointValue) {
+			const radioOne = document.querySelector('.js-form-home');
+			const radioTwo = document.querySelector('.js-form-away');
+			setRadioPlaceholders(dataPointName, eventAttrArray, radioOne, radioTwo);
 		}
 	});
 };
 
-const setRadioPlaceholders = (dataPointName, eventAttrArray) => {
-	let item;
-	if(dataPointName === 'programme_got_want') {
-		item = 'programme';
-	} else {
-		item = 'ticket';
-	}
-
-	const formWant = document.querySelector(`.js-form-${item}-want`);
-	const formGot = document.querySelector(`.js-form-${item}-got`);
-
+const setRadioPlaceholders = (dataPointName, eventAttrArray, radioOne, radioTwo) => {
 	// remove current radio button selection
-	formGot.removeAttribute('checked');
-	formWant.removeAttribute('checked');
+	radioOne.removeAttribute('checked');
+	radioTwo.removeAttribute('checked');
 
 	// set correct value to checked
 	eventAttrArray.forEach(attr => {
-		if (attr.name === `data-${item}_got_want`) {
-			if (attr.value === 'Got') {
-				formGot.setAttribute('checked', 'checked');
+		if (attr.name === `data-${dataPointName}`) {
+			if (attr.value === radioOne.value) {
+				radioOne.setAttribute('checked', 'checked');
 			} else {
-				formWant.setAttribute('checked', 'checked');
+				radioTwo.setAttribute('checked', 'checked');
 			}
 		}
 	});
@@ -249,5 +251,3 @@ editButton.addEventListener('click', e => showForm(e));
 filterToggle.addEventListener('click', e => toggleFilter(e));
 if (keyToggle) { keyToggle.addEventListener('click', e => toggleKey(e)); }
 if (printViewToggle) { printViewToggle.addEventListener('click', e => togglePrintView(e)); }
-
-module.exports = togglePrintView;

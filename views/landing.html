@@ -276,30 +276,112 @@
 
         <div class="modal js-modal hidden">
             <div class="modal-content typography--small">
-                <div class="js-modal-season"></div>
-                <div class="js-modal-competition"></div>
-                <div class="js-modal-cup_round"></div>
-                <div class="js-modal-date"></div>
-                <div class="js-modal-opponent typography--large primary-color"></div>
-                <div class="js-modal-home_away"></div>
-                <div class="js-modal-score"></div>
-                <div class="js-modal-points"></div>
-                <div class="js-modal-league_position"></div>
-                <div class="js-modal-ground"></div>
-                <div class="js-modal-attendance"></div>
-                <div class="js-modal-match_notes"></div>
                 <div class="js-modal-content-editable">
+                    <div class="js-modal-season"></div>
+                    <div class="js-modal-competition"></div>
+                    <div class="js-modal-cup_round"></div>
+                    <div class="js-modal-date"></div>
+                    <div class="js-modal-opponent typography--large primary-color"></div>
+                    <div class="js-modal-home_away"></div>
+                    <div class="js-modal-score"></div>
+                    <div class="js-modal-points"></div>
+                    <div class="js-modal-league_position"></div>
+                    <div class="js-modal-ground"></div>
+                    <div class="js-modal-attendance"></div>
+                    <div class="js-modal-match_notes"></div>
                     <div class="typography--large primary-color">
                         <div>{{#if data.is_ticket_collection}}<span>Programme: </span>{{/if}}<span class="js-modal-programme_got_want"></span></div>
                         {{#if data.is_ticket_collection}}<div><span>Ticket: </span><span class="js-modal-ticket_got_want"></span></div>{{/if}}
                     </div>
-                    {{#if data.data_points.price}}<div class="js-modal-price"></div>{{/if}}
+                    <div class="js-modal-price"></div>
                     <div class="js-modal-programme_notes"></div>
                     <div class="js-modal-other_items"></div>
                     <button class="button js-modal-edit-button">Edit</button>
                 </div>
                 <form method="POST" class="section js-modal-content-form" action="/">
-                    {{#if data.edit_mode}}
+                {{#if data.edit_mode}}
+                    <div class="form-body">
+                        <label class="form-body__label" for="Season">Season</label>
+                        <input name="Season" id="form-season" class="js-form-season form-body__input"></input>
+                    </div>
+                    <div class="form-body">
+                        <label class="form-body__label" for="Competition">Competition</label>
+                        <input name="Competition" id="form-competition" class="js-form-competition form-body__input"></input>
+                    </div>
+                    {{#if data.data_points.cup_round}}
+                    <div class="form-body">
+                        <label class="form-body__label" for="Cup Round">Cup Round</label>
+                        <input name="Cup Round" id="form-cup_round" class="js-form-cup_round form-body__input"></input>
+                    </div>
+                    {{/if}}
+                    <div class="form-body">
+                        <label class="form-body__label" for="Date">Date</label>
+                        <input name="Date" id="form-date" class="js-form-date form-body__input"></input>
+                    </div>
+                    <div class="form-body">
+                        <label class="form-body__label" for="Opponent">Opponent</label>
+                        <input name="Opponent" id="form-opponent" class="js-form-opponent form-body__input"></input>
+                    </div>
+                    <div>
+                        <label for="Home">Home</label>
+                        <input type="radio" id="Home" name="Home/Away" value="Home" class="js-form-home">
+                        <label for="Away">Away</label>
+                        <input type="radio" id="Away" name="Home/Away" value="Away" class="js-form-away"></input>
+                    </div>
+                    {{#if data.data_points.includes_non_first_team}}
+                    <div class="form-body">
+                        <label class="form-body__label" for="Non First Team">Non First Team</label>
+                        <select id="Non First Team" name="Non First Team" class="js-form-non_first_team form-body__input">
+                            <option value="Yes">Yes</option>
+                            <option value="">No</option>
+                        </select>
+                    </div>
+                    {{/if}}
+                    {{#if data.data_points.friendly}}
+                    <div class="form-body"> 
+                        <label class="form-body__label" for="Friendly">Friendly</label>
+                        <select id="Friendly" name="Friendly" class="js-form-friendly form-body__input">
+                            <option value="Yes">Yes</option>
+                            <option value="">No</option>
+                        </select>
+                    </div>
+                    {{/if}}
+                    {{#if data.data_points.score}}
+                    <div class="form-body">
+                        <label class="form-body__label" for="Score">Score</label>
+                        <input name="Score" id="form-score" class="js-form-score form-body__input"></input>
+                    </div >
+                    {{/if}}
+                    {{#if data.data_points.points}}
+                    <div class="form-body">
+                        <label class="form-body__label" for="Points">Points</label>
+                        <input name="Points" id="form-points" class="js-form-points form-body__input"></input>
+                    </div>
+                    {{/if}}
+                    {{#if data.data_points.league_position}}
+                    <div class="form-body">
+                        <label class="form-body__label" for="League Position">League Position</label>
+                        <input name="League Position" id="form-league_position" class="js-form-league_position form-body__input"></input>
+                    </div>
+                    {{/if}}
+                    {{#if data.data_points.ground}}
+                    <div class="form-body">
+                        <label class="form-body__label" for="Ground">Ground</label>
+                        <input name="Ground" id="form-ground" class="js-form-ground form-body__input"></input>
+                    </div>
+                    {{/if}}
+                    {{#if data.data_points.attendance}}
+                    <div class="form-body">
+                        <label class="form-body__label" for="Attendance">Attendance</label>
+                        <input name="Att" id="form-attendance" class="js-form-attendance form-body__input"></input>
+                    </div>
+                    {{/if}}
+                    {{#if data.data_points.match_notes}}
+                    <div class="form-body">
+                        <label class="form-body__label" for="Match Notes">Match Notes</label>
+                        <input name="Match Notes" rows="4" id="form-match_notes" class="js-form-match_notes form-body__input"></input>
+                    </div>
+                    {{/if}}
                     {{#if data.is_ticket_collection}}
                     <div>
                         <strong class="primary-color">Programme: </strong>
@@ -308,19 +390,21 @@
                     <div>
                         <label for="got">Got</label>
                         <input type="radio" id="got" name="Programme Got/Want" value="Got" class="js-form-programme-got">
-                    </div>
-                    <div>
                         <label for="want">Want</label>
                         <input type="radio" id="want" name="Programme Got/Want" value="Want" class="js-form-programme-want"></input>
                     </div>
+                    {{#if data.data_points.price}}
                     <div>
-                        <label for="Programme Price">Programme Price</label>
-                        <input name="Programme Price" rows="4" id="form-price" class="js-form-price"></input>
+                        <label class="form-body__label" for="Programme Price">Programme Price</label>
+                        <input name="Programme Price" id="form-price" class="js-form-price form-body__input"></input>
                     </div>
-                    <div>
-                        <label for="Programme Notes">Programme Notes</label>
-                        <textarea name="Programme Notes" rows="4" id="form-programme_notes" class="js-form-programme_notes"></textarea>
+                    {{/if}}
+                    {{#if data.data_points.programme_notes}}
+                    <div class="form-body">
+                        <label class="form-body__label" for="Programme Notes">Programme Notes</label>
+                        <textarea name="Programme Notes" rows="3" id="form-programme_notes" class="js-form-programme_notes form-body__input"></textarea>
                     </div>
+                    {{/if}}
                     {{#if data.is_ticket_collection}}
                     <div>
                         <strong class="primary-color">Ticket: </strong>
@@ -328,18 +412,18 @@
                     <div>
                         <label for="got">Got</label>
                         <input type="radio" id="got" name="Ticket Got/Want" value="Got" class="js-form-ticket-got">
-                    </div>
-                    <div>
                         <label for="want">Want</label>
                         <input type="radio" id="want" name="Ticket Got/Want" value="Want" class="js-form-ticket-want"></input>
                     </div>
                     {{/if}}
-                    <div>
-                        <label class="block primary-color" for="Other Items"><strong>Other Items</strong></label>
-                        <textarea name="Other Items" rows="4" id="form-other_items" class="js-form-other_items"></textarea>
+                    {{#if data.data_points.other_items}}
+                    <div class="form-body">
+                        <label class="form-body__label" class="block primary-color" for="Other Items"><strong>Other Items</strong></label>
+                        <textarea name="Other Items" rows="4" id="form-other_items" class="js-form-other_items form-body__input"></textarea>
                     </div>
                     <input id="form-id" name="ID" class="js-form-id hidden"></input>
-                    {{else}}
+                    {{/if}}
+                {{else}}
                     <div class="password-box">
                         {{#if data.passwordFail}}<div class="error-msg">The password you entered was incorrect, please try again</div>{{/if}}
                         <div>
@@ -347,7 +431,7 @@
                         </div>
                         <input name="password" id="form-password" class="js-form-password"></input>
                     </div>
-                    {{/if}}
+                {{/if}}
                     <button class="button" type="submit">Submit</button>
                 </form>
             </div>

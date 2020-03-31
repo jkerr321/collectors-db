@@ -21,7 +21,6 @@ module.exports = {
             cup_round: 'Cup Round',
             match_notes: 'Match Notes',
             ticket_got_want: 'Ticket Got/Want',
-            price: 'Programme Price',
             programme_notes: 'Programme Notes',
             ground: 'Ground',
             attendance: 'Att',

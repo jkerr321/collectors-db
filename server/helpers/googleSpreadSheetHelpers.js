@@ -11,11 +11,9 @@ const updateSpreadsheet = async (rows, reqBody) => {
 		rows.forEach(async row => {
 			if (row.ID === reqBody.ID) {
 				Object.keys(reqBody).forEach(key => {
-					if (reqBody[key]) {
-						// e.g. if (reqBody.colour) {row.colour = reqBody.colour};
-						row[key] = reqBody[key];
-						changedValue += row[key];
-					}
+					// e.g. if (reqBody.colour) {row.colour = reqBody.colour};
+					row[key] = reqBody[key];
+					changedValue += row[key];
 				});
 				await row.save();
 			}

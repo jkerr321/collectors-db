@@ -25,6 +25,7 @@ module.exports = {
             ticket_got_want: 'Ticket Got/Want',
             programme_notes: 'Programme Notes',
             other_items: 'Other Items',
+            non_first_team: 'Non First Team',
             is_ticket_collection: true,
             includes_non_first_team: true
         },
