@@ -21,10 +21,11 @@ describe('googleSpreadSheetHelpers', async () => {
         }).timeout(15000);
     });
 
-    describe('updateSpreadsheet', () => {
+    describe.only('updateSpreadsheet', () => {
         it('returns the correct changed value based on req.body', async () => {
             expect(await updateSpreadsheet(rows, reqBody.updateThree)).to.equal('Got923');
             expect(await updateSpreadsheet(rows, reqBody.updateFour)).to.equal('£2.80924');
+            expect(await updateSpreadsheet(rows, reqBody.updateFive)).to.equal('GotGotYesYes926');
         }).timeout(15000);
     });
 

@@ -27,15 +27,22 @@ module.exports =
         filter: 'filter'
     },
     updateThree : {
-        'Got Want': 'Got',
+        'Programme Got/Want': 'Got',
         'Programme Price': '',
         'Programme Notes': '',
         ID: '923'
     },
     updateFour : {
-        gotWant: '',
+        'Programme Got/Want': '',
         'Programme Price': '£2.80',
         'Programme Notes': '',
         ID: '924'
+    },
+    updateFive: {
+        'Programme Got/Want': 'Got',
+        'Ticket Got/Want': 'Got',
+        'Non First Team': 'Yes',
+        'Friendly': 'Yes',
+        ID: '926'
     }
 }

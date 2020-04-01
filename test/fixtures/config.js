@@ -19,6 +19,8 @@ module.exports = {
             position: 'Position',
             points: 'Points',
             cup_round: 'Cup Round',
+            friendly: 'Friendly',
+            non_first_team: 'Non First Team',
             match_notes: 'Match Notes',
             ticket_got_want: 'Ticket Got/Want',
             programme_notes: 'Programme Notes',

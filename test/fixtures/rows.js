@@ -20,6 +20,8 @@ module.exports = [
         'Ticket Got/Want': 'Want',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': 'Yes',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -43,6 +45,8 @@ module.exports = [
         'Programme Got/Want': 'Got',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': 'Yes',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -67,6 +71,8 @@ module.exports = [
         'Ticket Got/Want': 'Got',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': 'Yes',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -91,6 +97,8 @@ module.exports = [
         'Ticket Got/Want': 'Want',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -115,6 +123,8 @@ module.exports = [
         'Ticket Got/Want': 'Want',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -138,6 +148,8 @@ module.exports = [
         'Programme Got/Want': 'Got',
         'Programme Price': '£23',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -161,6 +173,8 @@ module.exports = [
         'Programme Got/Want': 'Got',
         'Programme Price': '£9',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -185,6 +199,8 @@ module.exports = [
         'Ticket Got/Want': 'Want',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -209,6 +225,8 @@ module.exports = [
         'Ticket Got/Want': 'Want',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -233,6 +251,8 @@ module.exports = [
         'Ticket Got/Want': 'Want',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -280,6 +300,8 @@ module.exports = [
         'Ticket Got/Want': 'Want',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -304,6 +326,8 @@ module.exports = [
         'Ticket Got/Want': 'Want',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -327,6 +351,8 @@ module.exports = [
         'Programme Got/Want': 'Got',
         'Programme Price': '£25',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -351,6 +377,8 @@ module.exports = [
         'Ticket Got/Want': 'Want',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -375,6 +403,8 @@ module.exports = [
         'Ticket Got/Want': 'Want',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -398,6 +428,8 @@ module.exports = [
         'Programme Got/Want': 'Got',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -421,6 +453,8 @@ module.exports = [
         'Programme Got/Want': 'Got',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': 'Yes',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -444,6 +478,8 @@ module.exports = [
         'Programme Got/Want': 'Got',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': 'Yes',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
@@ -467,6 +503,8 @@ module.exports = [
         'Programme Got/Want': 'Got',
         'Programme Price': '',
         'Programme Notes': '',
+        'Non First Team': '',
+        'Friendly': '',
         save: () => 'row saved!',
         del: [Function]
     },
