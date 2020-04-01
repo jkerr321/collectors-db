@@ -117,7 +117,7 @@ describe('dataModel', async () => {
             expect(data.collection_data[0].is_ticket_collection).to.be.false;
             expect(data.collection_data[0].matchData[0].is_ticket_collection).to.be.false;
         });
-        it.only('returns an array containing an a set of data for each match in the season', () => {
+        it('returns an array containing an a set of data for each match in the season', () => {
             const data = new DataModel(config, req());
             data.setCollectionData(rows);
             expect(data.collection_data.every(value => value.matchData)).to.be.true;
