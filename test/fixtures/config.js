@@ -27,7 +27,8 @@ module.exports = {
             ground: 'Ground',
             attendance: 'Att',
             other_items: 'Other Items',
-            is_ticket_collection: true
+            is_ticket_collection: true,
+            includes_non_first_team: true
         },
     },
     password: process.env.password,

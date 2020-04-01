@@ -109,11 +109,11 @@ module.exports = class DataModel {
 						matchObj[key] = row[`${this.data_points[key]}`];
 					});
 
+					matchObj.is_ticket_collection = this.is_ticket_collection;
 					if (this.includes_non_first_team && row['Non First Team'] === 'Yes') {
 						matchObj.is_non_first_team = true;
 						seasonObject.nft_matchData.push(matchObj);
 					} else {
-						matchObj.is_ticket_collection = this.is_ticket_collection; // don't want to show ticket collection for non first-team fixtures
 						seasonObject.matchData.push(matchObj);
 					}
 				}

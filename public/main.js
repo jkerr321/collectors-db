@@ -184,8 +184,10 @@ const toggleWants = (event) => {
 
 	if (event.srcElement.classList.contains('js-show-wants')) {
 		matchCells.forEach(cell => {
-			if (cell.innerHTML === 'Got') {
-				cell.parentNode.classList.add('hidden');
+			// hide all rows then remove 'hidden' if any cells contain 'Want' - enables showing wants for programmes and tickets
+			cell.parentNode.classList.add('hidden');
+			if (cell.innerHTML === 'Want') {
+				cell.parentNode.classList.remove('hidden');
 			}
 		});
 	} else {
