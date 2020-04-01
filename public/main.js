@@ -130,11 +130,6 @@ const populateForm = (eventAttrArray) => {
 			const radioTwo = document.querySelector('.js-form-ticket-got');
 			setRadioPlaceholders(dataPointName, eventAttrArray, radioOne, radioTwo);
 		}
-		if (dataPointName === 'home_away' && !!dataPointValue) {
-			const radioOne = document.querySelector('.js-form-home');
-			const radioTwo = document.querySelector('.js-form-away');
-			setRadioPlaceholders(dataPointName, eventAttrArray, radioOne, radioTwo);
-		}
 	});
 };
 
