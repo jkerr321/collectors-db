@@ -22,7 +22,7 @@ module.exports = class DataModel {
 	}
 
 	_setSeasonList (rows) {
-		this.season_list = this._getUniqueList(rows, 'Season');
+		this.season_list = this._getUniqueList(rows, 'Season').sort();
 	}
 
 	setOpponentList (rows) {
