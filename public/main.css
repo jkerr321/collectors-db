@@ -313,10 +313,10 @@ body {
 /* Footer */
 .footer {
   text-align: center;
-  margin: 8.6rem 0 0 0;
+  margin: 8.6rem 0 2rem 0;
 }
 
-.footer a{
+a{
   color: #131313;
 }
 
