@@ -269,19 +269,9 @@ body {
   background-color: var(--tertiary-color);
 }
 
-/* .ticket-Got::before, .ticket-Want::before {
-    content: '';
-    position: absolute;
-    top: 1.8rem;
-    left: 0;
-    right: 0;
-    width: 3.5rem;
-    height: 1.7rem;
-    margin-left: auto;
-    margin-right: auto;
-    border-bottom-left-radius: 8rem;
-    border-bottom-right-radius: 8rem;
-} */
+.non-first-team.ticket-Got::before {
+  background-color: var(--tertiary-color);
+}
 
 .faux-link {
   text-decoration: underline;
