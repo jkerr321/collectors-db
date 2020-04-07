@@ -61,8 +61,8 @@ const hideModal = (event) => {
 			element = element.parentElement;
 		}
 	}
-	if (shouldClose) { hide(modal) }
-}
+	if (shouldClose) { hide(modal); }
+};
 
 const showModal = (event) => {
 	const modal = document.querySelector('.js-modal');
