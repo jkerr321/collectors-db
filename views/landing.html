@@ -486,7 +486,7 @@
                 <tr>
                     <td>{{date}}</td>
                     <td>{{opponent}}</td>
-                    <td>{{competition}}</td>
+                    <td>{{competition}}{{#if cup_round}}, {{cup_round}}{{/if}}</td>
                     <td>{{home_away}}</td>
                     <td>{{score}}</td>
                     <td class="hidden-mobile">{{match_notes}}</td>
@@ -494,6 +494,18 @@
                     {{#if this.is_ticket_collection}}<td>{{ticket_got_want}}</td>{{/if}}
                 </tr>
                 {{/matchData}}
+                {{#nft_matchData}}
+                <tr>
+                    <td>{{date}}</td>
+                    <td>{{opponent}}</td>
+                    <td>{{competition}}{{#if cup_round}}, {{cup_round}}{{/if}}</td>
+                    <td>{{home_away}}</td>
+                    <td>{{score}}</td>
+                    <td class="hidden-mobile">{{match_notes}}</td>
+                    <td>{{programme_got_want}}</td>
+                    {{#if this.is_ticket_collection}}<td class=>{{ticket_got_want}}</td>{{/if}}
+                </tr>
+                {{/nft_matchData}}
             </tbody>
         </table>
     </div>
