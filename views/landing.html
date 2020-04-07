@@ -271,7 +271,7 @@
         </div>
         <a href="#header" class="sticky-bottom">Back to top ^</a>
         <div class="footer">
-            <a href="https://docs.google.com/spreadsheets/d/{{data.sheet_id}}" target="_blank">View Data</a>
+            {{#if data.edit_mode}}<a href="https://docs.google.com/spreadsheets/d/{{data.sheet_id}}" target="_blank">View Data</a>{{/if}}
         </div>
 
         <div class="modal js-modal hidden">
@@ -380,7 +380,7 @@
                     {{#if data.data_points.match_notes}}
                     <div class="form-body">
                         <label class="form-body__label" for="Match Notes">Match Notes</label>
-                        <input name="Match Notes" rows="4" id="form-match_notes" class="js-form-match_notes form-body__input"></input>
+                        <textarea name="Match Notes" rows="2" id="form-match_notes" class="js-form-match_notes form-body__input"></textarea>
                     </div>
                     {{/if}}
                     <div class="section">
@@ -500,18 +500,16 @@
 {{/data.collection_data}}
 </div>
 {{/if}}
-<div class="js-title hidden">{{data.heading}}</div>
-<div class="js-colour-one hidden">{{data.colour_one}}</div>
-{{#if data.colour_two}}
-<div class="js-colour-two hidden">{{data.colour_two}}</div>
-{{/if}}
-{{#if data.colour_three}}
-<div class="js-colour-three hidden">{{data.colour_three}}</div>
-{{/if}}
-{{#if data.table_colour}}
-<div class="js-table-colour hidden">{{data.table_colour}}</div>
-{{/if}}
-<div class="hidden" data-modal_data_points="{{data.modalDataPoints}}"></div>
-{{#each data.modalDataPoints}}
-<div class="js-modal-data-point hidden">{{this}}</div>
-{{/each}}
+<div>
+    <div class="js-title hidden">{{data.heading}}</div>
+    <div class="js-colour-one hidden">{{data.colour_one}}</div>
+    {{#if data.colour_two}}
+    <div class="js-colour-two hidden">{{data.colour_two}}</div>
+    {{/if}}
+    {{#if data.colour_three}}
+    <div class="js-colour-three hidden">{{data.colour_three}}</div>
+    {{/if}}
+    {{#if data.table_colour}}
+    <div class="js-table-colour hidden">{{data.table_colour}}</div>
+    {{/if}}
+</div>

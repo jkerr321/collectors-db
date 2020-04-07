@@ -1,4 +1,5 @@
 // for query selectors
+const richView = document.querySelector('.js-rich-view');
 const matches = document.querySelectorAll('.js-grid-match');
 const editButton = document.querySelector('.js-modal-edit-button');
 const tableToggles = document.querySelectorAll('.js-table-toggle');
@@ -46,6 +47,22 @@ const getSeasonContainer = (event) => {
 	}
 	return seasonContainer;
 };
+
+const hideModal = (event) => {
+	const modal = document.querySelector('.js-modal');
+	let element = event.target;
+	let shouldClose = true;
+	// workaround to emulate event.path which is not available in Safari
+	while (element) {
+		if (element.classList && element.classList.contains('js-modal') || element.classList && element.classList.contains('js-grid-match')) {
+			shouldClose = false;
+			break;
+		} else {
+			element = element.parentElement;
+		}
+	}
+	if (shouldClose) { hide(modal) }
+}
 
 const showModal = (event) => {
 	const modal = document.querySelector('.js-modal');
@@ -248,3 +265,4 @@ editButton.addEventListener('click', e => showForm(e));
 filterToggle.addEventListener('click', e => toggleFilter(e));
 if (keyToggle) { keyToggle.addEventListener('click', e => toggleKey(e)); }
 if (printViewToggle) { printViewToggle.addEventListener('click', e => togglePrintView(e)); }
+richView.addEventListener('click', e => hideModal(e));
