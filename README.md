@@ -20,21 +20,13 @@ Requirements
 ------------
 
 To create a smiliar UI from your own data you will need:
- - a Google sheet containing your data. Mine has the following headings - 
+ - a Google sheet containing your data with, at a minimum, the following headings - 
     - ID
     - Season
-    - League
-    - League Tier
     - Date
     - Opponent
-    - Home/Away	Score
-    - Position
-    - Points
-    - Competition	
-    - Match Notes
-    - Got/Want
-    - Programme Price
-    - Programme Notes
+    - Home/Away
+    - Programme Got/Want
  - A google project connected to your sheet (I used [this very helpful Twilio tutorial](https://www.youtube.com/watch?v=UGN6EUi4Yio) )
  - Your google project credentials saved as environment variables
 
@@ -49,19 +41,17 @@ To run locally:
 
  - Clone the repo to your machine
  - Do $ `npm install`
- - Create a .env file with your google config variables
-- Update `renderLandingPage.js` to point to your google sheet: `new GoogleSpreadsheet('[MY_SHEET_ID]')`
+ - Create a `.env` file with your google config variables and sheet id
+ - Update the `config.js` file with your configuration preferences, e.g. heading and colours for the site
 - run locally with `$ nodemon app.js`
 
 Things to do
 ---------------------
 
-- webkit styles
 - make colorTwo a transparent version of colourOne if no colourTwo supplied
 - show filter string on main page
 - ebay link
 - DRY out get images function
 - update readme once componentisation complete
 - on table view, if match is clicked on, do edit inline?
-- update code to use classes / renderLandingPage and main.js ??
 - are non unique IDs on checkboxes a problem?

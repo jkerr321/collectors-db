@@ -10,6 +10,7 @@ module.exports = class DataModel {
 		this.img_one_src = config.options.img_one_src;
 		this.img_two_src = config.options.img_two_src;
 		this.img_three_src = config.options.img_three_src;
+		this.team = config.options.team;
 		this.sheet_id = config.sheet_id;
 		this.intro = config.options.intro;
 		this.data_points = config.options.data_points;
@@ -80,6 +81,11 @@ module.exports = class DataModel {
 		});
 	}
 
+	_setEbayUrl (type, matchObj) {
+		const year = matchObj.date.substring(matchObj.date.length-2);
+		return `https://www.ebay.co.uk/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=${this.team}+${matchObj.opponent}+${matchObj.season}+${matchObj.date}+${year}+${type}&_sacat=0`;
+	}
+
 	setCollectionData (rows) {
 		// clear any existing data
 		this.collection_data = [];
@@ -104,12 +110,21 @@ module.exports = class DataModel {
 					//         etc...
 					//     }
 					// ]
+
 					let matchObj = {};
 					Object.keys(this.data_points).forEach(key => {
 						matchObj[key] = row[`${this.data_points[key]}`];
 					});
 
 					matchObj.is_ticket_collection = this.is_ticket_collection;
+
+					if(matchObj.programme_got_want === 'Want') {
+						matchObj.ebay_prog_url = this._setEbayUrl('programme', matchObj);
+					}
+					if (matchObj.is_ticket_collection && matchObj.ticket_got_want === 'Want') {
+						matchObj.ebay_ticket_url = this._setEbayUrl('ticket', matchObj);
+					}
+
 					if (this.includes_non_first_team && row['Non First Team'] === 'Yes') {
 						matchObj.is_non_first_team = true;
 						seasonObject.nft_matchData.push(matchObj);

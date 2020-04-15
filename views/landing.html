@@ -271,7 +271,7 @@
         </div>
         <a href="#header" class="sticky-bottom">Back to top ^</a>
         <div class="footer">
-            {{#if data.edit_mode}}<a href="https://docs.google.com/spreadsheets/d/{{data.sheet_id}}" target="_blank">View Data</a>{{/if}}
+            {{#if data.edit_mode}}<a href="https://docs.google.com/spreadsheets/d/{{data.sheet_id}}" target="_blank" rel="noopener noreferrer">View Data</a>{{/if}}
         </div>
 
         <div class="modal js-modal hidden">
@@ -490,8 +490,18 @@
                     <td>{{home_away}}</td>
                     <td>{{score}}</td>
                     <td class="hidden-mobile">{{match_notes}}</td>
-                    <td>{{programme_got_want}}</td>
-                    {{#if this.is_ticket_collection}}<td>{{ticket_got_want}}</td>{{/if}}
+                    <td>
+                        {{#if ebay_prog_url}}
+                        <a href="{{ebay_prog_url}}" target="_blank" rel="noopener noreferrer">{{programme_got_want}}</a>
+                        {{else}} {{programme_got_want}} {{/if}}
+                    </td>
+                    {{#if this.is_ticket_collection}}
+                    <td>
+                        {{#if ebay_ticket_url}}
+                        <a href="{{ebay_ticket_url}}" target="_blank" rel="noopener noreferrer">{{ticket_got_want}}</a>
+                        {{else}} {{ticket_got_want}} {{/if}}
+                    </td>
+                    {{/if}}
                 </tr>
                 {{/matchData}}
                 {{#nft_matchData}}
@@ -502,8 +512,18 @@
                     <td>{{home_away}}</td>
                     <td>{{score}}</td>
                     <td class="hidden-mobile">{{match_notes}}</td>
-                    <td>{{programme_got_want}}</td>
-                    {{#if this.is_ticket_collection}}<td class=>{{ticket_got_want}}</td>{{/if}}
+                    <td>
+                        {{#if ebay_prog_url}}
+                        <a href="{{ebay_prog_url}}" target="_blank" rel="noopener noreferrer">{{programme_got_want}}</a>
+                        {{else}} {{programme_got_want}} {{/if}}
+                    </td>
+                    {{#if this.is_ticket_collection}}
+                    <td>
+                        {{#if ebay_ticket_url}}
+                        <a href="{{ebay_ticket_url}}" target="_blank" rel="noopener noreferrer">{{ticket_got_want}}</a>
+                        {{else}} {{ticket_got_want}} {{/if}}
+                    </td>
+                    {{/if}}
                 </tr>
                 {{/nft_matchData}}
             </tbody>
