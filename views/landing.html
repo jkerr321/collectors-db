@@ -300,6 +300,7 @@
                 </div>
                 <form method="POST" class="section js-modal-content-form" action="/">
                 {{#if data.edit_mode}}
+                    <input id="form-id" name="ID" class="js-form-id hidden"></input>
                     <div class="form-body">
                         <label class="form-body__label" for="Season">Season</label>
                         <input name="Season" id="form-season" class="js-form-season form-body__input"></input>
@@ -423,7 +424,6 @@
                             <label class="form-body__label" class="block primary-color" for="Other Items"><strong>Other Items</strong></label>
                             <textarea name="Other Items" rows="4" id="form-other_items" class="js-form-other_items form-body__input"></textarea>
                         </div>
-                        <input id="form-id" name="ID" class="js-form-id hidden"></input>
                         {{/if}}
                     </div>
                 {{else}}
