@@ -1,10 +1,10 @@
 const express = require('express');
-const app = express();
 const exphbs = require('express-handlebars');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
 const renderLandingPage = require('./server/controllers/renderLandingPage').init;
 const exampleConfig = require('./config');
 
@@ -33,9 +33,11 @@ const getImages = (configOptions) => {
 		if (err) throw err;
 	});
 	console.info('image file copies complete!');
-}
+};
 
 const init = (config, isTestApp) => {
+	const app = express();
+
 	if (isTestApp) {
 		console.info('index init: testApp');
 		app.engine('html', exphbs({
@@ -59,6 +61,8 @@ const init = (config, isTestApp) => {
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.use(cookieParser());
+	app.use(csrf({ cookie: true }));
+
 	app.get('/', (req, res) => renderLandingPage(req, res, config));
 	app.post('/', (req, res) => renderLandingPage(req, res, config));
 
@@ -68,6 +72,6 @@ const init = (config, isTestApp) => {
 	console.info('index init: complete');
 }
 
-// init(exampleConfig, true);  // uncomment to run the module with test config
+init(exampleConfig, true); // uncomment to run the module with test config
 
 module.exports = init;

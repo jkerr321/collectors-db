@@ -20,6 +20,7 @@ module.exports = class DataModel {
 		this.season_list = '';
 		this.opponent_list = '';
 		this.collection_data = [];
+		this.csrfToken = null;
 	}
 
 	_setSeasonList (rows) {
@@ -37,6 +38,10 @@ module.exports = class DataModel {
 	setFilterData (reqBody) {
 		this.isFiltered = true;
 		this.appliedFilter = this._getFilterArray(reqBody);
+	}
+
+	setCsrfToken (token) {
+		this.csrfToken = token;
 	}
 
 	_getUniqueList (rows, value) {

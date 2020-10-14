@@ -15,11 +15,12 @@ describe('renderLandingPage', async () => {
     let sandbox;
 
     beforeEach(() => {
-        sandbox = sinon.createSandbox();        
+        sandbox = sinon.createSandbox();
         req = (method, body) => ({
             method: method || 'GET',
             get: () => { },
             post: () => { },
+            csrfToken: () => { },
             cookies: {},
             query: {},
             body: { ...body || {} }
