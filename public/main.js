@@ -20,12 +20,10 @@ const hide = (element) => element.classList.add('hidden');
 const colourOne = document.querySelector('.js-colour-one').innerHTML;
 const colourTwo = document.querySelector('.js-colour-two') ? document.querySelector('.js-colour-two').innerHTML : 'ghostwhite';
 const colourThree = document.querySelector('.js-colour-three') ? document.querySelector('.js-colour-three').innerHTML : 'ghostwhite';
-const tableColour = document.querySelector('.js-table-colour') ? document.querySelector('.js-table-colour').innerHTML : 'ghostwhite';
 const title = document.querySelector('.js-title').innerHTML;
 document.querySelector(':root').style.setProperty('--primary-color', colourOne);
 document.querySelector(':root').style.setProperty('--secondary-color', colourTwo);
 document.querySelector(':root').style.setProperty('--tertiary-color', colourThree);
-document.querySelector(':root').style.setProperty('--table-color', tableColour);
 document.querySelector('title').innerHTML = title;
 
 const toggleClickableSpan = (element) => {

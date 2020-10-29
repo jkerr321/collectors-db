@@ -2,7 +2,6 @@
   --primary-color: LightGrey;
   --secondary-color: white;
   --tertiary-color: white;
-  --table-color: white;
 }
 
 html {
@@ -318,8 +317,8 @@ a{
   border-collapse: collapse;
 }
 
-.games-table th {
-  background-color: var(--table-color);
+.th {
+  background-color: var(--secondary-color);
 }
 
 .table--print-view {
@@ -333,7 +332,7 @@ td, th {
 }
 
 th {
-  background-color: ghostwhite;
+  background-color: var(--secondary-color);
   border-bottom: 0.2rem #131313;
 }
 
