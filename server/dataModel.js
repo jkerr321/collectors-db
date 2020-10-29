@@ -1,6 +1,6 @@
 module.exports = class DataModel {
 
-	constructor (config, req) {
+	constructor (config, reqCookies) {
 		this.heading = config.options.heading;
 		this.sub_heading = config.options.sub_heading;
 		this.colour_one = config.options.colour_one;
@@ -16,7 +16,7 @@ module.exports = class DataModel {
 		this.data_points = config.options.data_points;
 		this.is_ticket_collection = config.options.data_points.is_ticket_collection || false;
 		this.includes_non_first_team = config.options.data_points.includes_non_first_team || false;
-		this.edit_mode = !!req.cookies.programmeCollectorCookie || false;
+		this.edit_mode = !!reqCookies.programmeCollectorCookie || false;
 		this.season_list = '';
 		this.opponent_list = '';
 		this.collection_data = [];

@@ -1,4 +1,7 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
+const xss = require('xss');
+
+const sanitise = string => xss(string);
 
 const updateSpreadsheet = async (rows, reqBody) => {
 	try {
@@ -12,7 +15,7 @@ const updateSpreadsheet = async (rows, reqBody) => {
 			if (row.ID === reqBody.ID) {
 				Object.keys(reqBody).forEach(key => {
 					// e.g. if (reqBody.colour) {row.colour = reqBody.colour};
-					row[key] = reqBody[key];
+					row[key] = sanitise(reqBody[key]);
 					changedValue += row[key];
 				});
 				await row.save();

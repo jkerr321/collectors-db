@@ -32,7 +32,7 @@ const filterRows = async (rows, reqBody) => {
 
 const init = async (req, res, config) => {
 	try {
-		const data = new DataModel(config, req);
+		const data = new DataModel(config, req.cookies);
 		data.setCsrfToken(req.csrfToken());
 		const sheetRows = await getRows(config);
 		data.setOpponentList(sheetRows);

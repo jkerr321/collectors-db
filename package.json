@@ -28,7 +28,8 @@
     "mocha": "^7.0.1",
     "nodemon": "^1.19.3",
     "path": "^0.12.7",
-    "sinon": "^8.1.1"
+    "sinon": "^8.1.1",
+    "xss": "^1.0.8"
   },
   "devDependencies": {
     "eslint": "^6.7.2",
