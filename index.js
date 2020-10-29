@@ -50,12 +50,12 @@ const init = (config, isTestApp) => {
 		getImages(config.options); //copy user provided images to module
 
 		app.engine('html', exphbs({
-		defaultLayout: 'main',
+			defaultLayout: 'main',
 			extname: '.html',
 			layoutsDir: 'node_modules/collectors-db/views/layouts/'
 		}));
-	}	
-	
+	}
+
 	app.set('view engine', 'html');
 	app.set('views', path.join(__dirname, '/views'));
 	app.use(bodyParser.urlencoded({ extended: true }));
@@ -70,8 +70,8 @@ const init = (config, isTestApp) => {
 		console.log('collectors-db: listening on port 8001');
 	});
 	console.info('index init: complete');
-}
+};
 
-init(exampleConfig, true); // uncomment to run the module with test config
+// init(exampleConfig, true); // uncomment to run the module with test config
 
 module.exports = init;
