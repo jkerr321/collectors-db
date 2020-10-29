@@ -28,11 +28,14 @@ describe('dataModel', async () => {
     });
 
     describe('constructor', () => {
-        it('sets edit_mode based on the correct cookie', () => {
-            const data = new DataModel(config, req());
+        it('doesn\'t set edit_mode when there is no programmeCollectorCookie cookie', () => {
+            const {cookies} = req();
+            const data = new DataModel(config, cookies);
             expect(data.edit_mode).to.equal(false);
-            const reqWithCookie = req('GET', {}, { programmeCollectorCookie: true });
-            const data2 = new DataModel(config, reqWithCookie);            
+        });
+        it('set edit_mode when there is a programmeCollectorCookie cookie', () => {
+            const {cookies} = req('GET', {}, { programmeCollectorCookie: true });
+            const data2 = new DataModel(config, cookies);
             expect(data2.edit_mode).to.equal(true);
         });
     });
