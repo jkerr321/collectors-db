@@ -45,13 +45,10 @@ To run locally:
  - Update the `config.js` file with your configuration preferences, e.g. heading and colours for the site
 - run locally with `$ nodemon app.js`
 
-Things to do
+Things to do / enhancements
 ---------------------
 
-- make colorTwo a transparent version of colourOne if no colourTwo supplied
+- make colorTwo a more transparent version of colourOne if no colourTwo supplied
 - show filter string on main page
-- ebay link
 - DRY out get images function
-- update readme once componentisation complete
-- on table view, if match is clicked on, do edit inline?
-- are non unique IDs on checkboxes a problem?
+- allow inline editing on table view
